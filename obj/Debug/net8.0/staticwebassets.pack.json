@@ -1,0 +1,541 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\UPVC.bundle.scp.css",
+      "PackagePath": "staticwebassets\\UPVC.mwj6t9t2yd.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\README.md",
+      "PackagePath": "staticwebassets\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\css\\style-rtl.css",
+      "PackagePath": "staticwebassets\\css\\style-rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\about\\about-bg.png",
+      "PackagePath": "staticwebassets\\images\\about\\about-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\contact\\contact-bg.png",
+      "PackagePath": "staticwebassets\\images\\contact\\contact-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\contact\\facebook.png",
+      "PackagePath": "staticwebassets\\images\\contact\\facebook.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\contact\\instagram.png",
+      "PackagePath": "staticwebassets\\images\\contact\\instagram.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\contact\\linkedin.png",
+      "PackagePath": "staticwebassets\\images\\contact\\linkedin.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\favicon\\favicon.svg",
+      "PackagePath": "staticwebassets\\images\\favicon\\favicon.svg"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\20year.png",
+      "PackagePath": "staticwebassets\\images\\home\\20year.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\eos.png",
+      "PackagePath": "staticwebassets\\images\\home\\eos.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\hero2-icon1.png",
+      "PackagePath": "staticwebassets\\images\\home\\hero2-icon1.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home1-bg.png",
+      "PackagePath": "staticwebassets\\images\\home\\home1-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home1-bg2.png",
+      "PackagePath": "staticwebassets\\images\\home\\home1-bg2.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home2-bg.png",
+      "PackagePath": "staticwebassets\\images\\home\\home2-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home3-bg.png",
+      "PackagePath": "staticwebassets\\images\\home\\home3-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-bg.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo1.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo1.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo2.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo2.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo3.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo3.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo4.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo4.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo5.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo5.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo6.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo6.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\home4-logo7.png",
+      "PackagePath": "staticwebassets\\images\\home\\home4-logo7.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\iso.png",
+      "PackagePath": "staticwebassets\\images\\home\\iso.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\nr.png",
+      "PackagePath": "staticwebassets\\images\\home\\nr.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\home\\trophy.png",
+      "PackagePath": "staticwebassets\\images\\home\\trophy.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\20year.png",
+      "PackagePath": "staticwebassets\\images\\product\\20year.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\NR.png",
+      "PackagePath": "staticwebassets\\images\\product\\NR.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\cer.png",
+      "PackagePath": "staticwebassets\\images\\product\\cer.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\eos.png",
+      "PackagePath": "staticwebassets\\images\\product\\eos.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\iso.png",
+      "PackagePath": "staticwebassets\\images\\product\\iso.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\product-bg.png",
+      "PackagePath": "staticwebassets\\images\\product\\product-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\product-d-bg.png",
+      "PackagePath": "staticwebassets\\images\\product\\product-d-bg.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\product-d-hero1.png",
+      "PackagePath": "staticwebassets\\images\\product\\product-d-hero1.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\product-hero.png",
+      "PackagePath": "staticwebassets\\images\\product\\product-hero.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win1.png",
+      "PackagePath": "staticwebassets\\images\\product\\win1.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win10.png",
+      "PackagePath": "staticwebassets\\images\\product\\win10.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win11.png",
+      "PackagePath": "staticwebassets\\images\\product\\win11.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win12.png",
+      "PackagePath": "staticwebassets\\images\\product\\win12.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win13.png",
+      "PackagePath": "staticwebassets\\images\\product\\win13.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win14.png",
+      "PackagePath": "staticwebassets\\images\\product\\win14.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win15.png",
+      "PackagePath": "staticwebassets\\images\\product\\win15.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win2.png",
+      "PackagePath": "staticwebassets\\images\\product\\win2.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win3.png",
+      "PackagePath": "staticwebassets\\images\\product\\win3.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win4.png",
+      "PackagePath": "staticwebassets\\images\\product\\win4.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win5.png",
+      "PackagePath": "staticwebassets\\images\\product\\win5.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win6.png",
+      "PackagePath": "staticwebassets\\images\\product\\win6.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win7.png",
+      "PackagePath": "staticwebassets\\images\\product\\win7.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win8.png",
+      "PackagePath": "staticwebassets\\images\\product\\win8.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\images\\product\\win9.png",
+      "PackagePath": "staticwebassets\\images\\product\\win9.png"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\js\\lang.js",
+      "PackagePath": "staticwebassets\\js\\lang.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\about-ar.html",
+      "PackagePath": "staticwebassets\\templates\\about-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\about.html",
+      "PackagePath": "staticwebassets\\templates\\about.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\contact-ar.html",
+      "PackagePath": "staticwebassets\\templates\\contact-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\contact.html",
+      "PackagePath": "staticwebassets\\templates\\contact.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home1-ar.html",
+      "PackagePath": "staticwebassets\\templates\\home1-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home1.html",
+      "PackagePath": "staticwebassets\\templates\\home1.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home2-ar.html",
+      "PackagePath": "staticwebassets\\templates\\home2-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home2.html",
+      "PackagePath": "staticwebassets\\templates\\home2.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home3-ar.html",
+      "PackagePath": "staticwebassets\\templates\\home3-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home3.html",
+      "PackagePath": "staticwebassets\\templates\\home3.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home4-ar.html",
+      "PackagePath": "staticwebassets\\templates\\home4-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\home4.html",
+      "PackagePath": "staticwebassets\\templates\\home4.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\product-ar.html",
+      "PackagePath": "staticwebassets\\templates\\product-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\product-details-ar.html",
+      "PackagePath": "staticwebassets\\templates\\product-details-ar.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\product-details.html",
+      "PackagePath": "staticwebassets\\templates\\product-details.html"
+    },
+    {
+      "Id": "C:\\Users\\VIP\\source\\repos\\UPVC\\wwwroot\\templates\\product.html",
+      "PackagePath": "staticwebassets\\templates\\product.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.UPVC.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.UPVC.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.UPVC.props",
+      "PackagePath": "build\\UPVC.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.UPVC.props",
+      "PackagePath": "buildMultiTargeting\\UPVC.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.UPVC.props",
+      "PackagePath": "buildTransitive\\UPVC.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

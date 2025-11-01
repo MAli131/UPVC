@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "EMAPEN - uPVC Systems";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/style.css" />
+}
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section home1">
+    <div class="container">
+        <div class="vertical-dots white-dots">
+            <a asp-controller="Home" asp-action="Index" class="dot active"></a>
+            <a asp-controller="Home" asp-action="Home2" class="dot"></a>
+            <a asp-controller="Home" asp-action="Home3" class="dot"></a>
+            <a asp-controller="Home" asp-action="Home4" class="dot"></a>
+        </div>
+        <div class="hero-content">
+            <div class="hero-header">
+                <h1 class="hero-title">Our profiles ensure that your windows will endure</h1>
+
+                <a asp-controller="Product" asp-action="Index" class="btn btn-outline-light">
+                    Check our product line
+                    <svg width="16" height="16" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect x="0.196045" y="0.581543" width="24" height="24" fill="url(#pattern0_4_869)" />
+                        <defs>
+                            <pattern id="pattern0_4_869" patternContentUnits="objectBoundingBox" width="1"
+                                height="1">
+                                <use xlink:href="#image0_4_869" transform="scale(0.0416667)" />
+                            </pattern>
+                            <image id="image0_4_869" width="24" height="24" preserveAspectRatio="none"
+                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEb0lEQVRIiXWWb0xVdRjHP88Rt8TGVQw8sCXLCznvRWk1DbaWLTZc0oo/NtdsZqDD3vAip2UJW2BTydmiF2gzLNecvQBWC1Ncbrg2cSw3F/ew6t42yHEPoAxwaCu4Ty/OPfcfl+fN+Z1znt/zfL/f5/n9kZqTJYAASkSB6BuAJzNbi/KL8Zo+vKaPQtMHQNC2CNkWQTtAMBxg9tGUAGh0fjwCSPWJEmcgEFEFhAwjQ3eW7aPq+b0MjQ4SGrcIhgOExi0AvGvdhH42FWyl59Z5ugbOsRCZFydJQoKatmec1CJoRCnIfVobd7QwMTvG2avHmJ6binsnzwWFVY+v0YaKo+Rm5dF+uYmRyT8lfQKgfHON1pcfpuNKCzesy+Iyc+mrGz85JQDb/JV6oKKJzuttXLvTE/PI0IgiAuueKNL68sM0nqtm8kE4KYQbfBGDBOsP9Mrw3dv6eV0Pf4wNqcMEDIBlxnJtrGyl40pL2uASJS1RRpLgIU5/ADA5G5Yzfa00VrawzMjQWILasnomZsa4YV0WTdICRISDr3+qZRvK1U24yBJk7A/0ysRMmNrSOgAMT2a2Vm3dy5m+YyBOQBJQqSrdNzt55+VD7HrhgAoOhhjDSHROgp3t+4Sa0jo8mdlqFOUXM/T3IDNzU06LpUH41/iwHL6wm5KCUg5VneKx5SvUZeeCcAbOY3ruvgyNDuI1fRiFpo9Q2IrruUQRp+fuS/Ol/Tx4NMPxt74h15Ovqhr3T5kbtC0KTR/GetNHaHw4ViyXRSptgPmF/6Tjaov03eni+O4L+J98TsWQtKBCtuUy8BOyh+LdEnNOV03Hfrr9nXz24we899pJtpe8oenAhGyLQtOPkRgoWUpZ1JLpTFGSq578PyNoW3jX+pl60J+UBAFBiEQWM3nl2V26s2w/p794n8DdXyUpaBSQ1/QRtANkhGyL9eZGBoP9qdDQFPTLjAzdX3GEDfmbOfLtHiZnx8Rp08XMvKaPkG1huFolmkiUegJ6z8rV+vGbX+HJXM2HF992grtNlKZchaaPoG1hBMNDbCrYyqqVa5as6lO5G7Rtz0WGRgZp6znIP/8+lEQpU7to1co1Wrxui8Ngem5KugfO07D9aJI8iVZbto+vr5/m0i8domg8eOozag0VH9E90MnM3JQYAF0D58jNyuNF/w5N9He76NT3h+Tm79cWK+1uKQl/tvkrNSfLpGugEwQMBOYX5qW9t4l3tzeT68mL4VFdYnNL+eYWOScrTw9UNNHe28zCwrygYBBdYKP3g9L5cxvt9T28VFy59CoDHN7J6Lf5XtX2+h46r7cxei8obm2k6sRmVMEwHM+CnCJtrGxlYibMmSutzDycip1s0SM7PsYpaEPFUXKyTL7obWbkXsqR6R76GoUj4vR7bWk9NaV1/DYySMgOELKHCdkBEPCu9ePN20ih6ad43Ra6BzrpuvWVIwvOPqZRiaX6ZMlifaMAPCuy1Zvn3B4KTR9e0w+Cc8OIXltCthVjGT+zxVmowP9h0Pl3P+HY4AAAAABJRU5ErkJggg==" />
+                        </defs>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="hero-body">
+                <p class="hero-description">
+                    The leading manufacturer of uPVC window and door systems in Egypt and the African region,
+                    demonstrating the reliability of its profiles across a multitude of projects with over a decade
+                    of experience in the industry.
+                </p>
+
+                <div class="hero-footer green-footer">
+                    <div class="certifications-container">
+                        <div class="certifications">
+                            <img src="~/images/home/20year.png" alt="20 Years" height="50" loading="lazy" />
+                            <img src="~/images/home/iso.png" alt="ISO" height="50" loading="lazy" />
+                            <img src="~/images/home/nr.png" alt="NR" height="50" loading="lazy" />
+                            <img src="~/images/home/eos.png" alt="EOS" height="50" loading="lazy" />
+                        </div>
+                        <div class="hotline">
+                            <span class="hotline-number">15726</span>
+                            <p>Hotline</p>
+                        </div>
+                    </div>
+                    <p>
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        EMAPEN all rights reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-arrow">
+            <button type="button" class="btn btn-link">
+                <svg width="108" height="68" viewBox="0 0 108 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12.735L12.7305 0L54.018 42.0255L95.2695 0L108 12.735L54.018 67.5L0 12.735Z"
+                        fill="#75C059" fill-opacity="0.3" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
