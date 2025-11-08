@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using UPVC.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace UPVC.Data
 {
@@ -56,6 +60,12 @@ namespace UPVC.Data
                 .HasIndex(s => s.Platform)
                 .IsUnique();
 
+            modelBuilder.Entity<AboutPage>()
+                .HasMany(p => p.Sections)
+                .WithOne(s => s.AboutPage)
+                .HasForeignKey(s => s.AboutPageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Seed default admin user (password: Admin@123)
             // Password hash for "Admin@123" using BCrypt
             modelBuilder.Entity<AdminUser>().HasData(
@@ -91,11 +101,13 @@ namespace UPVC.Data
                     TitleEn = "The window of the future",
                     TitleAr = "نافذة المستقبل",
                     SubtitleEn = "Energy efficiency",
-                    SubtitleAr = "كفاءة الطاقة",
-                    ContentEn = "With a thermal conductivity significantly lower than aluminum, upvc possesses superior thermal insulation properties.",
-                    ContentAr = "مع موصلية حرارية أقل بكثير من الألومنيوم، يمتلك uPVC خصائص عزل حراري فائقة.",
+                    SubtitleAr = "موفر للطاقة",
+                    ContentEn = "With a thermal conductivity significantly lower than aluminum, uPVC possesses superior <span>thermal insulation</span> properties. This thermal insulation <span>reduces heat loss</span> during winter and minimizes heat gain during summer, reducing the reliance on artificial heating and cooling systems and making it the material of choice for saving energy and <span>lowering utility bills</span>.",
+                    ContentAr = "نظرًا لأن التوصيل الحراري لمادة الـ uPVC أقل بكثير من الألومنيوم، فهي تتمتع بخصائص <span>عزل حراري</span> فائقة. يساعد هذا العزل الحراري في تقليل <span>فقدان الحرارة</span> خلال فصل الشتاء، ويحدّ من <span>اكتساب الحرارة</span> في الصيف، مما يقلل الاعتماد على أنظمة التدفئة والتبريد الاصطناعية، ويجعلها المادة المثالية لتوفير الطاقة و <span>خفض فواتير الخدمات</span>.",
                     IsActive = true
                 },
+
+                
                 new HomePage
                 {
                     Id = 3,
@@ -112,15 +124,59 @@ namespace UPVC.Data
                 {
                     Id = 4,
                     PageKey = "Home4",
-                    TitleEn = "Quality Assurance",
-                    TitleAr = "ضمان الجودة",
-                    SubtitleEn = "International Standards",
-                    SubtitleAr = "المعايير الدولية",
-                    ContentEn = "Our products meet the highest international quality standards.",
-                    ContentAr = "منتجاتنا تلبي أعلى معايير الجودة الدولية.",
+                    TitleEn = "Projects completed",
+                    TitleAr = "المشاريع المكتملة",
+                    SubtitleEn = "Renowned for their exceptional performance, EMAPEN’s profiles have garnered the trust of numerous clients, firmly establishing our reputation as a preferred choice for window and door applications in a diverse set of construction projects.",
+                    SubtitleAr = "تُعرف قطاعات إيمابن بأدائها الاستثنائي، حيث نالت ثقة العديد من العملاء، مما رسّخ سمعتها كأحد أفضل القطاعات المتخصصة في تطبيقات النوافذ والأبواب لمختلف مشاريع البناء في مصر وخارجها. وتتميّز منتجات إيمابن بجودتها العالية وثبات أدائها في البيئات المتنوعة، ما جعلها الخيار المفضل لدى كبرى شركات التطوير العقاري والمقاولين.",
+                    ContentEn = "EMAPEN is also known for its high production capacity, consistently meeting the high demands of many construction projects.",
+                    ContentAr = "كما تُعرف إيمابن بقدرتها الإنتاجية العالية والتزامها الدائم بتلبية المتطلبات الكبيرة للمشروعات الضخمة، مع الحرص على الالتزام بالمعايير الدولية في كل مرحلة من مراحل التصنيع والتنفيذ.",
+                    ContentOtherEn = "The following is some of the large-scale projects that have specified our profiles.",
+                    ContentOtherAr = "تحتوي القائمة التالية على مجموعة من أبرز المشاريع الكبرى التي تم تزويدها بقطاعات إيمابن، والتي تعكس الثقة المتبادلة بين الشركة وشركائها في قطاع البناء.",
                     IsActive = true
                 }
             );
+
+            var aboutPageId = 1;
+
+            modelBuilder.Entity<AboutPage>().HasData(new AboutPage
+            {
+                Id= aboutPageId,
+                PageKey = "About",
+                TitleEn = "Since its establishment in 2015, EMAPEN has consistently demonstrated the reliability of its profiles across a multitude of projects, thereby solidifying its standing as one of the leading manufacturers of UPVC in Egypt.",
+                TitleAr = "منذ تأسيسها عام 2015، أثبتت شركة إيمابن بشكلٍ متواصل موثوقية قطاعاتها في مئات المشاريع المتنوعة، مما رسّخ مكانتها كواحدة من أبرز الشركات الرائدة في تصنيع أنظمة الـuPVC في مصر. وقد جاءت هذه الريادة نتيجة التزام الشركة الدائم بالجودة، والابتكار في التصميم، والاستمرارية في تحسين الأداء لتلبية احتياجات السوق المتغيرة ومواكبة أحدث التطورات في مجال صناعة النوافذ والأبواب.",
+                ContentEn = "EMAPEN boasts the largest network of distributors in the country, proving itself as the profile of choice for many construction projects. Additionally, the company features Egypt's largest extrusion facility, equipped with seven production lines and a capacity of 500 metric tons per month.",
+                ContentAr = "تفتخر إيمابن بامتلاكها أكبر شبكة موزعين على مستوى الجمهورية، مما جعلها الخيار الأول والمفضل في العديد من مشاريع البناء الكبرى. ويأتي هذا الانتشار الواسع كدليل على الثقة التي اكتسبتها الشركة بين شركائها في السوق المحلي، بفضل التزامها بالمواعيد وجودة منتجاتها العالية. كما تضم الشركة أكبر منشأة بثق في مصر، مزوّدة بسبعة خطوط إنتاج تعمل بطاقة تصل إلى 500 طن متري شهريًا، مما يمكّنها من تلبية الطلبات المتزايدة بكفاءة واستقرار في الإنتاج.",
+                SubtitleEn = "EMAPEN's profiles conform to the ISO 9001:2015 standard, ensuring consistent manufacturing processes and product performance.",
+                SubtitleAr = "تُصنّع قطاعات إيمابن وفقًا لمواصفات ISO 9001:2015 العالمية، مما يضمن التزام الشركة بأعلى معايير الجودة في جميع مراحل التصنيع والإدارة. ويُترجم هذا الالتزام إلى عمليات إنتاج دقيقة ومنتجات ذات أداء ثابت وموثوق، تعكس رؤية إيمابن في توفير حلول متكاملة تجمع بين المتانة، والكفاءة، والجمال في آنٍ واحد.",
+                IsActive = true
+            });
+
+            modelBuilder.Entity<AboutSection>().HasData(
+                new AboutSection
+                {
+                    Id=1,
+                    AboutPageId = aboutPageId,
+                    SectionType = AboutSectionType.Mission,
+                    Order = 1,
+                    TitleEn = "Our mission",
+                    TitleAr = "مهمتنا",
+                    ContentEn = "is to provide uPVC profiles of high quality and durability that satisfy international standards and meets customer demands through advanced machinery and necessary equipment managed by qualified professionals.",
+                    ContentAr = "هي تقديم قطاعات uPVC عالية الجودة والمتانة، مطابقة للمعايير الدولية، وتلبي احتياجات العملاء في مختلف الأسواق. نحرص على تحقيق ذلك من خلال استخدام أحدث خطوط الإنتاج والمعدات المتطورة، بإشراف فريق من المهندسين والفنيين ذوي الكفاءة العالية، لضمان تحقيق أعلى مستويات الدقة والأداء في كل منتج يحمل اسم إيمابن."
+                },
+                new AboutSection
+                {
+                    Id = 2,
+                    AboutPageId = aboutPageId,
+                    SectionType = AboutSectionType.Vision,
+                    Order = 2,
+                    TitleEn = "Our vision",
+                    TitleAr = "رؤيتنا",
+                    ContentEn = "is to become the most reliable and trusted supplier of uPVC profiles in both domestic and export markets.",
+                    ContentAr = "أن نكون المورد الأكثر موثوقية واعتمادًا لقطاعات uPVC في الأسواق المحلية وأسواق التصدير، من خلال ترسيخ اسم إيمابن كرمز للجودة والالتزام والابتكار في هذه الصناعة. نسعى إلى توسيع نطاق أعمالنا إقليميًا ودوليًا، وتعزيز مكانتنا كشريك موثوق يوفّر حلول نوافذ وأبواب متكاملة تلبي أعلى المعايير الفنية والجمالية، بما يضمن رضا العملاء واستدامة الثقة في منتجاتنا."
+                }
+            );
+
+
 
             // Seed default company info
             modelBuilder.Entity<CompanyInfo>().HasData(
@@ -147,7 +203,7 @@ namespace UPVC.Data
                 {
                     Id = 1,
                     Platform = "Facebook",
-                    Url = "https://facebook.com/emapen",
+                    Url = "https://www.facebook.com/share/1Bhcz5o4dt/",
                     IconClass = "bi bi-facebook",
                     DisplayOrder = 1,
                     IsActive = true,
@@ -167,7 +223,7 @@ namespace UPVC.Data
                 {
                     Id = 3,
                     Platform = "Instagram",
-                    Url = "https://instagram.com/emapen",
+                    Url = "https://www.instagram.com/emapen.upvc.egypt?igsh=eG9uMGR5bmttaXZv",
                     IconClass = "bi bi-instagram",
                     DisplayOrder = 3,
                     IsActive = true,
@@ -177,7 +233,7 @@ namespace UPVC.Data
                 {
                     Id = 4,
                     Platform = "LinkedIn",
-                    Url = "https://linkedin.com/company/emapen",
+                    Url = "https://www.linkedin.com/company/emapen-for-upvc-profile/",
                     IconClass = "bi bi-linkedin",
                     DisplayOrder = 4,
                     IsActive = true,
@@ -187,7 +243,7 @@ namespace UPVC.Data
                 {
                     Id = 5,
                     Platform = "WhatsApp",
-                    Url = "https://wa.me/201000000000",
+                    Url = "https://wa.me/201069946220",
                     IconClass = "bi bi-whatsapp",
                     DisplayOrder = 5,
                     IsActive = true,

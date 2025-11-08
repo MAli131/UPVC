@@ -8,9 +8,12 @@ namespace UPVC.Models
         public string TitleAr { get; set; } = string.Empty;
         public string SubtitleEn { get; set; } = string.Empty;
         public string SubtitleAr { get; set; } = string.Empty;
-        public string ContentEn { get; set; } = string.Empty; // Main content/description
+        public string ContentEn { get; set; } = string.Empty; 
         public string ContentAr { get; set; } = string.Empty;
         public string? ImagePath { get; set; }
+        public string? ContentOtherEn { get; set; } = string.Empty;
+        public string? ContentOtherAr { get; set; } = string.Empty;
+
         public string? SecondaryImagePath { get; set; }
         public string? MetaDataJson { get; set; } // For additional flexible fields (stored as JSON)
     }

@@ -30,9 +30,6 @@ namespace UPVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AdditionalContentJson")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ContentAr")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -62,6 +59,10 @@ namespace UPVC.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<string>("PageKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SubtitleAr")
                         .HasColumnType("nvarchar(max)");
 
@@ -82,6 +83,116 @@ namespace UPVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AboutPages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContentAr = "تفتخر إيمابن بامتلاكها أكبر شبكة موزعين على مستوى الجمهورية، مما جعلها الخيار الأول والمفضل في العديد من مشاريع البناء الكبرى. ويأتي هذا الانتشار الواسع كدليل على الثقة التي اكتسبتها الشركة بين شركائها في السوق المحلي، بفضل التزامها بالمواعيد وجودة منتجاتها العالية. كما تضم الشركة أكبر منشأة بثق في مصر، مزوّدة بسبعة خطوط إنتاج تعمل بطاقة تصل إلى 500 طن متري شهريًا، مما يمكّنها من تلبية الطلبات المتزايدة بكفاءة واستقرار في الإنتاج.",
+                            ContentEn = "EMAPEN boasts the largest network of distributors in the country, proving itself as the profile of choice for many construction projects. Additionally, the company features Egypt's largest extrusion facility, equipped with seven production lines and a capacity of 500 metric tons per month.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            PageKey = "About",
+                            SubtitleAr = "تُصنّع قطاعات إيمابن وفقًا لمواصفات ISO 9001:2015 العالمية، مما يضمن التزام الشركة بأعلى معايير الجودة في جميع مراحل التصنيع والإدارة. ويُترجم هذا الالتزام إلى عمليات إنتاج دقيقة ومنتجات ذات أداء ثابت وموثوق، تعكس رؤية إيمابن في توفير حلول متكاملة تجمع بين المتانة، والكفاءة، والجمال في آنٍ واحد.",
+                            SubtitleEn = "EMAPEN's profiles conform to the ISO 9001:2015 standard, ensuring consistent manufacturing processes and product performance.",
+                            TitleAr = "منذ تأسيسها عام 2015، أثبتت شركة إيمابن بشكلٍ متواصل موثوقية قطاعاتها في مئات المشاريع المتنوعة، مما رسّخ مكانتها كواحدة من أبرز الشركات الرائدة في تصنيع أنظمة الـuPVC في مصر. وقد جاءت هذه الريادة نتيجة التزام الشركة الدائم بالجودة، والابتكار في التصميم، والاستمرارية في تحسين الأداء لتلبية احتياجات السوق المتغيرة ومواكبة أحدث التطورات في مجال صناعة النوافذ والأبواب.",
+                            TitleEn = "Since its establishment in 2015, EMAPEN has consistently demonstrated the reliability of its profiles across a multitude of projects, thereby solidifying its standing as one of the leading manufacturers of UPVC in Egypt."
+                        });
+                });
+
+            modelBuilder.Entity("UPVC.Models.AboutSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AboutPageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IconPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TitleAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AboutPageId");
+
+                    b.ToTable("AboutSection");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AboutPageId = 1,
+                            ContentAr = "هي تقديم قطاعات uPVC عالية الجودة والمتانة، مطابقة للمعايير الدولية، وتلبي احتياجات العملاء في مختلف الأسواق. نحرص على تحقيق ذلك من خلال استخدام أحدث خطوط الإنتاج والمعدات المتطورة، بإشراف فريق من المهندسين والفنيين ذوي الكفاءة العالية، لضمان تحقيق أعلى مستويات الدقة والأداء في كل منتج يحمل اسم إيمابن.",
+                            ContentEn = "is to provide uPVC profiles of high quality and durability that satisfy international standards and meets customer demands through advanced machinery and necessary equipment managed by qualified professionals.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            IsDeleted = false,
+                            Order = 1,
+                            SectionType = 1,
+                            TitleAr = "مهمتنا",
+                            TitleEn = "Our mission"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AboutPageId = 1,
+                            ContentAr = "أن نكون المورد الأكثر موثوقية واعتمادًا لقطاعات uPVC في الأسواق المحلية وأسواق التصدير، من خلال ترسيخ اسم إيمابن كرمز للجودة والالتزام والابتكار في هذه الصناعة. نسعى إلى توسيع نطاق أعمالنا إقليميًا ودوليًا، وتعزيز مكانتنا كشريك موثوق يوفّر حلول نوافذ وأبواب متكاملة تلبي أعلى المعايير الفنية والجمالية، بما يضمن رضا العملاء واستدامة الثقة في منتجاتنا.",
+                            ContentEn = "is to become the most reliable and trusted supplier of uPVC profiles in both domestic and export markets.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            IsDeleted = false,
+                            Order = 2,
+                            SectionType = 2,
+                            TitleAr = "رؤيتنا",
+                            TitleEn = "Our vision"
+                        });
                 });
 
             modelBuilder.Entity("UPVC.Models.AdminUser", b =>
@@ -142,9 +253,51 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$mmpMXhhTvA8vbY3aiA5bN.2n/4x93dXmRIM18mvTXbLLa30a4xhBq",
+                            PasswordHash = "$2a$11$290Zr1xiNqxawJEvLTSK3.IccBNXFsfc8zHgu4r6JcnA3igt0Cjxu",
                             Username = "admin"
                         });
+                });
+
+            modelBuilder.Entity("UPVC.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("UPVC.Models.CompanyInfo", b =>
@@ -255,6 +408,9 @@ namespace UPVC.Migrations
                     b.Property<string>("AddressEn")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContentAr")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -293,6 +449,12 @@ namespace UPVC.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SubtitleAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubtitleEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TitleAr")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -305,6 +467,8 @@ namespace UPVC.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("ContactPages");
                 });
@@ -323,6 +487,12 @@ namespace UPVC.Migrations
 
                     b.Property<string>("ContentEn")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentOtherAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentOtherEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -388,6 +558,8 @@ namespace UPVC.Migrations
                             Id = 1,
                             ContentAr = "الشركة الرائدة في تصنيع أنظمة نوافذ و أبواب الuPVC في مصر و القارة الأفريقية، والتي أثبتت كفائتها في مشاريع متعددة، مستندة إلى أكثر من عقد من الخبرة في الصناعة.",
                             ContentEn = "The leading manufacturer of uPVC window and door systems in Egypt and the African region, demonstrating the reliability of its profiles across a multitude of projects with over a decade of experience in the industry.",
+                            ContentOtherAr = "",
+                            ContentOtherEn = "",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             IsDeleted = false,
@@ -400,13 +572,15 @@ namespace UPVC.Migrations
                         new
                         {
                             Id = 2,
-                            ContentAr = "مع موصلية حرارية أقل بكثير من الألومنيوم، يمتلك uPVC خصائص عزل حراري فائقة.",
-                            ContentEn = "With a thermal conductivity significantly lower than aluminum, upvc possesses superior thermal insulation properties.",
+                            ContentAr = "نظرًا لأن التوصيل الحراري لمادة الـ uPVC أقل بكثير من الألومنيوم، فهي تتمتع بخصائص <span>عزل حراري</span> فائقة. يساعد هذا العزل الحراري في تقليل <span>فقدان الحرارة</span> خلال فصل الشتاء، ويحدّ من <span>اكتساب الحرارة</span> في الصيف، مما يقلل الاعتماد على أنظمة التدفئة والتبريد الاصطناعية، ويجعلها المادة المثالية لتوفير الطاقة و <span>خفض فواتير الخدمات</span>.",
+                            ContentEn = "With a thermal conductivity significantly lower than aluminum, uPVC possesses superior <span>thermal insulation</span> properties. This thermal insulation <span>reduces heat loss</span> during winter and minimizes heat gain during summer, reducing the reliance on artificial heating and cooling systems and making it the material of choice for saving energy and <span>lowering utility bills</span>.",
+                            ContentOtherAr = "",
+                            ContentOtherEn = "",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             IsDeleted = false,
                             PageKey = "Home2",
-                            SubtitleAr = "كفاءة الطاقة",
+                            SubtitleAr = "موفر للطاقة",
                             SubtitleEn = "Energy efficiency",
                             TitleAr = "نافذة المستقبل",
                             TitleEn = "The window of the future"
@@ -416,6 +590,8 @@ namespace UPVC.Migrations
                             Id = 3,
                             ContentAr = "أكبر منشأة بثق، أكبر عدد من الملفات الشخصية، أكبر شبكة من الموردين.",
                             ContentEn = "Largest extrusion facility, largest number of profiles, largest network of suppliers.",
+                            ContentOtherAr = "",
+                            ContentOtherEn = "",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             IsDeleted = false,
@@ -428,16 +604,18 @@ namespace UPVC.Migrations
                         new
                         {
                             Id = 4,
-                            ContentAr = "منتجاتنا تلبي أعلى معايير الجودة الدولية.",
-                            ContentEn = "Our products meet the highest international quality standards.",
+                            ContentAr = "كما تُعرف إيمابن بقدرتها الإنتاجية العالية والتزامها الدائم بتلبية المتطلبات الكبيرة للمشروعات الضخمة، مع الحرص على الالتزام بالمعايير الدولية في كل مرحلة من مراحل التصنيع والتنفيذ.",
+                            ContentEn = "EMAPEN is also known for its high production capacity, consistently meeting the high demands of many construction projects.",
+                            ContentOtherAr = "تحتوي القائمة التالية على مجموعة من أبرز المشاريع الكبرى التي تم تزويدها بقطاعات إيمابن، والتي تعكس الثقة المتبادلة بين الشركة وشركائها في قطاع البناء.",
+                            ContentOtherEn = "The following is some of the large-scale projects that have specified our profiles.",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             IsDeleted = false,
                             PageKey = "Home4",
-                            SubtitleAr = "المعايير الدولية",
-                            SubtitleEn = "International Standards",
-                            TitleAr = "ضمان الجودة",
-                            TitleEn = "Quality Assurance"
+                            SubtitleAr = "تُعرف قطاعات إيمابن بأدائها الاستثنائي، حيث نالت ثقة العديد من العملاء، مما رسّخ سمعتها كأحد أفضل القطاعات المتخصصة في تطبيقات النوافذ والأبواب لمختلف مشاريع البناء في مصر وخارجها. وتتميّز منتجات إيمابن بجودتها العالية وثبات أدائها في البيئات المتنوعة، ما جعلها الخيار المفضل لدى كبرى شركات التطوير العقاري والمقاولين.",
+                            SubtitleEn = "Renowned for their exceptional performance, EMAPEN’s profiles have garnered the trust of numerous clients, firmly establishing our reputation as a preferred choice for window and door applications in a diverse set of construction projects.",
+                            TitleAr = "المشاريع المكتملة",
+                            TitleEn = "Projects completed"
                         });
                 });
 
@@ -575,7 +753,7 @@ namespace UPVC.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             Platform = "Facebook",
-                            Url = "https://facebook.com/emapen"
+                            Url = "https://www.facebook.com/share/1Bhcz5o4dt/"
                         },
                         new
                         {
@@ -597,7 +775,7 @@ namespace UPVC.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             Platform = "Instagram",
-                            Url = "https://instagram.com/emapen"
+                            Url = "https://www.instagram.com/emapen.upvc.egypt?igsh=eG9uMGR5bmttaXZv"
                         },
                         new
                         {
@@ -608,7 +786,7 @@ namespace UPVC.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             Platform = "LinkedIn",
-                            Url = "https://linkedin.com/company/emapen"
+                            Url = "https://www.linkedin.com/company/emapen-for-upvc-profile/"
                         },
                         new
                         {
@@ -619,8 +797,38 @@ namespace UPVC.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             Platform = "WhatsApp",
-                            Url = "https://wa.me/201000000000"
+                            Url = "https://wa.me/201069946220"
                         });
+                });
+
+            modelBuilder.Entity("UPVC.Models.AboutSection", b =>
+                {
+                    b.HasOne("UPVC.Models.AboutPage", "AboutPage")
+                        .WithMany("Sections")
+                        .HasForeignKey("AboutPageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AboutPage");
+                });
+
+            modelBuilder.Entity("UPVC.Models.ContactPage", b =>
+                {
+                    b.HasOne("UPVC.Models.Category", "Category")
+                        .WithMany("ContactPages")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("UPVC.Models.AboutPage", b =>
+                {
+                    b.Navigation("Sections");
+                });
+
+            modelBuilder.Entity("UPVC.Models.Category", b =>
+                {
+                    b.Navigation("ContactPages");
                 });
 #pragma warning restore 612, 618
         }
