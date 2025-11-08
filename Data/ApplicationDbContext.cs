@@ -21,6 +21,8 @@ namespace UPVC.Data
         public DbSet<ContactPage> ContactPages { get; set; }
         public DbSet<CompanyInfo> CompanyInfos { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -246,6 +248,42 @@ namespace UPVC.Data
                     Url = "https://wa.me/201069946220",
                     IconClass = "bi bi-whatsapp",
                     DisplayOrder = 5,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                }
+            );
+
+            // Seed categories for contact form
+            modelBuilder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = 1,
+                    NameEn = "Window manufacturer (Egypt)",
+                    NameAr = "مصنع نوافذ (مصر)",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Category
+                {
+                    Id = 2,
+                    NameEn = "Supplier",
+                    NameAr = "مورد",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Category
+                {
+                    Id = 3,
+                    NameEn = "Architect",
+                    NameAr = "مهندس معماري",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Category
+                {
+                    Id = 4,
+                    NameEn = "Home owner",
+                    NameAr = "مالك منزل",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
