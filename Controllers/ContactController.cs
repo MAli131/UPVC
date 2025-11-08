@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using UPVC.Models;
+using UPVC.Filters;
 
 namespace UPVC.Controllers
 {
+    [PreventAdminAccess]
     public class ContactController : Controller
     {
         public IActionResult Index()
