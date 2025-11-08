@@ -1,0 +1,149 @@
+@model UPVC.Models.CompanyInfo
+
+@{
+    Layout = "~/Views/Admin/Dashboard/Index.cshtml";
+    ViewData["Title"] = "إدارة بيانات الشركة";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="mb-0">إدارة بيانات الشركة</h2>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-3">البيانات الأساسية</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">اسم الشركة (عربي)</label>
+                            <input asp-for="NameAr" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">اسم الشركة (إنجليزي)</label>
+                            <input asp-for="NameEn" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الهاتف</label>
+                            <input asp-for="Phone" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الجوال</label>
+                            <input asp-for="Mobile" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input asp-for="Email" type="email" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="mb-3">العنوان والوصف</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label">العنوان (عربي)</label>
+                            <textarea asp-for="AddressAr" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">العنوان (إنجليزي)</label>
+                            <textarea asp-for="AddressEn" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الوصف (عربي)</label>
+                            <textarea asp-for="DescriptionAr" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الوصف (إنجليزي)</label>
+                            <textarea asp-for="DescriptionEn" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-3">الشعار والأيقونة</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label">الشعار (Logo)</label>
+                            @if (!string.IsNullOrEmpty(Model?.LogoPath))
+                            {
+                                <div class="mb-2">
+                                    <img src="@Model.LogoPath" alt="Logo" style="max-height: 100px;" class="img-thumbnail">
+                                </div>
+                            }
+                            <input type="file" name="logoFile" class="form-control" accept="image/*" />
+                            <small class="text-muted">يُفضل صورة بخلفية شفافة (PNG)</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الأيقونة (Favicon)</label>
+                            @if (!string.IsNullOrEmpty(Model?.FaviconPath))
+                            {
+                                <div class="mb-2">
+                                    <img src="@Model.FaviconPath" alt="Favicon" style="max-height: 50px;" class="img-thumbnail">
+                                </div>
+                            }
+                            <input type="file" name="faviconFile" class="form-control" accept="image/*" />
+                            <small class="text-muted">يُفضل صورة مربعة 32x32 أو 64x64 بكسل</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="mb-3">ساعات العمل</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label">ساعات العمل (JSON)</label>
+                            <textarea asp-for="WorkingHoursJson" class="form-control" rows="8"></textarea>
+                            <small class="text-muted">
+                                مثال:<br>
+                                {<br>
+                                &nbsp;&nbsp;"ar": "السبت - الخميس: 9 صباحاً - 6 مساءً",<br>
+                                &nbsp;&nbsp;"en": "Saturday - Thursday: 9 AM - 6 PM"<br>
+                                }
+                            </small>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                            <label class="form-check-label">
+                                نشط
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> حفظ التغييرات
+                        </button>
+                        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-right"></i> رجوع
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

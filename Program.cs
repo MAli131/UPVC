@@ -1,9 +1,23 @@
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using UPVC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add Database Context
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add Session support for admin authentication
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 // Add FluentValidation
 builder.Services.AddFluentValidationAutoValidation()
@@ -34,6 +48,9 @@ app.UseStaticFiles();
 
 // Use Request Localization
 app.UseRequestLocalization();
+
+// Use Session (before routing)
+app.UseSession();
 
 app.UseRouting();
 
