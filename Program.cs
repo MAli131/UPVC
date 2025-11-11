@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using UPVC.Data;
+using UPVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddControllersWithViews();
 // Add Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register Email Service
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Add Session support for admin authentication
 builder.Services.AddSession(options =>
@@ -28,7 +32,7 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = new[] { "ar-SA", "en-US" };
-    options.SetDefaultCulture("ar-SA")
+    options.SetDefaultCulture("en-US")
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
 });
