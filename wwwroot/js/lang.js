@@ -55,17 +55,18 @@
         returnUrlInput.name = 'returnUrl';
         returnUrlInput.value = window.location.pathname + window.location.search;
         
+        // Get anti-forgery token from any form on the page
         const tokenInput = document.createElement('input');
         tokenInput.type = 'hidden';
         tokenInput.name = '__RequestVerificationToken';
         const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
         if (tokenElement) {
             tokenInput.value = tokenElement.value;
+            form.appendChild(tokenInput);
         }
         
         form.appendChild(cultureInput);
         form.appendChild(returnUrlInput);
-        form.appendChild(tokenInput);
         document.body.appendChild(form);
         form.submit();
     }

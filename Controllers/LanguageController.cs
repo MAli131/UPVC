@@ -6,6 +6,7 @@ namespace UPVC.Controllers
     public class LanguageController : Controller
     {
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
             if (!string.IsNullOrEmpty(culture))
