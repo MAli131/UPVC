@@ -9,9 +9,8 @@ using System.Globalization;
 namespace UPVC.Controllers
 {
     [PreventAdminAccess]
-    public class ContactController : Controller
+    public class ContactController : BaseController
     {
-        private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
         private readonly ILogger<ContactController> _logger;
 
@@ -19,8 +18,8 @@ namespace UPVC.Controllers
             ApplicationDbContext context,
             IEmailService emailService,
             ILogger<ContactController> logger)
+            : base(context)
         {
-            _context = context;
             _emailService = emailService;
             _logger = logger;
         }

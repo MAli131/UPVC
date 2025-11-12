@@ -1,12 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using UPVC.Models;
 using UPVC.Filters;
+using UPVC.Data;
 
 namespace UPVC.Controllers
 {
     [PreventAdminAccess]
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
+        public ProductController(ApplicationDbContext context) 
+            : base(context)
+        {
+        }
         public IActionResult Index()
         {
             // يمكن جلب المنتجات من قاعدة البيانات هنا
@@ -53,7 +58,7 @@ namespace UPVC.Controllers
             return new List<ProductModel>();
         }
 
-        private ProductModel GetProductById(string id)
+        private ProductModel? GetProductById(string id)
         {
             if (id == "ema42s")
             {

@@ -54,8 +54,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Use Request Localization
-app.UseRequestLocalization();
+// Use Request Localization (must be before routing)
+var localizationOptions = app.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
 
 // Use Session (before routing)
 app.UseSession();
