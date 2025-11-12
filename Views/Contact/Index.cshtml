@@ -1,6 +1,11 @@
+@model UPVC.ViewModels.ContactViewModel
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<UPVC.Resources.ContactPageResource> Localizer
 @{
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/style.css" />
@@ -91,7 +96,11 @@
                     <input type="radio" class="btn-check" name="lang" id="ar-lang" autocomplete="off">
                     <label class="btn" for="ar-lang">AR</label>
                 </div>
-                <span class="navbar-slogan d-none d-lg-block">EMAPEN uPVC systems for doors and windows</span>
+                <span class="navbar-slogan d-none d-lg-block">
+                    @(isArabic 
+                        ? (Model?.CompanyInfo?.SloganAr ?? "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ") 
+                        : (Model?.CompanyInfo?.SloganEn ?? "EMAPEN uPVC systems for doors and windows"))
+                </span>
             </div>
         </div>
     </nav>
@@ -99,46 +108,101 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="hero-content col">
-                <h1 class="hero-title">Contact Us</h1>
+                <h1 class="hero-title">
+                    @(isArabic 
+                        ? (Model?.ContactPage?.TitleAr ?? "اتصل بنا") 
+                        : (Model?.ContactPage?.TitleEn ?? "Contact Us"))
+                </h1>
                 <p class="hero-description">
-                    Whether you have any questions regarding our products or you're considering making an order,
-                    <span>feel free to contact us.</span>
+                    @(isArabic 
+                        ? (Model?.ContactPage?.SubtitleAr ?? "سواء كانت لديك أي استفسارات حول منتجاتنا أو كنت تفكر في تقديم طلب،")
+                        : (Model?.ContactPage?.SubtitleEn ?? "Whether you have any questions regarding our products or you're considering making an order,"))
+                    @if (!string.IsNullOrEmpty(Model?.ContactPage?.SubtitleHighlightEn) || !string.IsNullOrEmpty(Model?.ContactPage?.SubtitleHighlightAr))
+                    {
+                        <span>
+                            @(isArabic 
+                                ? (Model?.ContactPage?.SubtitleHighlightAr ?? "لا تتردد في الاتصال بنا.") 
+                                : (Model?.ContactPage?.SubtitleHighlightEn ?? "feel free to contact us."))
+                        </span>
+                    }
                 </p>
-                <p class="hero-description">
-                    Window manufacturer, Supplier, Architect, Home owner, no matter what your category is,
-                    <span> we would be glad to support you.</span>
-                </p>
+                @if (!string.IsNullOrEmpty(Model?.ContactPage?.ContentEn) || !string.IsNullOrEmpty(Model?.ContactPage?.ContentAr))
+                {
+                    <p class="hero-description">
+                        @(isArabic 
+                            ? (Model?.ContactPage?.ContentAr ?? "مصنع نوافذ، موزع، مهندس معماري، صاحب منزل، مهما كانت فئتك،")
+                            : (Model?.ContactPage?.ContentEn ?? "Window manufacturer, Supplier, Architect, Home owner, no matter what your category is,"))
+                        @if (!string.IsNullOrEmpty(Model?.ContactPage?.ContentHighlightEn) || !string.IsNullOrEmpty(Model?.ContactPage?.ContentHighlightAr))
+                        {
+                            <span>
+                                @(isArabic 
+                                    ? (Model?.ContactPage?.ContentHighlightAr ?? "يسعدنا دعمك.") 
+                                    : (Model?.ContactPage?.ContentHighlightEn ?? "we would be glad to support you."))
+                            </span>
+                        }
+                    </p>
+                }
 
                 <div class="hero-category">
-                    <label for="category" class="form-label">Select Category</label>
-                    <select class="form-select" id="category">
-                        <option selected>Choose...</option>
-                        <option value="1">Window manufacturer (Egypt)</option>
-                        <option value="2">Supplier</option>
-                        <option value="3">Architect</option>
-                        <option value="4">Home owner</option>
+                    <label for="category" class="form-label">@Localizer["SelectCategory"]</label>
+                    <select class="form-select" id="category" asp-for="NewMessage.Category" required>
+                        <option value="" disabled selected>Choose...</option>
+                        @if (Model?.Categories != null && Model.Categories.Any())
+                        {
+                            foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.Id">@category.NameEn</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="1">Window manufacturer (Egypt)</option>
+                            <option value="2">Supplier</option>
+                            <option value="3">Architect</option>
+                            <option value="4">Home owner</option>
+                            <option value="5">Other</option>
+                        }
                     </select>
+                    <span asp-validation-for="NewMessage.Category" class="text-danger"></span>
                 </div>
             </div>
             <div class="hero-form col">
-                <form class="row">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        @TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                <form class="row" asp-action="Index" asp-controller="Contact" method="post">
+                    @Html.AntiForgeryToken()
                     <div class="col-12 col-md-5">
-                        <input type="text" class="form-control" id="name" placeholder="Name">
+                        <input type="text" class="form-control" id="name" placeholder="Name" asp-for="NewMessage.Name" required>
+                        <span asp-validation-for="NewMessage.Name" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-7">
-                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <input type="email" class="form-control" id="email" placeholder="Email" asp-for="NewMessage.Email" required>
+                        <span asp-validation-for="NewMessage.Email" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="text" class="form-control" id="country" placeholder="Country">
+                        <input type="text" class="form-control" id="country" placeholder="Country" asp-for="NewMessage.Country">
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="text" class="form-control" id="city" placeholder="City">
+                        <input type="text" class="form-control" id="city" placeholder="City" asp-for="NewMessage.City">
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="number" class="form-control" id="tel" placeholder="Telephone">
+                        <input type="tel" class="form-control" id="tel" placeholder="Telephone" asp-for="NewMessage.Telephone">
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" id="message" rows="5" placeholder="Content"></textarea>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Content" asp-for="NewMessage.Content" required></textarea>
+                        <span asp-validation-for="NewMessage.Content" class="text-danger"></span>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">
@@ -156,30 +220,64 @@
         </div>
         <div class="hero-footer">
             <div class="hero-address">
-                <p>
-                    <span>6th of October City Industrial Zone 1</span>,
-                    <span>Land no.238 - Giza</span>,
-                    <span>Egypt</span>
-                </p>
-                <p>
-                    +201069946220 <br>
-                    info@emapen.net
-                </p>
+                @if (Model?.CompanyInfo != null)
+                {
+                    <p>
+                        <span>@Model.CompanyInfo.AddressEn</span>
+                    </p>
+                    <p>
+                        @Model.CompanyInfo.Mobile <br>
+                        @Model.CompanyInfo.Email
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        <span>6th of October City Industrial Zone 1</span>,
+                        <span>Land no.238 - Giza</span>,
+                        <span>Egypt</span>
+                    </p>
+                    <p>
+                        +201069946220 <br>
+                        info@emapen.net
+                    </p>
+                }
                 <ul>
-                    <li><a href="#"><img src="/images/contact/facebook.png" alt="facebook" width="30px"
-                                loading="lazy"></a></li>
-                    <li><a href="#"><img src="/images/contact/instagram.png" alt="instagram" width="30px"
-                                loading="lazy"></a></li>
-                    <li><a href="#"><img src="/images/contact/linkedin.png" alt="linkedin" width="30px"
-                                loading="lazy"></a></li>
+                    @if (Model?.SocialMedias != null && Model.SocialMedias.Any())
+                    {
+                        foreach (var social in Model.SocialMedias)
+                        {
+                            <li>
+                                <a href="@social.Url" target="_blank" rel="noopener noreferrer">
+                                    <i class="@social.IconClass" style="font-size: 30px; color: white;"></i>
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li><a href="#"><img src="/images/contact/facebook.png" alt="facebook" width="30px" loading="lazy"></a></li>
+                        <li><a href="#"><img src="/images/contact/instagram.png" alt="instagram" width="30px" loading="lazy"></a></li>
+                        <li><a href="#"><img src="/images/contact/linkedin.png" alt="linkedin" width="30px" loading="lazy"></a></li>
+                    }
                 </ul>
-                <div class="hotline">
-                    <span class="hotline-number">15726</span>
-                    <p>Hotline</p>
-                </div>
+                @if (Model?.CompanyInfo != null)
+                {
+                    <div class="hotline">
+                        <span class="hotline-number">@Model.CompanyInfo.Phone</span>
+                        <p>Hotline</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="hotline">
+                        <span class="hotline-number">15726</span>
+                        <p>Hotline</p>
+                    </div>
+                }
             </div>
             <p>
-                &copy; @DateTime.Now.Year EMAPEN all rights reserved
+                &copy; @DateTime.Now.Year @(Model?.CompanyInfo?.NameEn ?? "EMAPEN") all rights reserved
             </p>
         </div>
     </div>
@@ -190,3 +288,7 @@
 
 </html>
 <script src="~/js/lang.js"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

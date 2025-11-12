@@ -4,10 +4,16 @@ namespace UPVC.Models
     {
         public string TitleEn { get; set; } = string.Empty;
         public string TitleAr { get; set; } = string.Empty;
+        public string SubtitleEn { get; set; } = string.Empty;
+        public string SubtitleAr { get; set; } = string.Empty;
+        public string? SubtitleHighlightEn { get; set; }
+        public string? SubtitleHighlightAr { get; set; }
         public string ContentEn { get; set; } = string.Empty;
         public string ContentAr { get; set; } = string.Empty;
-        public string? SubtitleEn { get; set; } = string.Empty;
-        public string? SubtitleAr { get; set; } = string.Empty;
+        public string? ContentHighlightEn { get; set; }
+        public string? ContentHighlightAr { get; set; }
+        public string? ContentOtherEn { get; set; }
+        public string? ContentOtherAr { get; set; }
         public string? ImagePath { get; set; }
         public string? AddressEn { get; set; }
         public string? AddressAr { get; set; }

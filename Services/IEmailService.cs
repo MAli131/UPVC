@@ -3,6 +3,6 @@ namespace UPVC.Services
     public interface IEmailService
     {
         Task<bool> SendEmailAsync(string toEmail, string subject, string body, bool isHtml = true);
-        Task<bool> SendContactFormEmailAsync(string name, string email, string content, string? category = null);
+        Task<bool> SendContactFormEmailAsync(string name, string email, string content, string? category = null, string? country = null, string? city = null, string? telephone = null);
     }
 }

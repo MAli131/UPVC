@@ -49,7 +49,7 @@ namespace UPVC.Services
             }
         }
 
-        public async Task<bool> SendContactFormEmailAsync(string name, string email, string content, string? category = null)
+        public async Task<bool> SendContactFormEmailAsync(string name, string email, string content, string? category = null, string? country = null, string? city = null, string? telephone = null)
         {
             var adminEmail = _configuration["EmailSettings:AdminEmail"] ?? "info@emapen.net";
             var subject = $"New Contact Form Submission from {name}";
@@ -67,6 +67,24 @@ namespace UPVC.Services
                             <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Email:</strong></td>
                             <td style='padding: 10px; border: 1px solid #ddd;'>{email}</td>
                         </tr>
+                        {(string.IsNullOrEmpty(country) ? "" : $@"
+                        <tr>
+                            <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Country:</strong></td>
+                            <td style='padding: 10px; border: 1px solid #ddd;'>{country}</td>
+                        </tr>
+                        ")}
+                        {(string.IsNullOrEmpty(city) ? "" : $@"
+                        <tr>
+                            <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>City:</strong></td>
+                            <td style='padding: 10px; border: 1px solid #ddd;'>{city}</td>
+                        </tr>
+                        ")}
+                        {(string.IsNullOrEmpty(telephone) ? "" : $@"
+                        <tr>
+                            <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Telephone:</strong></td>
+                            <td style='padding: 10px; border: 1px solid #ddd;'>{telephone}</td>
+                        </tr>
+                        ")}
                         {(string.IsNullOrEmpty(category) ? "" : $@"
                         <tr>
                             <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Category:</strong></td>

@@ -194,6 +194,8 @@ namespace UPVC.Data
                     AddressAr = "مدينة 6 أكتوبر، المنطقة الصناعية 1، قطعة رقم 238 - الجيزة، مصر",
                     DescriptionEn = "Leading provider of uPVC windows and doors solutions",
                     DescriptionAr = "المزود الرائد لحلول النوافذ والأبواب uPVC",
+                    SloganEn = "EMAPEN uPVC systems for doors and windows",
+                    SloganAr = "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
@@ -259,7 +261,7 @@ namespace UPVC.Data
                 {
                     Id = 1,
                     NameEn = "Window manufacturer (Egypt)",
-                    NameAr = "مصنع نوافذ (مصر)",
+                    NameAr = "مصنع نوافذ",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -267,7 +269,7 @@ namespace UPVC.Data
                 {
                     Id = 2,
                     NameEn = "Supplier",
-                    NameAr = "مورد",
+                    NameAr = "موزع",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -275,7 +277,7 @@ namespace UPVC.Data
                 {
                     Id = 3,
                     NameEn = "Architect",
-                    NameAr = "مهندس معماري",
+                    NameAr = "مهندس",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -283,7 +285,35 @@ namespace UPVC.Data
                 {
                     Id = 4,
                     NameEn = "Home owner",
-                    NameAr = "مالك منزل",
+                    NameAr = "صاحب منزل",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Category
+                {
+                    Id = 5,
+                    NameEn = "other",
+                    NameAr = "آخر",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                }
+            );
+
+            // Seed contact page content
+            modelBuilder.Entity<ContactPage>().HasData(
+                new ContactPage
+                {
+                    Id = 1,
+                    TitleEn = "Contact Us",
+                    TitleAr = "اتصل بنا",
+                    SubtitleEn = "Whether you have any questions regarding our products or you're considering making an order,",
+                    SubtitleAr = "سواء كانت لديك أي استفسارات حول منتجاتنا أو كنت تفكر في تقديم طلب،",
+                    SubtitleHighlightEn = "feel free to contact us.",
+                    SubtitleHighlightAr = "لا تتردد في الاتصال بنا.",
+                    ContentEn = "Window manufacturer, Supplier, Architect, Home owner, no matter what your category is,",
+                    ContentAr = "مصنع نوافذ، موزع، مهندس معماري، صاحب منزل، مهما كانت فئتك،",
+                    ContentHighlightEn = "we would be glad to support you.",
+                    ContentHighlightAr = "يسعدنا دعمك.",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }

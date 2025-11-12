@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UPVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Createdb : Migration
+    public partial class create1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,7 @@ namespace UPVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -75,7 +75,7 @@ namespace UPVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,6 +96,8 @@ namespace UPVC.Migrations
                     FaviconPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescriptionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SloganEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SloganAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -105,6 +107,33 @@ namespace UPVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CompanyInfos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContactMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telephone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubmittedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    EmailSent = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactMessages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,10 +254,16 @@ namespace UPVC.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubtitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubtitleAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubtitleHighlightEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubtitleHighlightAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContentEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContentAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubtitleEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubtitleAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentHighlightEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentHighlightAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentOtherEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentOtherAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -246,9 +281,9 @@ namespace UPVC.Migrations
                 {
                     table.PrimaryKey("PK_ContactPages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContactPages_Category_CategoryId",
+                        name: "FK_ContactPages_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "Id");
                 });
 
@@ -260,12 +295,29 @@ namespace UPVC.Migrations
             migrationBuilder.InsertData(
                 table: "AdminUsers",
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "Email", "IsActive", "LastLoginAt", "PasswordHash", "UpdatedAt", "Username" },
-                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@emapen.com", true, null, "$2a$11$290Zr1xiNqxawJEvLTSK3.IccBNXFsfc8zHgu4r6JcnA3igt0Cjxu", null, "admin" });
+                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@emapen.com", true, null, "$2a$11$shYkCTpnTUcxcS.1InExVuD1vsv3mrQLYTPsf3KqDAAvIdMvjI6XG", null, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsActive", "NameAr", "NameEn", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, true, "مصنع نوافذ", "Window manufacturer (Egypt)", null },
+                    { 2, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, true, "موزع", "Supplier", null },
+                    { 3, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, true, "مهندس", "Architect", null },
+                    { 4, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, true, "صاحب منزل", "Home owner", null },
+                    { 5, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, true, "آخر", "other", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "CompanyInfos",
-                columns: new[] { "Id", "AddressAr", "AddressEn", "CreatedAt", "DeletedAt", "DescriptionAr", "DescriptionEn", "Email", "FaviconPath", "IsActive", "LogoPath", "Mobile", "NameAr", "NameEn", "Phone", "UpdatedAt", "WorkingHoursJson" },
-                values: new object[] { 1, "مدينة 6 أكتوبر، المنطقة الصناعية 1، قطعة رقم 238 - الجيزة، مصر", "6th of October City Industrial Zone 1, Land no.238 - Giza, Egypt", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "المزود الرائد لحلول النوافذ والأبواب uPVC", "Leading provider of uPVC windows and doors solutions", "info@emapen.net", null, true, null, "+201069946220", "إيمابن", "EMAPEN", "15726", null, null });
+                columns: new[] { "Id", "AddressAr", "AddressEn", "CreatedAt", "DeletedAt", "DescriptionAr", "DescriptionEn", "Email", "FaviconPath", "IsActive", "LogoPath", "Mobile", "NameAr", "NameEn", "Phone", "SloganAr", "SloganEn", "UpdatedAt", "WorkingHoursJson" },
+                values: new object[] { 1, "مدينة 6 أكتوبر، المنطقة الصناعية 1، قطعة رقم 238 - الجيزة، مصر", "6th of October City Industrial Zone 1, Land no.238 - Giza, Egypt", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "المزود الرائد لحلول النوافذ والأبواب uPVC", "Leading provider of uPVC windows and doors solutions", "info@emapen.net", null, true, null, "+201069946220", "إيمابن", "EMAPEN", "15726", "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ", "EMAPEN uPVC systems for doors and windows", null, null });
+
+            migrationBuilder.InsertData(
+                table: "ContactPages",
+                columns: new[] { "Id", "AddressAr", "AddressEn", "CategoryId", "ContentAr", "ContentEn", "ContentHighlightAr", "ContentHighlightEn", "ContentOtherAr", "ContentOtherEn", "CreatedAt", "DeletedAt", "Email", "ImagePath", "IsActive", "MapUrl", "PhoneNumber", "SubtitleAr", "SubtitleEn", "SubtitleHighlightAr", "SubtitleHighlightEn", "TitleAr", "TitleEn", "UpdatedAt" },
+                values: new object[] { 1, null, null, null, "مصنع نوافذ، موزع، مهندس معماري، صاحب منزل، مهما كانت فئتك،", "Window manufacturer, Supplier, Architect, Home owner, no matter what your category is,", "يسعدنا دعمك.", "we would be glad to support you.", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, true, null, null, "سواء كانت لديك أي استفسارات حول منتجاتنا أو كنت تفكر في تقديم طلب،", "Whether you have any questions regarding our products or you're considering making an order,", "لا تتردد في الاتصال بنا.", "feel free to contact us.", "اتصل بنا", "Contact Us", null });
 
             migrationBuilder.InsertData(
                 table: "HomePages",
@@ -341,6 +393,9 @@ namespace UPVC.Migrations
                 name: "CompanyInfos");
 
             migrationBuilder.DropTable(
+                name: "ContactMessages");
+
+            migrationBuilder.DropTable(
                 name: "ContactPages");
 
             migrationBuilder.DropTable(
@@ -356,7 +411,7 @@ namespace UPVC.Migrations
                 name: "AboutPages");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
         }
     }
 }

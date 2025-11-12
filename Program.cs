@@ -1,5 +1,6 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
 using UPVC.Data;
 using UPVC.Services;
 
@@ -35,6 +36,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SetDefaultCulture("en-US")
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
+    
+    // Use Cookie to store user's language preference
+    options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
 
 var app = builder.Build();

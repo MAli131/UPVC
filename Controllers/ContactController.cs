@@ -1,30 +1,106 @@
 using Microsoft.AspNetCore.Mvc;
 using UPVC.Models;
 using UPVC.Filters;
+using UPVC.Data;
+using UPVC.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace UPVC.Controllers
 {
     [PreventAdminAccess]
     public class ContactController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly IEmailService _emailService;
+        private readonly ILogger<ContactController> _logger;
+
+        public ContactController(
+            ApplicationDbContext context,
+            IEmailService emailService,
+            ILogger<ContactController> logger)
+        {
+            _context = context;
+            _emailService = emailService;
+            _logger = logger;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var viewModel = new ViewModels.ContactViewModel
+            {
+                ContactPage = _context.ContactPages.FirstOrDefault(cp => cp.IsActive),
+                CompanyInfo = _context.CompanyInfos.FirstOrDefault(ci => ci.IsActive),
+                Categories = _context.Categories.Where(c => c.IsActive).ToList(),
+                SocialMedias = _context.SocialMedias.Where(sm => sm.IsActive).OrderBy(sm => sm.DisplayOrder).ToList(),
+                NewMessage = new ContactMessage()
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Index(ContactFormModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(ViewModels.ContactViewModel viewModel)
         {
+            var model = viewModel.NewMessage;
+            var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+            
+            // Validate Category
+            if (string.IsNullOrWhiteSpace(model.Category))
+            {
+                var errorMessage = isArabic ? "من فضلك اختر الفئة" : "Please select a category";
+                ModelState.AddModelError("NewMessage.Category", errorMessage);
+            }
+            
             if (ModelState.IsValid)
             {
-                // معالجة إرسال النموذج
-                // يمكن إرسال إيميل، حفظ في قاعدة البيانات، إلخ
-                
-                TempData["SuccessMessage"] = "تم إرسال رسالتك بنجاح. سنتواصل معك في أقرب وقت ممكن.";
-                return RedirectToAction("Index");
+                try
+                {
+                    // Save to database
+                    model.SubmittedAt = DateTime.Now;
+                    _context.ContactMessages.Add(model);
+                    await _context.SaveChangesAsync();
+
+                    // Send email notification
+                    var emailSent = await _emailService.SendContactFormEmailAsync(
+                        model.Name,
+                        model.Email,
+                        model.Content,
+                        model.Category,
+                        model.Country,
+                        model.City,
+                        model.Telephone
+                    );
+
+                    // Update email sent status
+                    if (emailSent)
+                    {
+                        model.EmailSent = true;
+                        await _context.SaveChangesAsync();
+                    }
+
+                    var successMessage = isArabic 
+                        ? "شكراً لتواصلك معنا! تم استلام رسالتك وسنتواصل معك قريباً."
+                        : "Thank you for contacting us! Your message has been received and we will get back to you soon.";
+                    TempData["SuccessMessage"] = successMessage;
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error processing contact form submission");
+                    var errorMessage = isArabic
+                        ? "حدث خطأ أثناء معالجة طلبك. يرجى المحاولة مرة أخرى لاحقاً."
+                        : "An error occurred while processing your request. Please try again later.";
+                    TempData["ErrorMessage"] = errorMessage;
+                }
             }
 
-            return View(model);
+            // Repopulate view model for redisplay
+            viewModel.ContactPage = _context.ContactPages.FirstOrDefault(cp => cp.IsActive);
+            viewModel.CompanyInfo = _context.CompanyInfos.FirstOrDefault(ci => ci.IsActive);
+            viewModel.Categories = _context.Categories.Where(c => c.IsActive).ToList();
+            viewModel.SocialMedias = _context.SocialMedias.Where(sm => sm.IsActive).OrderBy(sm => sm.DisplayOrder).ToList();
+            return View(viewModel);
         }
 
         [HttpGet]

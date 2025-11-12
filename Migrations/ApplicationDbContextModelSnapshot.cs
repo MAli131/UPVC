@@ -253,7 +253,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$290Zr1xiNqxawJEvLTSK3.IccBNXFsfc8zHgu4r6JcnA3igt0Cjxu",
+                            PasswordHash = "$2a$11$shYkCTpnTUcxcS.1InExVuD1vsv3mrQLYTPsf3KqDAAvIdMvjI6XG",
                             Username = "admin"
                         });
                 });
@@ -297,7 +297,54 @@ namespace UPVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "مصنع نوافذ",
+                            NameEn = "Window manufacturer (Egypt)"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "موزع",
+                            NameEn = "Supplier"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "مهندس",
+                            NameEn = "Architect"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "صاحب منزل",
+                            NameEn = "Home owner"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "آخر",
+                            NameEn = "other"
+                        });
                 });
 
             modelBuilder.Entity("UPVC.Models.CompanyInfo", b =>
@@ -365,6 +412,12 @@ namespace UPVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SloganAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SloganEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -390,8 +443,77 @@ namespace UPVC.Migrations
                             Mobile = "+201069946220",
                             NameAr = "إيمابن",
                             NameEn = "EMAPEN",
-                            Phone = "15726"
+                            Phone = "15726",
+                            SloganAr = "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ",
+                            SloganEn = "EMAPEN uPVC systems for doors and windows"
                         });
+                });
+
+            modelBuilder.Entity("UPVC.Models.ContactMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailSent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Telephone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactMessages");
                 });
 
             modelBuilder.Entity("UPVC.Models.ContactPage", b =>
@@ -417,6 +539,18 @@ namespace UPVC.Migrations
 
                     b.Property<string>("ContentEn")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentHighlightAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentHighlightEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentOtherAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentOtherEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -450,9 +584,17 @@ namespace UPVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubtitleAr")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubtitleEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubtitleHighlightAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubtitleHighlightEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TitleAr")
@@ -471,6 +613,25 @@ namespace UPVC.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("ContactPages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContentAr = "مصنع نوافذ، موزع، مهندس معماري، صاحب منزل، مهما كانت فئتك،",
+                            ContentEn = "Window manufacturer, Supplier, Architect, Home owner, no matter what your category is,",
+                            ContentHighlightAr = "يسعدنا دعمك.",
+                            ContentHighlightEn = "we would be glad to support you.",
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            IsDeleted = false,
+                            SubtitleAr = "سواء كانت لديك أي استفسارات حول منتجاتنا أو كنت تفكر في تقديم طلب،",
+                            SubtitleEn = "Whether you have any questions regarding our products or you're considering making an order,",
+                            SubtitleHighlightAr = "لا تتردد في الاتصال بنا.",
+                            SubtitleHighlightEn = "feel free to contact us.",
+                            TitleAr = "اتصل بنا",
+                            TitleEn = "Contact Us"
+                        });
                 });
 
             modelBuilder.Entity("UPVC.Models.HomePage", b =>

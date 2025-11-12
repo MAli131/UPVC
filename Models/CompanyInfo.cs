@@ -14,5 +14,7 @@ namespace UPVC.Models
         public string? FaviconPath { get; set; }
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
+        public string? SloganEn { get; set; }
+        public string? SloganAr { get; set; }
     }
 }
