@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using UPVC.Data;
 using UPVC.Services;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

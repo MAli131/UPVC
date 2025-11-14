@@ -7,7 +7,6 @@
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
-    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
 }
 @section Styles {
@@ -20,7 +19,7 @@
     <meta name="description" content="EMAPEN" />
     <meta name="keywords" content="EMAPEN, uPVC, windows, doors" />
 
-    <title>EMAPEN</title>
+    <title>@(isArabic? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn)</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/contact/favicon/favicon.svg" />
@@ -112,9 +111,12 @@
                     <label class="btn" for="ar-lang">AR</label>
                 </div>
                 <span class="navbar-slogan d-none d-lg-block">
+                    @{
+                        var companyInfo = ViewBag.CompanyInfo as UPVC.Models.CompanyInfo ?? Model?.CompanyInfo;
+                    }
                     @(isArabic 
-                        ? (Model?.CompanyInfo?.SloganAr ?? "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ") 
-                        : (Model?.CompanyInfo?.SloganEn ?? "EMAPEN uPVC systems for doors and windows"))
+                        ? (companyInfo?.SloganAr ?? "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ") 
+                        : (companyInfo?.SloganEn ?? "EMAPEN uPVC systems for doors and windows"))
                 </span>
             </div>
         </div>
@@ -160,22 +162,22 @@
 
                 <div class="hero-category">
                     <label for="category" class="form-label">@ContactLocalizer["SelectCategory"]</label>
-                    <select class="form-select" id="category" asp-for="NewMessage.Category" required>
-                        <option value="" disabled selected>Choose...</option>
+                    <select class="form-select" id="category" name="CategorySelect" required onchange="setCategoryData(this)">
+                            <option value="" disabled selected>@ContactLocalizer["Choose"]</option>
                         @if (Model?.Categories != null && Model.Categories.Any())
                         {
                             foreach (var category in Model.Categories)
                             {
-                                <option value="@category.Id">@category.NameEn</option>
+                                    <option value="@category.Id" data-name="@(isArabic ? category.NameAr : category.NameEn)">@(isArabic ? category.NameAr : category.NameEn)</option>
                             }
                         }
                         else
                         {
-                            <option value="1">Window manufacturer (Egypt)</option>
-                            <option value="2">Supplier</option>
-                            <option value="3">Architect</option>
-                            <option value="4">Home owner</option>
-                            <option value="5">Other</option>
+                            <option value="1" data-name="Window manufacturer (Egypt)">Window manufacturer (Egypt)</option>
+                            <option value="2" data-name="Supplier">Supplier</option>
+                            <option value="3" data-name="Architect">Architect</option>
+                            <option value="4" data-name="Home owner">Home owner</option>
+                            <option value="5" data-name="Other">Other</option>
                         }
                     </select>
                     <span asp-validation-for="NewMessage.Category" class="text-danger"></span>
@@ -198,6 +200,8 @@
                 }
                 <form class="row" asp-action="Index" asp-controller="Contact" method="post">
                     @Html.AntiForgeryToken()
+                    <input type="hidden" id="categoryId" name="NewMessage.CategoryId" />
+                    <input type="hidden" id="categoryName" name="NewMessage.Category" />
                     <div class="col-12 col-md-5">
                         <input type="text" class="form-control" id="name" placeholder="Name" asp-for="NewMessage.Name" required>
                         <span asp-validation-for="NewMessage.Name" class="text-danger"></span>
@@ -238,7 +242,7 @@
                 @if (Model?.CompanyInfo != null)
                 {
                     <p>
-                        <span>@Model.CompanyInfo.AddressEn</span>
+                            <span>@(isArabic?Model.CompanyInfo.AddressAr :Model.CompanyInfo.AddressEn)</span>
                     </p>
                     <p>
                         @Model.CompanyInfo.Mobile <br>
@@ -306,4 +310,14 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function setCategoryData(selectElement) {
+            var selectedOption = selectElement.options[selectElement.selectedIndex];
+            var categoryId = selectedOption.value;
+            var categoryName = selectedOption.getAttribute('data-name');
+            
+            document.getElementById('categoryId').value = categoryId;
+            document.getElementById('categoryName').value = categoryName;
+        }
+    </script>
 }

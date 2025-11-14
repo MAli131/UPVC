@@ -1,5 +1,6 @@
-using System.Net;
-using System.Net.Mail;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 namespace UPVC.Services
 {
@@ -25,26 +26,55 @@ namespace UPVC.Services
                 var smtpPassword = emailSettings["SmtpPassword"];
                 var fromEmail = emailSettings["FromEmail"];
                 var fromName = emailSettings["FromName"];
-                var enableSsl = bool.Parse(emailSettings["EnableSsl"] ?? "true");
 
-                using var message = new MailMessage();
-                message.From = new MailAddress(fromEmail ?? smtpUsername ?? "", fromName ?? "EMAPEN");
-                message.To.Add(toEmail);
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(fromName ?? "EMAPEN", fromEmail ?? smtpUsername ?? ""));
+                message.To.Add(new MailboxAddress("", toEmail));
                 message.Subject = subject;
-                message.Body = body;
-                message.IsBodyHtml = isHtml;
 
-                using var smtpClient = new SmtpClient(smtpHost, smtpPort);
-                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-                smtpClient.EnableSsl = enableSsl;
+                var bodyBuilder = new BodyBuilder();
+                if (isHtml)
+                {
+                    bodyBuilder.HtmlBody = body;
+                }
+                else
+                {
+                    bodyBuilder.TextBody = body;
+                }
+                message.Body = bodyBuilder.ToMessageBody();
 
-                await smtpClient.SendMailAsync(message);
+                using var client = new SmtpClient();
+                
+                // Connect to SMTP server
+                // Try STARTTLS first (port 587), then SSL (port 465), then unencrypted (port 25)
+                if (smtpPort == 465)
+                {
+                    await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.SslOnConnect);
+                }
+                else if (smtpPort == 587)
+                {
+                    await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
+                }
+                else
+                {
+                    await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.Auto);
+                }
+
+                // Authenticate
+                await client.AuthenticateAsync(smtpUsername, smtpPassword);
+
+                // Send email
+                await client.SendAsync(message);
+
+                // Disconnect
+                await client.DisconnectAsync(true);
+
                 _logger.LogInformation("Email sent successfully to {Email}", toEmail);
                 return true;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to send email to {Email}", toEmail);
+                _logger.LogError(ex, "Failed to send email to {Email}. Error: {ErrorMessage}", toEmail, ex.Message);
                 return false;
             }
         }
@@ -67,6 +97,12 @@ namespace UPVC.Services
                             <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Email:</strong></td>
                             <td style='padding: 10px; border: 1px solid #ddd;'>{email}</td>
                         </tr>
+                        {(string.IsNullOrEmpty(category) ? "" : $@"
+                        <tr>
+                            <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Category:</strong></td>
+                            <td style='padding: 10px; border: 1px solid #ddd;'>{category}</td>
+                        </tr>
+                        ")}
                         {(string.IsNullOrEmpty(country) ? "" : $@"
                         <tr>
                             <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Country:</strong></td>
@@ -83,12 +119,6 @@ namespace UPVC.Services
                         <tr>
                             <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Telephone:</strong></td>
                             <td style='padding: 10px; border: 1px solid #ddd;'>{telephone}</td>
-                        </tr>
-                        ")}
-                        {(string.IsNullOrEmpty(category) ? "" : $@"
-                        <tr>
-                            <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Category:</strong></td>
-                            <td style='padding: 10px; border: 1px solid #ddd;'>{category}</td>
                         </tr>
                         ")}
                         <tr>

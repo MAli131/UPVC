@@ -24,6 +24,9 @@
   <data name="SelectCategory" xml:space="preserve">
     <value>اختر الفئة</value>
   </data>
+	<data name="Choose" xml:space="preserve">
+    <value> ...اختر </value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
