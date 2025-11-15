@@ -198,7 +198,14 @@
                     <script>
                         document.write(new Date().getFullYear());
                     </script>
-                    EMAPEN all rights reserved
+                    @if (ViewBag.CompanyInfo != null)
+                    {
+                        @(ViewBag.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
+                    }
+                    else
+                    {
+                        @:EMAPEN all rights reserved
+                    }
                 </p>
             </div>
         </div>

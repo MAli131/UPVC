@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UPVC.Data;
 
@@ -11,9 +12,11 @@ using UPVC.Data;
 namespace UPVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251114135437_AddCategoryIdToContactMessage")]
+    partial class AddCategoryIdToContactMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$WCEx9Z234zDnS5hnbyCD2.T4kQah0VQZsbG/wYljxS.JiKcYbhPE6",
+                            PasswordHash = "$2a$11$zyaMFdos2IAoJi4sNOlGs./AMnAHKgLIdKLBa0jj6T6xVIC2Qs2cm",
                             Username = "admin"
                         });
                 });
@@ -363,12 +366,6 @@ namespace UPVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CopyrightTextAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CopyrightTextEn")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -440,8 +437,6 @@ namespace UPVC.Migrations
                             Id = 1,
                             AddressAr = "مدينة 6 أكتوبر، المنطقة الصناعية 1، قطعة رقم 238 - الجيزة، مصر",
                             AddressEn = "6th of October City Industrial Zone 1, Land no.238 - Giza, Egypt",
-                            CopyrightTextAr = "إيمابن جميع الحقوق محفوظة",
-                            CopyrightTextEn = "EMAPEN all rights reserved",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DescriptionAr = "المزود الرائد لحلول النوافذ والأبواب uPVC",
                             DescriptionEn = "Leading provider of uPVC windows and doors solutions",

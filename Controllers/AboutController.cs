@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UPVC.Filters;
 using UPVC.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace UPVC.Controllers
 {
@@ -14,7 +15,11 @@ namespace UPVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var aboutPage = _context.AboutPages
+                .Include(a => a.Sections)
+                .FirstOrDefault(a => a.PageKey == "About" && a.IsActive);
+            
+            return View(aboutPage);
         }
     }
 }

@@ -33,10 +33,17 @@ builder.Services.AddFluentValidationAutoValidation()
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCultures = new[] { "ar-SA", "en-US" };
-    options.SetDefaultCulture("en-US")
-        .AddSupportedCultures(supportedCultures)
-        .AddSupportedUICultures(supportedCultures);
+    // Configure cultures with Gregorian calendar
+    var arCulture = new CultureInfo("ar-SA");
+    arCulture.DateTimeFormat.Calendar = new GregorianCalendar();
+    
+    var enCulture = new CultureInfo("en-US");
+    
+    var supportedCultures = new[] { arCulture, enCulture };
+    
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
     
     // Use Cookie to store user's language preference
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());

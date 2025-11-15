@@ -196,6 +196,8 @@ namespace UPVC.Data
                     DescriptionAr = "المزود الرائد لحلول النوافذ والأبواب uPVC",
                     SloganEn = "EMAPEN uPVC systems for doors and windows",
                     SloganAr = "أنظمة EMAPEN لـ uPVC للأبواب والنوافذ",
+                    CopyrightTextEn = "EMAPEN all rights reserved",
+                    CopyrightTextAr = "إيمابن جميع الحقوق محفوظة",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }

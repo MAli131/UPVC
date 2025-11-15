@@ -296,7 +296,18 @@
                 }
             </div>
             <p>
-                &copy; @DateTime.Now.Year @(Model?.CompanyInfo?.NameEn ?? "EMAPEN") all rights reserved
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                @if (Model?.CompanyInfo != null)
+                {
+                    @(isArabic ? Model.CompanyInfo.CopyrightTextAr ?? "إيمابن جميع الحقوق محفوظة" : Model.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
+                }
+                else
+                {
+                    @:EMAPEN all rights reserved
+                }
             </p>
         </div>
     </div>
