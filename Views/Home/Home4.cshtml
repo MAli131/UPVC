@@ -1,6 +1,23 @@
+@model UPVC.ViewModels.HomeViewModel
+@using System.Globalization
 @{
-    ViewData["Title"] = "EMAPEN - Projects Completed";
-    Layout = "_Layout";
+    
+    Layout =null;
+    var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+    // Get current language from cookie or default to English
+    var currentLang = Context.Request.Cookies["selectedLanguage"] ?? "en";
+    
+    // Get page content based on language
+    var title = isArabic ? Model.HomePage?.TitleAr : Model.HomePage?.TitleEn;
+    var subtitle = isArabic ? Model.HomePage?.SubtitleAr : Model.HomePage?.SubtitleEn;
+    var content = isArabic ? Model.HomePage?.ContentAr : Model.HomePage?.ContentEn;
+    var contentOther = isArabic ? Model.HomePage?.ContentOtherAr : Model.HomePage?.ContentOtherEn;
+    
+    // Company info
+    var companyName = isArabic ? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn;
+    var companyAddress = isArabic ? Model.CompanyInfo?.AddressAr : Model.CompanyInfo?.AddressEn;
+    var companyEmail = Model.CompanyInfo?.Email;
+    ViewData["Title"] = companyName;
 }
 
 <head>
@@ -10,7 +27,7 @@
     <meta name="description" content="EMAPEN" />
     <meta name="keywords" content="EMAPEN, uPVC, windows, doors" />
 
-    <title>EMAPEN</title>
+    <title>@companyName</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/favicon/favicon.svg" />
@@ -89,7 +106,7 @@
                     <input type="radio" class="btn-check" name="lang" id="ar-lang" autocomplete="off">
                     <label class="btn" for="ar-lang">AR</label>
                 </div>
-                <span class="navbar-slogan d-none d-lg-block">EMAPEN uPVC systems for doors and windows</span>
+            <span class="navbar-slogan d-none d-lg-block">@(isArabic ? Model.CompanyInfo?.SloganAr : Model.CompanyInfo?.SloganEn)</span>
             </div>
         </div>
     </nav>
@@ -108,22 +125,28 @@
         <!-- Hero Content -->
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="hero-content col">
-                <h1 class="hero-title">Projects completed</h1>
+                <h1 class="hero-title">@title</h1>
 
-                <p class="hero-description">
-                    Renowned for their exceptional performance, EMAPEN's profiles have garnered the trust of
-                    numerous clients, firmly establishing our reputation as a preferred choice for window and door
-                    applications in a diverse set of construction projects.
-                </p>
+                @if (!string.IsNullOrEmpty(subtitle))
+                {
+                    <p class="hero-description">
+                        @subtitle
+                    </p>
+                }
 
-                <p class="hero-description">
-                    EMAPEN is also known for its high production capacity, consistently meeting the high demands of
-                    many construction projects.
-                </p>
+                @if (!string.IsNullOrEmpty(content))
+                {
+                    <p class="hero-description">
+                        @content
+                    </p>
+                }
 
-                <p class="hero-description">
-                    The following is some of the large-scale projects that have specified our profiles.
-                </p>
+                @if (!string.IsNullOrEmpty(contentOther))
+                {
+                    <p class="hero-description">
+                        @contentOther
+                    </p>
+                }
             </div>
 
             <!-- Logos -->
@@ -155,12 +178,19 @@
         <!-- Footer -->
         <div class="hero-footer green-footer">
             <div class="hero-address">
-                <p>
-                    <span>6th of October City Industrial Zone 1</span>,
-                    <span>Land no.238 - Giza</span>,
-                    <span>Egypt</span>
-                </p>
-                <p>info@emapen.net</p>
+                @if (!string.IsNullOrEmpty(companyAddress))
+                {
+                    <p>@Html.Raw(companyAddress)</p>
+                }
+                else
+                {
+                    <p>
+                        <span>@(isArabic ? "مدينة السادس من أكتوبر المنطقة الصناعية 1" : "6th of October City Industrial Zone 1")</span>,
+                        <span>@(isArabic ? "قطعة رقم 238 - الجيزة" : "Land no.238 - Giza")</span>,
+                        <span>@(isArabic ? "مصر" : "Egypt")</span>
+                    </p>
+                }
+                <p>@(companyEmail ?? "info@emapen.net")</p>
             </div>
             <p>
                 &copy;
@@ -169,11 +199,11 @@
                 </script>
                 @if (ViewBag.CompanyInfo != null)
                 {
-                    @(ViewBag.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
+                    @(isArabic ? ViewBag.CompanyInfo.CopyrightTextAr ?? "إيمابن جميع الحقوق محفوظة" : ViewBag.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
                 }
                 else
                 {
-                    @:EMAPEN all rights reserved
+                    @companyName @(isArabic ? "جميع الحقوق محفوظة" : "all rights reserved")
                 }
             </p>
         </div>

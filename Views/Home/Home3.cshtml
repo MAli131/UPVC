@@ -1,6 +1,7 @@
 @model UPVC.ViewModels.HomeViewModel
 @using System.Globalization
 @{
+    Layout = "_Layout";
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
     var companyName = isArabic ? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn;
     ViewData["Title"] = companyName;
