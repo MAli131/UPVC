@@ -284,14 +284,14 @@
                 {
                     <div class="hotline">
                         <span class="hotline-number">@Model.CompanyInfo.Phone</span>
-                        <p>Hotline</p>
+                            <p>@(isArabic ? "الخط الساخن" : "Hotline")</p>
                     </div>
                 }
                 else
                 {
                     <div class="hotline">
                         <span class="hotline-number">15726</span>
-                        <p>Hotline</p>
+                            <p>@(isArabic ? "الخط الساخن" : "Hotline")</p>
                     </div>
                 }
             </div>
