@@ -16,5 +16,20 @@ namespace UPVC.Models
 
         public string? SecondaryImagePath { get; set; }
         public string? MetaDataJson { get; set; } // For additional flexible fields (stored as JSON)
+        
+        public ICollection<HomePageSection> Sections { get; set; } = new List<HomePageSection>();
+    }
+
+    public class HomePageSection : BaseEntity
+    {
+        public int HomePageId { get; set; }
+        public HomePage HomePage { get; set; }
+
+        public string TitleEn { get; set; } = string.Empty;
+        public string TitleAr { get; set; } = string.Empty;
+        public string ContentEn { get; set; } = string.Empty;
+        public string ContentAr { get; set; } = string.Empty;
+        public string? ImagePath { get; set; }
+        public int Order { get; set; }
     }
 }

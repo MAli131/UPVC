@@ -126,9 +126,7 @@
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="hero-content col">
                 <h1 class="hero-title">
-                    @(isArabic 
-                        ? (Model?.ContactPage?.TitleAr ?? "اتصل بنا") 
-                        : (Model?.ContactPage?.TitleEn ?? "Contact Us"))
+                        @(isArabic ? Model?.ContactPage?.TitleAr : Model?.ContactPage?.TitleEn)
                 </h1>
                 <p class="hero-description">
                     @(isArabic 
@@ -225,7 +223,7 @@
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">
-                            Send
+                                @(isArabic ? "ارسال" : "Send")
                             <svg width="16" height="16" viewBox="0 0 25 19" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -242,25 +240,14 @@
                 @if (Model?.CompanyInfo != null)
                 {
                     <p>
-                            <span>@(isArabic?Model.CompanyInfo.AddressAr :Model.CompanyInfo.AddressEn)</span>
+                      <span>@(isArabic?Model.CompanyInfo.AddressAr :Model.CompanyInfo.AddressEn)</span>
                     </p>
                     <p>
                         @Model.CompanyInfo.Mobile <br>
                         @Model.CompanyInfo.Email
                     </p>
                 }
-                else
-                {
-                    <p>
-                        <span>6th of October City Industrial Zone 1</span>,
-                        <span>Land no.238 - Giza</span>,
-                        <span>Egypt</span>
-                    </p>
-                    <p>
-                        +201069946220 <br>
-                        info@emapen.net
-                    </p>
-                }
+
                 <ul>
                     @if (Model?.SocialMedias != null && Model.SocialMedias.Any())
                     {
@@ -287,13 +274,7 @@
                             <p>@(isArabic ? "الخط الساخن" : "Hotline")</p>
                     </div>
                 }
-                else
-                {
-                    <div class="hotline">
-                        <span class="hotline-number">15726</span>
-                            <p>@(isArabic ? "الخط الساخن" : "Hotline")</p>
-                    </div>
-                }
+               
             </div>
             <p>
                 &copy;
@@ -302,11 +283,7 @@
                 </script>
                 @if (Model?.CompanyInfo != null)
                 {
-                    @(isArabic ? Model.CompanyInfo.CopyrightTextAr ?? "إيمابن جميع الحقوق محفوظة" : Model.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
-                }
-                else
-                {
-                    @:EMAPEN all rights reserved
+                    @(isArabic ? Model.CompanyInfo.CopyrightTextAr : Model.CompanyInfo.CopyrightTextEn)
                 }
             </p>
         </div>

@@ -48,6 +48,7 @@ public class HomeController : BaseController
         var viewModel = new HomeViewModel
         {
             HomePage = await _context.HomePages
+                .Include(h => h.Sections.Where(s => s.IsActive && !s.IsDeleted))
                 .Where(h => h.PageKey == pageKey && h.IsActive && !h.IsDeleted)
                 .FirstOrDefaultAsync(),
             

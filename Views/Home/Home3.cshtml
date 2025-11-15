@@ -1,6 +1,15 @@
+@model UPVC.ViewModels.HomeViewModel
+@using System.Globalization
 @{
-    ViewData["Title"] = "EMAPEN - Our Achievements";
-    Layout = "_Layout";
+    var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+    var companyName = isArabic ? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn;
+    ViewData["Title"] = companyName;
+
+    var currentLang = Context.Request.Cookies["selectedLanguage"] ?? "en";
+
+    var title = isArabic ? Model.HomePage?.TitleAr : Model.HomePage?.TitleEn;
+    var subtitle = isArabic ? Model.HomePage?.SubtitleAr : Model.HomePage?.SubtitleEn;
+    
 }
 
 @section Styles {
@@ -16,39 +25,29 @@
             <a asp-controller="Home" asp-action="Home3" class="dot active"></a>
             <a asp-controller="Home" asp-action="Home4" class="dot"></a>
         </div>
-        <div class="hero-content">
+        <div class="hero-content"> 
             <div class="hero-items-container row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                <div class="hero-items col">
-                    <img class="img-fluid" src="~/images/home/trophy.png" alt="Trophy Image" loading="lazy" />
-                    <h2>Largest extrusion facility</h2>
-                    <p>With a production capacity of over 5,000 metric tons per annum, we ensure that our operations
-                        are equipped to meet the growing market demand with consistency and efficiency. Our
-                        state-of- the-art manufacturing facilities are designed to deliver high-quality uPVC window
-                        systems that comply with international standards.</p>
-                </div>
-
-                <div class="hero-items col">
-                    <img class="img-fluid" src="~/images/home/trophy.png" alt="Trophy Image" loading="lazy" />
-                    <h2>Largest number of profiles</h2>
-                    <p>With over 30 distinct profiles in our range, we are able to address the diverse requirements
-                        of the market and provide solutions tailored to the unique challenges of each client.
-                        Whether the project demands sleek modern performance, or heavy-duty durability, aesthetics,
-                        superior insulation our comprehensive product line ensures that there is always a perfect
-                        fit.</p>
-                </div>
-
-                <div class="hero-items col">
-                    <img class="img-fluid" src="~/images/home/trophy.png" alt="Trophy Image" loading="lazy" />
-                    <h2>Largest network of suppliers</h2>
-                    <p>With over 50 suppliers spread across the country, EMAPEN has become the profile extensive
-                        distribution network not only of choice for the local market. This ensures fast and reliable
-                        access to our products but also reflects the strong trust and partnerships we have built
-                        within the industry.</p>
-                </div>
+                @if (Model.HomePage?.Sections != null && Model.HomePage.Sections.Any())
+                {
+                    @foreach (var item in Model.HomePage.Sections.OrderBy(s => s.Order))
+                    {
+                        var sectionTitle = isArabic ? item.TitleAr : item.TitleEn;
+                        var sectionContent = isArabic ? item.ContentAr : item.ContentEn;
+                        
+                        <div class="hero-items col">
+                            <img class="img-fluid" src="~/images/home/trophy.png" alt="Trophy Image" loading="lazy" />
+                            <h2>@sectionTitle</h2>
+                            <p>@sectionContent</p>
+                        </div>
+                    }
+                }
             </div>
         </div>
         <div class="hero-footer">
-            <p>( Relative to the Egyptian market )</p>
+            @if (!string.IsNullOrEmpty(subtitle))
+            {
+                <p>@subtitle</p>
+            }
             <p>
                 &copy;
                 <script>
@@ -56,11 +55,7 @@
                 </script>
                 @if (ViewBag.CompanyInfo != null)
                 {
-                    @(ViewBag.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
-                }
-                else
-                {
-                    @:EMAPEN all rights reserved
+                    @(isArabic ? ViewBag.CompanyInfo.CopyrightTextAr : ViewBag.CompanyInfo.CopyrightTextEn)
                 }
             </p>
         </div>

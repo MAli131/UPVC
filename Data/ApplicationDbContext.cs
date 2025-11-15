@@ -16,6 +16,7 @@ namespace UPVC.Data
 
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<HomePage> HomePages { get; set; }
+        public DbSet<HomePageSection> HomePageSections { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<AboutPage> AboutPages { get; set; }
         public DbSet<ContactPage> ContactPages { get; set; }
@@ -116,10 +117,10 @@ namespace UPVC.Data
                     PageKey = "Home3",
                     TitleEn = "Largest in Egypt",
                     TitleAr = "الأكبر في مصر",
-                    SubtitleEn = "Market Leader",
-                    SubtitleAr = "الرائد في السوق",
-                    ContentEn = "Largest extrusion facility, largest number of profiles, largest network of suppliers.",
-                    ContentAr = "أكبر منشأة بثق، أكبر عدد من الملفات الشخصية، أكبر شبكة من الموردين.",
+                    SubtitleEn = "( Relative to the Egyptian market )",
+                    SubtitleAr = "( بالنسبة للسوق المصري )",
+                    ContentEn = "",
+                    ContentAr = "",
                     IsActive = true
                 },
                 new HomePage
@@ -134,6 +135,46 @@ namespace UPVC.Data
                     ContentAr = "كما تُعرف إيمابن بقدرتها الإنتاجية العالية والتزامها الدائم بتلبية المتطلبات الكبيرة للمشروعات الضخمة، مع الحرص على الالتزام بالمعايير الدولية في كل مرحلة من مراحل التصنيع والتنفيذ.",
                     ContentOtherEn = "The following is some of the large-scale projects that have specified our profiles.",
                     ContentOtherAr = "تحتوي القائمة التالية على مجموعة من أبرز المشاريع الكبرى التي تم تزويدها بقطاعات إيمابن، والتي تعكس الثقة المتبادلة بين الشركة وشركائها في قطاع البناء.",
+                    IsActive = true
+                }
+            );
+
+            // Seed HomePageSection data for Home3
+            modelBuilder.Entity<HomePageSection>().HasData(
+                new HomePageSection
+                {
+                    Id = 1,
+                    HomePageId = 3, // Home3
+                    TitleEn = "Largest extrusion facility",
+                    TitleAr = "أكبر منشأة للبثق",
+                    ContentEn = "With a production capacity of over 5,000 metric tons per annum, we ensure that our operations are equipped to meet the growing market demand with consistency and efficiency. Our state-of-the-art manufacturing facilities are designed to deliver high-quality uPVC window systems that comply with international standards.",
+                    ContentAr = "بطاقة إنتاجية تزيد عن 5000 طن متري سنويًا، نضمن أن عملياتنا مجهزة لتلبية الطلب المتزايد في السوق بثبات وكفاءة. تم تصميم منشآتنا الصناعية الحديثة لتقديم أنظمة نوافذ uPVC عالية الجودة تتوافق مع المعايير الدولية.",
+                    ImagePath = "~/images/home/trophy.png",
+                    Order = 1,
+                    IsActive = true
+                },
+                new HomePageSection
+                {
+                    Id = 2,
+                    HomePageId = 3, // Home3
+                    TitleEn = "Largest number of profiles",
+                    TitleAr = "أكبر عدد من الملفات",
+                    ContentEn = "With over 30 distinct profiles in our range, we are able to address the diverse requirements of the market and provide solutions tailored to the unique challenges of each client. Whether the project demands sleek modern performance, or heavy-duty durability, aesthetics, superior insulation our comprehensive product line ensures that there is always a perfect fit.",
+                    ContentAr = "مع أكثر من 30 ملف تعريف متميز في مجموعتنا، نحن قادرون على تلبية المتطلبات المتنوعة للسوق وتوفير حلول مصممة خصيصًا للتحديات الفريدة لكل عميل. سواء كان المشروع يتطلب أداءً حديثًا أنيقًا، أو متانة للخدمة الشاقة، أو جماليات، أو عزلًا فائقًا، فإن خط إنتاجنا الشامل يضمن أن هناك دائمًا حلًا مثاليًا.",
+                    ImagePath = "~/images/home/trophy.png",
+                    Order = 2,
+                    IsActive = true
+                },
+                new HomePageSection
+                {
+                    Id = 3,
+                    HomePageId = 3, // Home3
+                    TitleEn = "Largest network of suppliers",
+                    TitleAr = "أكبر شبكة موردين",
+                    ContentEn = "With over 50 suppliers spread across the country, EMAPEN has become the profile extensive distribution network not only of choice for the local market. This ensures fast and reliable access to our products but also reflects the strong trust and partnerships we have built within the industry.",
+                    ContentAr = "مع أكثر من 50 موردًا منتشرين في جميع أنحاء البلاد، أصبحت EMAPEN الخيار الأول للسوق المحلي بفضل شبكة التوزيع الواسعة. وهذا يضمن الوصول السريع والموثوق إلى منتجاتنا ويعكس أيضًا الثقة والشراكات القوية التي بنيناها داخل الصناعة.",
+                    ImagePath = "~/images/home/trophy.png",
+                    Order = 3,
                     IsActive = true
                 }
             );
