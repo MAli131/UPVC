@@ -18,6 +18,8 @@ namespace UPVC.Models
 
         public string? Category { get; set; }
 
+        public int? CategoryId { get; set; }
+
         public DateTime SubmittedAt { get; set; } = DateTime.Now;
 
         public bool IsRead { get; set; } = false;

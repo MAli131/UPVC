@@ -16,5 +16,7 @@ namespace UPVC.Models
         public string? DescriptionAr { get; set; }
         public string? SloganEn { get; set; }
         public string? SloganAr { get; set; }
+        public string? CopyrightTextEn { get; set; }
+        public string? CopyrightTextAr { get; set; }
     }
 }
