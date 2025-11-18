@@ -12,8 +12,8 @@ using UPVC.Data;
 namespace UPVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251114135437_AddCategoryIdToContactMessage")]
-    partial class AddCategoryIdToContactMessage
+    [Migration("20251118011549_sgsgw111125")]
+    partial class sgsgw111125
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -256,7 +256,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$zyaMFdos2IAoJi4sNOlGs./AMnAHKgLIdKLBa0jj6T6xVIC2Qs2cm",
+                            PasswordHash = "$2a$11$xsMiR4KivUm1A5q2act1OOMVNxZcXaf0IeRnmjdrf605642j3NVzy",
                             Username = "admin"
                         });
                 });
@@ -366,6 +366,12 @@ namespace UPVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CopyrightTextAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CopyrightTextEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -437,6 +443,8 @@ namespace UPVC.Migrations
                             Id = 1,
                             AddressAr = "مدينة 6 أكتوبر، المنطقة الصناعية 1، قطعة رقم 238 - الجيزة، مصر",
                             AddressEn = "6th of October City Industrial Zone 1, Land no.238 - Giza, Egypt",
+                            CopyrightTextAr = "إيمابن جميع الحقوق محفوظة",
+                            CopyrightTextEn = "EMAPEN all rights reserved",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DescriptionAr = "المزود الرائد لحلول النوافذ والأبواب uPVC",
                             DescriptionEn = "Leading provider of uPVC windows and doors solutions",
@@ -755,16 +763,16 @@ namespace UPVC.Migrations
                         new
                         {
                             Id = 3,
-                            ContentAr = "أكبر منشأة بثق، أكبر عدد من الملفات الشخصية، أكبر شبكة من الموردين.",
-                            ContentEn = "Largest extrusion facility, largest number of profiles, largest network of suppliers.",
+                            ContentAr = "",
+                            ContentEn = "",
                             ContentOtherAr = "",
                             ContentOtherEn = "",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             IsDeleted = false,
                             PageKey = "Home3",
-                            SubtitleAr = "الرائد في السوق",
-                            SubtitleEn = "Market Leader",
+                            SubtitleAr = "( بالنسبة للسوق المصري )",
+                            SubtitleEn = "( Relative to the Egyptian market )",
                             TitleAr = "الأكبر في مصر",
                             TitleEn = "Largest in Egypt"
                         },
@@ -783,6 +791,181 @@ namespace UPVC.Migrations
                             SubtitleEn = "Renowned for their exceptional performance, EMAPEN’s profiles have garnered the trust of numerous clients, firmly establishing our reputation as a preferred choice for window and door applications in a diverse set of construction projects.",
                             TitleAr = "المشاريع المكتملة",
                             TitleEn = "Projects completed"
+                        });
+                });
+
+            modelBuilder.Entity("UPVC.Models.HomePageSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HomePageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TitleAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HomePageId");
+
+                    b.ToTable("HomePageSections");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 4,
+                            ContentAr = "تمتلك مادة الuPVC خصائص عزل أفضل من الألمونيوم مما يقلل من فقدان الحرارة في فصل الصيف، و بالتالي يقل الإعتماد على أنظمة التدفئة و التبريد الكهربائية وتقل فواتير الكهرباء.",
+                            ContentEn = "With a thermal conductivity significantly lower than aluminum, uPVC possesses superior thermal insulation properties. This thermal insulation reduces heat loss during winter and minimizes heat gain during summer, reducing the reliance on artificial heating and cooling systems and making it the material of choice for saving energy and lowering utility bills.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "~/images/home2/adv1.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 1,
+                            TitleAr = "موفر للطاقة",
+                            TitleEn = "Energy efficiency"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ContentAr = "نظرا لخصائصه و بنيته الفريدة، تتميز قطاعات الuPVC عزل الصوت العالي. الكثافة العالية لدى القطاعات تقلل من إنتقال الموجات الصوتية. بالإضافة إلى ذلك، يعزز نظام الغرف و الكاوتش من خصائص العزل الصوتي.",
+                            ContentEn = "Due to its inherent properties and construction, uPVC frames stand out with unmatched sound insulation features. The relatively high density of uPVC reduces the transmission of sound waves through the material. Moreover, the chambered system and the gasket further enhance the profile's sound insulation properties.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "~/images/home2/adv2.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 2,
+                            TitleAr = "عزل الصوت",
+                            TitleEn = "Sound insulation"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ContentAr = "يقلل السطح الناعم للمادة من إلتصاق جزئيات الغبار عليها، بالإضافة إلى وجود آليات إغلاق فعالة مثل كاوتش الTPE المستورد الذي يعزز بشكل كبير مقاومة القطاع للغبار.",
+                            ContentEn = "The material's smooth surface finish reduces the adhesion of dust particles on the surface, not to mention effective sealing mechanisms such as rubber gaskets that greatly enhance the frame's dust resistance.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "~/images/home2/adv3.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 3,
+                            TitleAr = "عزل الأتربة",
+                            TitleEn = "Dust proof"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ContentAr = "تصنف الuPVC كمادة غير تفاعلية ولا تتعرض للصدأ او التآكل مع مرور الوقت. و هذا يمنح الuPVC متانة فائقة و مقاومة ممتازة للطقس، مما يحافظ على سلامتها الهيكلية و جماله البصري على مر الزمن، و يقضي على الحاجة إلى إعادة طلاء أو التغطية الوقائية.",
+                            ContentEn = "Unlike aluminum, uPVC is classified as non-reactive material and does not suffer from rust or corrosion over time. This offers uPVC with superior durability and weather resistance, which maintains its structural integrity and aesthetic appearance over time and eliminates the need for repainting or protective coating.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "~/images/home2/adv4.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 4,
+                            TitleAr = "المتانة",
+                            TitleEn = "Durability"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ContentAr = "تجمع نوافذ و أبواب الuPVC بواسطة اللحام، مما يوفر لك عزلا قويا و متانة أعلى مقارنة بالمثبتات الميكانيكية، بالإضافة إلى تقليل الصيانة لأن المسامير قد تتعرض للإرتخاء أو الصدأ.",
+                            ContentEn = "uPVC windows and doors are assembled by welding, which provides superior insulation and strength compared to mechanical fasteners, in addition to the reduction of maintenance since bolts or screws may loosen or corrode.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "~/images/home2/adv5.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 5,
+                            TitleAr = "لحام الوصلات",
+                            TitleEn = "Welded joints"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            ContentAr = "بطاقة إنتاجية تزيد عن 5000 طن متري سنويًا، نضمن أن عملياتنا مجهزة لتلبية الطلب المتزايد في السوق بثبات وكفاءة. تم تصميم منشآتنا الصناعية الحديثة لتقديم أنظمة نوافذ uPVC عالية الجودة تتوافق مع المعايير الدولية.",
+                            ContentEn = "With a production capacity of over 5,000 metric tons per annum, we ensure that our operations are equipped to meet the growing market demand with consistency and efficiency. Our state-of-the-art manufacturing facilities are designed to deliver high-quality uPVC window systems that comply with international standards.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 3,
+                            ImagePath = "~/images/home/trophy.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 1,
+                            TitleAr = "أكبر منشأة للبثق",
+                            TitleEn = "Largest extrusion facility"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ContentAr = "مع أكثر من 30 ملف تعريف متميز في مجموعتنا، نحن قادرون على تلبية المتطلبات المتنوعة للسوق وتوفير حلول مصممة خصيصًا للتحديات الفريدة لكل عميل. سواء كان المشروع يتطلب أداءً حديثًا أنيقًا، أو متانة للخدمة الشاقة، أو جماليات، أو عزلًا فائقًا، فإن خط إنتاجنا الشامل يضمن أن هناك دائمًا حلًا مثاليًا.",
+                            ContentEn = "With over 30 distinct profiles in our range, we are able to address the diverse requirements of the market and provide solutions tailored to the unique challenges of each client. Whether the project demands sleek modern performance, or heavy-duty durability, aesthetics, superior insulation our comprehensive product line ensures that there is always a perfect fit.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 3,
+                            ImagePath = "~/images/home/trophy.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 2,
+                            TitleAr = "أكبر عدد من الملفات",
+                            TitleEn = "Largest number of profiles"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ContentAr = "مع أكثر من 50 موردًا منتشرين في جميع أنحاء البلاد، أصبحت EMAPEN الخيار الأول للسوق المحلي بفضل شبكة التوزيع الواسعة. وهذا يضمن الوصول السريع والموثوق إلى منتجاتنا ويعكس أيضًا الثقة والشراكات القوية التي بنيناها داخل الصناعة.",
+                            ContentEn = "With over 50 suppliers spread across the country, EMAPEN has become the profile extensive distribution network not only of choice for the local market. This ensures fast and reliable access to our products but also reflects the strong trust and partnerships we have built within the industry.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 3,
+                            ImagePath = "~/images/home/trophy.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 3,
+                            TitleAr = "أكبر شبكة موردين",
+                            TitleEn = "Largest network of suppliers"
                         });
                 });
 
@@ -892,9 +1075,8 @@ namespace UPVC.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Platform")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -919,7 +1101,7 @@ namespace UPVC.Migrations
                             IconClass = "bi bi-facebook",
                             IsActive = true,
                             IsDeleted = false,
-                            Platform = "Facebook",
+                            Platform = 1,
                             Url = "https://www.facebook.com/share/1Bhcz5o4dt/"
                         },
                         new
@@ -930,7 +1112,7 @@ namespace UPVC.Migrations
                             IconClass = "bi bi-twitter",
                             IsActive = true,
                             IsDeleted = false,
-                            Platform = "Twitter",
+                            Platform = 2,
                             Url = "https://twitter.com/emapen"
                         },
                         new
@@ -941,7 +1123,7 @@ namespace UPVC.Migrations
                             IconClass = "bi bi-instagram",
                             IsActive = true,
                             IsDeleted = false,
-                            Platform = "Instagram",
+                            Platform = 3,
                             Url = "https://www.instagram.com/emapen.upvc.egypt?igsh=eG9uMGR5bmttaXZv"
                         },
                         new
@@ -952,7 +1134,7 @@ namespace UPVC.Migrations
                             IconClass = "bi bi-linkedin",
                             IsActive = true,
                             IsDeleted = false,
-                            Platform = "LinkedIn",
+                            Platform = 4,
                             Url = "https://www.linkedin.com/company/emapen-for-upvc-profile/"
                         },
                         new
@@ -963,7 +1145,7 @@ namespace UPVC.Migrations
                             IconClass = "bi bi-whatsapp",
                             IsActive = true,
                             IsDeleted = false,
-                            Platform = "WhatsApp",
+                            Platform = 5,
                             Url = "https://wa.me/201069946220"
                         });
                 });
@@ -988,6 +1170,17 @@ namespace UPVC.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("UPVC.Models.HomePageSection", b =>
+                {
+                    b.HasOne("UPVC.Models.HomePage", "HomePage")
+                        .WithMany("Sections")
+                        .HasForeignKey("HomePageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HomePage");
+                });
+
             modelBuilder.Entity("UPVC.Models.AboutPage", b =>
                 {
                     b.Navigation("Sections");
@@ -996,6 +1189,11 @@ namespace UPVC.Migrations
             modelBuilder.Entity("UPVC.Models.Category", b =>
                 {
                     b.Navigation("ContactPages");
+                });
+
+            modelBuilder.Entity("UPVC.Models.HomePage", b =>
+                {
+                    b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618
         }

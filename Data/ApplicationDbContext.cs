@@ -139,6 +139,70 @@ namespace UPVC.Data
                 }
             );
 
+            // Seed HomePageSection data for Home2 (Features slider)
+            modelBuilder.Entity<HomePageSection>().HasData(
+                new HomePageSection
+                {
+                    Id = 4,
+                    HomePageId = 2, // Home2
+                    TitleEn = "Energy efficiency",
+                    TitleAr = "موفر للطاقة",
+                    ContentEn = "With a thermal conductivity significantly lower than aluminum, uPVC possesses superior thermal insulation properties. This thermal insulation reduces heat loss during winter and minimizes heat gain during summer, reducing the reliance on artificial heating and cooling systems and making it the material of choice for saving energy and lowering utility bills.",
+                    ContentAr = "تمتلك مادة الuPVC خصائص عزل أفضل من الألمونيوم مما يقلل من فقدان الحرارة في فصل الصيف، و بالتالي يقل الإعتماد على أنظمة التدفئة و التبريد الكهربائية وتقل فواتير الكهرباء.",
+                    ImagePath = "/images/home2/adv1.png",
+                    Order = 1,
+                    IsActive = true
+                },
+                new HomePageSection
+                {
+                    Id = 5,
+                    HomePageId = 2, // Home2
+                    TitleEn = "Sound insulation",
+                    TitleAr = "عزل الصوت",
+                    ContentEn = "Due to its inherent properties and construction, uPVC frames stand out with unmatched sound insulation features. The relatively high density of uPVC reduces the transmission of sound waves through the material. Moreover, the chambered system and the gasket further enhance the profile's sound insulation properties.",
+                    ContentAr = "نظرا لخصائصه و بنيته الفريدة، تتميز قطاعات الuPVC عزل الصوت العالي. الكثافة العالية لدى القطاعات تقلل من إنتقال الموجات الصوتية. بالإضافة إلى ذلك، يعزز نظام الغرف و الكاوتش من خصائص العزل الصوتي.",
+                    ImagePath = "/images/home2/adv2.png",
+                    Order = 2,
+                    IsActive = true
+                },
+                new HomePageSection
+                {
+                    Id = 6,
+                    HomePageId = 2, // Home2
+                    TitleEn = "Dust proof",
+                    TitleAr = "عزل الأتربة",
+                    ContentEn = "The material's smooth surface finish reduces the adhesion of dust particles on the surface, not to mention effective sealing mechanisms such as rubber gaskets that greatly enhance the frame's dust resistance.",
+                    ContentAr = "يقلل السطح الناعم للمادة من إلتصاق جزئيات الغبار عليها، بالإضافة إلى وجود آليات إغلاق فعالة مثل كاوتش الTPE المستورد الذي يعزز بشكل كبير مقاومة القطاع للغبار.",
+                    ImagePath = "/images/home2/adv3.png",
+                    Order = 3,
+                    IsActive = true
+                },
+                new HomePageSection
+                {
+                    Id = 7,
+                    HomePageId = 2, // Home2
+                    TitleEn = "Durability",
+                    TitleAr = "المتانة",
+                    ContentEn = "Unlike aluminum, uPVC is classified as non-reactive material and does not suffer from rust or corrosion over time. This offers uPVC with superior durability and weather resistance, which maintains its structural integrity and aesthetic appearance over time and eliminates the need for repainting or protective coating.",
+                    ContentAr = "تصنف الuPVC كمادة غير تفاعلية ولا تتعرض للصدأ او التآكل مع مرور الوقت. و هذا يمنح الuPVC متانة فائقة و مقاومة ممتازة للطقس، مما يحافظ على سلامتها الهيكلية و جماله البصري على مر الزمن، و يقضي على الحاجة إلى إعادة طلاء أو التغطية الوقائية.",
+                    ImagePath = "/images/home2/adv4.png",
+                    Order = 4,
+                    IsActive = true
+                },
+                new HomePageSection
+                {
+                    Id = 8,
+                    HomePageId = 2, // Home2
+                    TitleEn = "Welded joints",
+                    TitleAr = "لحام الوصلات",
+                    ContentEn = "uPVC windows and doors are assembled by welding, which provides superior insulation and strength compared to mechanical fasteners, in addition to the reduction of maintenance since bolts or screws may loosen or corrode.",
+                    ContentAr = "تجمع نوافذ و أبواب الuPVC بواسطة اللحام، مما يوفر لك عزلا قويا و متانة أعلى مقارنة بالمثبتات الميكانيكية، بالإضافة إلى تقليل الصيانة لأن المسامير قد تتعرض للإرتخاء أو الصدأ.",
+                    ImagePath = "/images/home2/adv5.png",
+                    Order = 5,
+                    IsActive = true
+                }
+            );
+
             // Seed HomePageSection data for Home3
             modelBuilder.Entity<HomePageSection>().HasData(
                 new HomePageSection

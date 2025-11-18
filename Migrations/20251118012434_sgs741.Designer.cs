@@ -12,8 +12,8 @@ using UPVC.Data;
 namespace UPVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251118002434_sgsgw")]
-    partial class sgsgw
+    [Migration("20251118012434_sgs741")]
+    partial class sgs741
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -256,7 +256,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$4c/xp.IMmofZ3p8IXPfTT.ofRvclgQPk2hlncTbOSDrbUQWHkYr4e",
+                            PasswordHash = "$2a$11$lMKtxCf8360VjGqvIE4O5.vWsK2Xzd/b9jJw95GMmyyUinV5rrhFm",
                             Username = "admin"
                         });
                 });
@@ -855,6 +855,76 @@ namespace UPVC.Migrations
                     b.ToTable("HomePageSections");
 
                     b.HasData(
+                        new
+                        {
+                            Id = 4,
+                            ContentAr = "تمتلك مادة الuPVC خصائص عزل أفضل من الألمونيوم مما يقلل من فقدان الحرارة في فصل الصيف، و بالتالي يقل الإعتماد على أنظمة التدفئة و التبريد الكهربائية وتقل فواتير الكهرباء.",
+                            ContentEn = "With a thermal conductivity significantly lower than aluminum, uPVC possesses superior thermal insulation properties. This thermal insulation reduces heat loss during winter and minimizes heat gain during summer, reducing the reliance on artificial heating and cooling systems and making it the material of choice for saving energy and lowering utility bills.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "/images/home2/adv1.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 1,
+                            TitleAr = "موفر للطاقة",
+                            TitleEn = "Energy efficiency"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ContentAr = "نظرا لخصائصه و بنيته الفريدة، تتميز قطاعات الuPVC عزل الصوت العالي. الكثافة العالية لدى القطاعات تقلل من إنتقال الموجات الصوتية. بالإضافة إلى ذلك، يعزز نظام الغرف و الكاوتش من خصائص العزل الصوتي.",
+                            ContentEn = "Due to its inherent properties and construction, uPVC frames stand out with unmatched sound insulation features. The relatively high density of uPVC reduces the transmission of sound waves through the material. Moreover, the chambered system and the gasket further enhance the profile's sound insulation properties.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "/images/home2/adv2.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 2,
+                            TitleAr = "عزل الصوت",
+                            TitleEn = "Sound insulation"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ContentAr = "يقلل السطح الناعم للمادة من إلتصاق جزئيات الغبار عليها، بالإضافة إلى وجود آليات إغلاق فعالة مثل كاوتش الTPE المستورد الذي يعزز بشكل كبير مقاومة القطاع للغبار.",
+                            ContentEn = "The material's smooth surface finish reduces the adhesion of dust particles on the surface, not to mention effective sealing mechanisms such as rubber gaskets that greatly enhance the frame's dust resistance.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "/images/home2/adv3.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 3,
+                            TitleAr = "عزل الأتربة",
+                            TitleEn = "Dust proof"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ContentAr = "تصنف الuPVC كمادة غير تفاعلية ولا تتعرض للصدأ او التآكل مع مرور الوقت. و هذا يمنح الuPVC متانة فائقة و مقاومة ممتازة للطقس، مما يحافظ على سلامتها الهيكلية و جماله البصري على مر الزمن، و يقضي على الحاجة إلى إعادة طلاء أو التغطية الوقائية.",
+                            ContentEn = "Unlike aluminum, uPVC is classified as non-reactive material and does not suffer from rust or corrosion over time. This offers uPVC with superior durability and weather resistance, which maintains its structural integrity and aesthetic appearance over time and eliminates the need for repainting or protective coating.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "/images/home2/adv4.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 4,
+                            TitleAr = "المتانة",
+                            TitleEn = "Durability"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ContentAr = "تجمع نوافذ و أبواب الuPVC بواسطة اللحام، مما يوفر لك عزلا قويا و متانة أعلى مقارنة بالمثبتات الميكانيكية، بالإضافة إلى تقليل الصيانة لأن المسامير قد تتعرض للإرتخاء أو الصدأ.",
+                            ContentEn = "uPVC windows and doors are assembled by welding, which provides superior insulation and strength compared to mechanical fasteners, in addition to the reduction of maintenance since bolts or screws may loosen or corrode.",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HomePageId = 2,
+                            ImagePath = "/images/home2/adv5.png",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Order = 5,
+                            TitleAr = "لحام الوصلات",
+                            TitleEn = "Welded joints"
+                        },
                         new
                         {
                             Id = 1,

@@ -1,6 +1,14 @@
+@model UPVC.ViewModels.HomeViewModel
+@using System.Globalization
 @{
-    ViewData["Title"] = "EMAPEN - Energy Efficiency";
+    ViewData["Title"] = Model.CompanyInfo?.NameEn ?? "EMAPEN - Energy Efficiency";
     Layout = "_Layout";
+    
+    // Get current language
+    var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+    
+    // Get page sections
+    var sections = Model.HomePage?.Sections?.OrderBy(s => s.Order).ToList() ?? new List<UPVC.Models.HomePageSection>();
 }
 
 <head>
@@ -104,26 +112,61 @@
         </div>
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="hero-content col text-center">
-                <h1 class="hero-title">The window of the future</h1>
-                <div class="hero-slider">
-                    <button type="button" class="btn btn-link">
-                        <svg width="20" height="20" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2206 2.68068L4.3599 19.0003L25.2206 35.2822L24.3223 36.4157L2.00012 19.0003L24.3368 1.58496L25.2206 2.68068Z" fill="#4DAC2A" />
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.98389 18.9989L26.6298 35.1139L24.4892 37.8148L0.374695 19.0004L24.4979 0.191772L26.6356 2.84326L5.98389 18.9989ZM25.2206 2.68072L24.3368 1.585L2.00013 19.0004L24.3223 36.4157L25.2206 35.2823L4.35991 19.0004L25.2206 2.68072Z" fill="#4DAC2A" />
-                        </svg>
-                    </button>
-                    <img src="~/images/home/hero2-icon1.png" alt="Hero Icon" loading="lazy" height="40" />
-                    <button type="button" class="btn btn-link">
-                        <svg width="20" height="20" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.97541 2.68068L22.8361 19.0003L1.97541 35.2822L2.87375 36.4157L25.1959 19.0003L2.85924 1.58496L1.97541 2.68068Z" fill="#4DAC2A" />
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.69814 0.191772L26.8213 19.0004L2.70685 37.8148L0.566214 35.1139L21.2121 18.9989L0.560406 2.84326L2.69814 0.191772ZM1.97541 2.68072L22.8361 19.0004L1.97541 35.2823L2.87375 36.4157L25.1959 19.0004L2.85923 1.585L1.97541 2.68072Z" fill="#4DAC2A" />
-                        </svg>
-                    </button>
-                </div>
-                <h2 class="hero-subtitle">Energy efficiency</h2>
-                <p class="hero-description">
-                    With a thermal conductivity significantly lower than aluminum, upvc possesses superior <span>thermal insulation</span> properties. This thermal insulation during summer, reducing the reliance artificial heating and cooling <span>reduces heat loss</span> during winter and minimizes heat gain systems and making it the material of choice for saving energy and <span>lowering utility bills</span>.
-                </p>
+                <h1 class="hero-title">@(isArabic ? Model.HomePage?.TitleAr : Model.HomePage?.TitleEn)</h1>
+                
+                @if (sections.Any())
+                {
+                    <div class="hero-slider">
+                        <button type="button" class="btn btn-link" id="prevBtn">
+                            <svg width="20" height="20" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2206 2.68068L4.3599 19.0003L25.2206 35.2822L24.3223 36.4157L2.00012 19.0003L24.3368 1.58496L25.2206 2.68068Z" fill="#4DAC2A" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.98389 18.9989L26.6298 35.1139L24.4892 37.8148L0.374695 19.0004L24.4979 0.191772L26.6356 2.84326L5.98389 18.9989ZM25.2206 2.68072L24.3368 1.585L2.00013 19.0004L24.3223 36.4157L25.2206 35.2823L4.35991 19.0004L25.2206 2.68072Z" fill="#4DAC2A" />
+                            </svg>
+                        </button>
+                        <img id="featureIcon" src="@sections.First().ImagePath" alt="Feature Icon" loading="lazy" height="90" />
+                        <button type="button" class="btn btn-link" id="nextBtn">
+                            <svg width="20" height="20" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.97541 2.68068L22.8361 19.0003L1.97541 35.2822L2.87375 36.4157L25.1959 19.0003L2.85924 1.58496L1.97541 2.68068Z" fill="#4DAC2A" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.69814 0.191772L26.8213 19.0004L2.70685 37.8148L0.566214 35.1139L21.2121 18.9989L0.560406 2.84326L2.69814 0.191772ZM1.97541 2.68072L22.8361 19.0004L1.97541 35.2823L2.87375 36.4157L25.1959 19.0004L2.85923 1.585L1.97541 2.68072Z" fill="#4DAC2A" />
+                            </svg>
+                        </button>
+                    </div>
+                    <h2 class="hero-subtitle" id="featureTitle">@(isArabic ? sections.First().TitleAr : sections.First().TitleEn)</h2>
+                    <p class="hero-description" id="featureContent">@(isArabic ? sections.First().ContentAr : sections.First().ContentEn)</p>
+                    
+                    <!-- Hidden data for JavaScript -->
+                    <script type="application/json" id="sectionsData" data-lang="@(isArabic ? "ar" : "en")">
+                        @Html.Raw(System.Text.Json.JsonSerializer.Serialize(sections.Select(s => new {
+                            titleEn = s.TitleEn,
+                            titleAr = s.TitleAr,
+                            contentEn = s.ContentEn,
+                            contentAr = s.ContentAr,
+                            imagePath = s.ImagePath
+                        })))
+                    </script>
+                }
+                else
+                {
+                    <div class="hero-slider">
+                        <button type="button" class="btn btn-link">
+                            <svg width="20" height="20" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2206 2.68068L4.3599 19.0003L25.2206 35.2822L24.3223 36.4157L2.00012 19.0003L24.3368 1.58496L25.2206 2.68068Z" fill="#4DAC2A" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.98389 18.9989L26.6298 35.1139L24.4892 37.8148L0.374695 19.0004L24.4979 0.191772L26.6356 2.84326L5.98389 18.9989ZM25.2206 2.68072L24.3368 1.585L2.00013 19.0004L24.3223 36.4157L25.2206 35.2823L4.35991 19.0004L25.2206 2.68072Z" fill="#4DAC2A" />
+                            </svg>
+                        </button>
+                        <img src="~/images/home/hero2-icon1.png" alt="Hero Icon" loading="lazy" height="40" />
+                        <button type="button" class="btn btn-link">
+                            <svg width="20" height="20" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.97541 2.68068L22.8361 19.0003L1.97541 35.2822L2.87375 36.4157L25.1959 19.0003L2.85924 1.58496L1.97541 2.68068Z" fill="#4DAC2A" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.69814 0.191772L26.8213 19.0004L2.70685 37.8148L0.566214 35.1139L21.2121 18.9989L0.560406 2.84326L2.69814 0.191772ZM1.97541 2.68072L22.8361 19.0004L1.97541 35.2823L2.87375 36.4157L25.1959 19.0004L2.85923 1.585L1.97541 2.68072Z" fill="#4DAC2A" />
+                            </svg>
+                        </button>
+                    </div>
+                    <h2 class="hero-subtitle">Energy efficiency</h2>
+                    <p class="hero-description">
+                        With a thermal conductivity significantly lower than aluminum, upvc possesses superior thermal insulation properties.
+                    </p>
+                }
             </div>
         </div>
         <div class="hero-arrow">
@@ -156,4 +199,4 @@
 </body>
 </html>
 <script src="~/js/lang.js"></script>
-<script src="~/js/home-slider.js"></script>
+<script src="~/js/home2-slider.js"></script>
