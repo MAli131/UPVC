@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UPVC.Data;
 
@@ -11,9 +12,11 @@ using UPVC.Data;
 namespace UPVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251115035018_SocialMediaPlatform")]
+    partial class SocialMediaPlatform
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$4c/xp.IMmofZ3p8IXPfTT.ofRvclgQPk2hlncTbOSDrbUQWHkYr4e",
+                            PasswordHash = "$2a$11$BB/bCSdaoO8Zb.jiHh.Tj.aq38fjj.Fn/8P1oOxU85IZFaDk0CcHy",
                             Username = "admin"
                         });
                 });

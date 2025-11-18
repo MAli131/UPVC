@@ -249,7 +249,7 @@ namespace UPVC.Data
                 new SocialMedia
                 {
                     Id = 1,
-                    Platform = "Facebook",
+                    Platform = SocialMediaPlatform.Facebook,
                     Url = "https://www.facebook.com/share/1Bhcz5o4dt/",
                     IconClass = "bi bi-facebook",
                     DisplayOrder = 1,
@@ -259,7 +259,7 @@ namespace UPVC.Data
                 new SocialMedia
                 {
                     Id = 2,
-                    Platform = "Twitter",
+                    Platform = SocialMediaPlatform.Twitter,
                     Url = "https://twitter.com/emapen",
                     IconClass = "bi bi-twitter",
                     DisplayOrder = 2,
@@ -269,7 +269,7 @@ namespace UPVC.Data
                 new SocialMedia
                 {
                     Id = 3,
-                    Platform = "Instagram",
+                    Platform = SocialMediaPlatform.Instagram,
                     Url = "https://www.instagram.com/emapen.upvc.egypt?igsh=eG9uMGR5bmttaXZv",
                     IconClass = "bi bi-instagram",
                     DisplayOrder = 3,
@@ -279,7 +279,7 @@ namespace UPVC.Data
                 new SocialMedia
                 {
                     Id = 4,
-                    Platform = "LinkedIn",
+                    Platform = SocialMediaPlatform.LinkedIn,
                     Url = "https://www.linkedin.com/company/emapen-for-upvc-profile/",
                     IconClass = "bi bi-linkedin",
                     DisplayOrder = 4,
@@ -289,7 +289,7 @@ namespace UPVC.Data
                 new SocialMedia
                 {
                     Id = 5,
-                    Platform = "WhatsApp",
+                    Platform = SocialMediaPlatform.WhatsApp,
                     Url = "https://wa.me/201069946220",
                     IconClass = "bi bi-whatsapp",
                     DisplayOrder = 5,

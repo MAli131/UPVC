@@ -1,6 +1,7 @@
 @model UPVC.ViewModels.ContactViewModel
 @using Microsoft.Extensions.Localization
 @using System.Globalization
+@using UPVC.Models
 @inject IStringLocalizer<UPVC.Resources.ContactPageResource> ContactLocalizer
 @inject IStringLocalizer<UPVC.Resources.SharedResource> SharedLocalizer
 @{
@@ -249,23 +250,29 @@
                 }
 
                 <ul>
-                    @if (Model?.SocialMedias != null && Model.SocialMedias.Any())
-                    {
-                        foreach (var social in Model.SocialMedias)
-                        {
-                            <li>
-                                <a href="@social.Url" target="_blank" rel="noopener noreferrer">
-                                    <i class="@social.IconClass" style="font-size: 30px; color: white;"></i>
-                                </a>
-                            </li>
-                        }
+                    @{
+                        var facebook = Model?.SocialMedias?.FirstOrDefault(s => s.Platform == SocialMediaPlatform.Facebook);
+                        var instagram = Model?.SocialMedias?.FirstOrDefault(s => s.Platform == SocialMediaPlatform.Instagram);
+                        var linkedin = Model?.SocialMedias?.FirstOrDefault(s => s.Platform == SocialMediaPlatform.LinkedIn);
                     }
-                    else
-                    {
-                        <li><a href="#"><img src="/images/contact/facebook.png" alt="facebook" width="30px" loading="lazy"></a></li>
-                        <li><a href="#"><img src="/images/contact/instagram.png" alt="instagram" width="30px" loading="lazy"></a></li>
-                        <li><a href="#"><img src="/images/contact/linkedin.png" alt="linkedin" width="30px" loading="lazy"></a></li>
-                    }
+                    
+                    <li>
+                        <a href="@(facebook?.Url ?? "#")" target="_blank" rel="noopener noreferrer">
+                            <img src="/images/contact/facebook.png" alt="facebook" width="30px" loading="lazy">
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="@(instagram?.Url ?? "#")" target="_blank" rel="noopener noreferrer">
+                            <img src="/images/contact/instagram.png" alt="instagram" width="30px" loading="lazy">
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="@(linkedin?.Url ?? "#")" target="_blank" rel="noopener noreferrer">
+                            <img src="/images/contact/linkedin.png" alt="linkedin" width="30px" loading="lazy">
+                        </a>
+                    </li>
                 </ul>
                 @if (Model?.CompanyInfo != null)
                 {
