@@ -1,7 +1,6 @@
 ﻿@model UPVC.ViewModels.HomeViewModel
 @using System.Globalization
 @{
-    ViewData["Title"] = Model.CompanyInfo?.NameEn ?? "EMAPEN - uPVC Systems";
     Layout = "_Layout";
     
     // Get current language from cookie or default to English
@@ -14,6 +13,7 @@
     
     // Company info
     var companyName = isArabic ? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn;
+    ViewData["Title"] = companyName;
     var companyPhone = Model.CompanyInfo?.Phone ?? "15726";
 }
 

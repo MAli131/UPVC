@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization
+@{
+    var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+}
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8" />
@@ -7,7 +11,7 @@
     <meta name="description" content="EMAPEN" />
     <meta name="keywords" content="EMAPEN, uPVC, windows, doors" />
 
-    <title>@ViewData["Title"] - EMAPEN</title>
+    <title>@ViewData["Title"]</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/favicon/favicon.svg" />
@@ -95,7 +99,10 @@
                     <input type="radio" class="btn-check" name="lang" id="ar-lang" autocomplete="off">
                     <label class="btn" for="ar-lang">AR</label>
                 </div>
-                <span class="navbar-slogan d-none d-lg-block">EMAPEN uPVC systems for doors and windows</span>
+                @{
+                    var companyInfo = ViewBag.CompanyInfo as UPVC.Models.CompanyInfo;
+                }
+                <span class="navbar-slogan d-none d-lg-block">@(isArabic ? companyInfo?.SloganAr : companyInfo?.SloganEn)</span>
             </div>
         </div>
     </nav>

@@ -1,12 +1,12 @@
 @model UPVC.ViewModels.HomeViewModel
 @using System.Globalization
 @{
-    ViewData["Title"] = Model.CompanyInfo?.NameEn ?? "EMAPEN - Energy Efficiency";
     Layout = "_Layout";
     
     // Get current language
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
-    
+    ViewData["Title"] = isArabic ? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn;
+
     // Get page sections
     var sections = Model.HomePage?.Sections?.OrderBy(s => s.Order).ToList() ?? new List<UPVC.Models.HomePageSection>();
 }
@@ -18,7 +18,7 @@
     <meta name="description" content="EMAPEN" />
     <meta name="keywords" content="EMAPEN, uPVC, windows, doors" />
 
-    <title>EMAPEN</title>
+    <title>@(isArabic ? Model.CompanyInfo?.NameAr : Model.CompanyInfo?.NameEn)</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/favicon/favicon.svg" />
@@ -98,7 +98,7 @@
                     <input type="radio" class="btn-check" name="lang" id="ar-lang" autocomplete="off">
                     <label class="btn" for="ar-lang">AR</label>
                 </div>
-                <span class="navbar-slogan d-none d-lg-block">EMAPEN uPVC systems for doors and windows</span>
+                <span class="navbar-slogan d-none d-lg-block">@(isArabic ? Model.CompanyInfo?.SloganAr : Model.CompanyInfo?.SloganEn)</span>
             </div>
         </div>
     </nav>
@@ -185,7 +185,8 @@
                 </script>
                 @if (ViewBag.CompanyInfo != null)
                 {
-                    @(ViewBag.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
+                        @(isArabic ? ViewBag.CompanyInfo.CopyrightTextAr : ViewBag.CompanyInfo.CopyrightTextEn)
+
                 }
                 else
                 {
