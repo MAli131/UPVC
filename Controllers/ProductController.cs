@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UPVC.Models;
 using UPVC.Filters;
 using UPVC.Data;
@@ -12,10 +13,14 @@ namespace UPVC.Controllers
             : base(context)
         {
         }
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Index()
         {
-            // يمكن جلب المنتجات من قاعدة البيانات هنا
-            var products = GetAllProducts();
+            var products = await _context.Products
+                .Where(p => p.IsActive && !p.IsDeleted)
+                .OrderBy(p => p.DisplayOrder)
+                .ToListAsync();
+                
             return View(products);
         }
 

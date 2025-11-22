@@ -1,3 +1,10 @@
+@model List<UPVC.Models.Product>
+@using System.Globalization
+@{
+    ViewData["Title"] = "Products - EMAPEN";
+    var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+    var currentProduct = Model?.FirstOrDefault();
+}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -99,29 +106,34 @@
                 <div class="hero-content col order-1 order-lg-0">
                     <div class="hero-header">
                         <div>
-                            <h1 class="hero-title">Ema-42s</h1>
-                            <h2 class="hero-subtitle">ECONOMIC SLIDING WINDOW SYSTEM</h2>
+                            <h1 class="hero-title" id="productName">@(isArabic ? currentProduct?.NameAr : currentProduct?.NameEn)</h1>
+                            @if (currentProduct?.DisplayOrder == 1)
+                            {
+                                <h2 class="hero-subtitle" id="productSubtitle">@(isArabic ? currentProduct?.SubtitleAr : currentProduct?.SubtitleEn)</h2>
+                            }
+                            else
+                            {
+                                <h2 class="hero-subtitle" id="productSubtitle" style="white-space: pre-line;">@(isArabic ? currentProduct?.SubtitleAr : currentProduct?.SubtitleEn)</h2>
+                            }
                         </div>
 
                         <img class="img-fluid" src="~/images/home/20year.png" alt="Hero Image" loading="lazy" />
                     </div>
 
                     <div class="hero-body">
-                        <p class="hero-description">
-                            The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller
-                            budgets while
-                            still maintaining the exceptional quality you need for your windows.
+                        <p class="hero-description" id="productDescription">
+                            @(isArabic ? currentProduct?.DescriptionAr : currentProduct?.DescriptionEn)
                         </p>
 
                         <div class="product-btns">
                             <a href="product-details.html" class="btn btn-outline-primary">See more</a>
-                            <a class="btn btn-outline-primary">Download EMA42 brochure</a>
-                            <a class="btn btn-outline-primary">Download full catalog</a>
+                            <a class="btn btn-outline-primary" id="productBrochure" href="@currentProduct?.BrochurePath" target="_blank">Download @currentProduct?.NameEn brochure</a>
+                            <a class="btn btn-outline-primary" href="~/files/EMAPEN-Catalog-new_compressed.pdf" target="_blank">Download full catalog</a>
                         </div>
                     </div>
                 </div>
                 <div class="hero-image col order-0 order-lg-1">
-                    <img class="img-fluid" src="~/images/product/product-hero.png" alt="Hero Image" loading="lazy">
+                    <img class="img-fluid" id="productImage" src="@currentProduct?.ImagePath" alt="Hero Image" loading="lazy">
                 </div>
             </div>
             <div class="hero-footer">
@@ -211,6 +223,21 @@
         </div>
     </section>
 
+    <!-- Hidden products data for JavaScript -->
+    <script type="application/json" id="productsData" data-lang="@(isArabic ? "ar" : "en")">
+        @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.Select(p => new {
+            nameEn = p.NameEn,
+            nameAr = p.NameAr,
+            subtitleEn = p.SubtitleEn,
+            subtitleAr = p.SubtitleAr,
+            descriptionEn = p.DescriptionEn,
+            descriptionAr = p.DescriptionAr,
+            imagePath = p.ImagePath,
+            brochurePath = p.BrochurePath,
+            displayOrder = p.DisplayOrder
+        })))
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -218,3 +245,4 @@
 
 </html>
 <script src="~/js/lang.js"></script>
+<script src="~/js/product-slider.js"></script>

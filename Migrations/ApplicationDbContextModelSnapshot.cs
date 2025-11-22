@@ -253,7 +253,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$lMKtxCf8360VjGqvIE4O5.vWsK2Xzd/b9jJw95GMmyyUinV5rrhFm",
+                            PasswordHash = "$2a$11$YlyGdmnxNoPjBCCyusFXiODl/2Xveacf0/OUET1up9.TeI.bzENHy",
                             Username = "admin"
                         });
                 });
@@ -974,6 +974,9 @@ namespace UPVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BrochurePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CategoryAr")
                         .HasColumnType("nvarchar(max)");
 
@@ -1029,6 +1032,14 @@ namespace UPVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SubtitleAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubtitleEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ThumbnailPath")
                         .HasColumnType("nvarchar(max)");
 
@@ -1038,6 +1049,72 @@ namespace UPVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrochurePath = "/files/42s-brochure.pdf",
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DescriptionAr = "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.",
+                            DescriptionEn = "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.",
+                            DisplayOrder = 1,
+                            ImagePath = "/images/product/EMA-42S.jpg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "EMA-42S",
+                            NameEn = "Ema-42s",
+                            SubtitleAr = "ECONOMIC SLIDING WINDOW SYSTEM",
+                            SubtitleEn = "ECONOMIC SLIDING WINDOW SYSTEM"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrochurePath = "/files/60-brochure.pdf",
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DescriptionAr = "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.",
+                            DescriptionEn = "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.",
+                            DisplayOrder = 2,
+                            ImagePath = "/images/product/EMA-60.jpg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "EMA-60",
+                            NameEn = "EMA-60",
+                            SubtitleAr = "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM",
+                            SubtitleEn = "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrochurePath = "/files/60s-brochure.pdf",
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DescriptionAr = "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة",
+                            DescriptionEn = "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.",
+                            DisplayOrder = 3,
+                            ImagePath = "/images/product/EMA-60s.jpg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "EMA-60S",
+                            NameEn = "EMA-60S",
+                            SubtitleAr = "STANDARD SLIDING WINDOW SYSTEM",
+                            SubtitleEn = "STANDARD SLIDING WINDOW SYSTEM"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BrochurePath = "/files/Style-brochure.pdf",
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DescriptionAr = "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.",
+                            DescriptionEn = "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.",
+                            DisplayOrder = 4,
+                            ImagePath = "/images/product/EMA-STYLE.jpg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameAr = "EMA-STYLE",
+                            NameEn = "EMA-STYLE",
+                            SubtitleAr = "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM",
+                            SubtitleEn = "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM"
+                        });
                 });
 
             modelBuilder.Entity("UPVC.Models.SocialMedia", b =>

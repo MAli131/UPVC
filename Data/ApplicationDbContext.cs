@@ -425,6 +425,70 @@ namespace UPVC.Data
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
             );
+
+            // Seed Products
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = 1,
+                    NameEn = "Ema-42s",
+                    NameAr = "EMA-42S",
+                    SubtitleEn = "ECONOMIC SLIDING WINDOW SYSTEM",
+                    SubtitleAr = "نظام الجرار الإقتصادي",
+                    DescriptionEn = "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.",
+                    DescriptionAr = "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.",
+                    ImagePath = "/images/product/EMA-42S.jpg",
+                    BrochurePath = "/files/42s-brochure.pdf",
+                    DisplayOrder = 1,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Product
+                {
+                    Id = 2,
+                    NameEn = "EMA-60",
+                    NameAr = "EMA-60",
+                    SubtitleEn = "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM",
+                    SubtitleAr = "نظام المفصلي",
+                    DescriptionEn = "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.",
+                    DescriptionAr = "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.",
+                    ImagePath = "/images/product/EMA-60.jpg",
+                    BrochurePath = "/files/60-brochure.pdf",
+                    DisplayOrder = 2,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Product
+                {
+                    Id = 3,
+                    NameEn = "EMA-60S",
+                    NameAr = "EMA-60S",
+                    SubtitleEn = "STANDARD SLIDING WINDOW SYSTEM",
+                    SubtitleAr = "نظام الجرار",
+                    DescriptionEn = "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.",
+                    DescriptionAr = "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة",
+                    ImagePath = "/images/product/EMA-60s.jpg",
+                    BrochurePath = "/files/60s-brochure.pdf",
+                    DisplayOrder = 3,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Product
+                {
+                    Id = 4,
+                    NameEn = "EMA-STYLE",
+                    NameAr = "EMA-STYLE",
+                    SubtitleEn = "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM",
+                    SubtitleAr = "نظام الجرار المميز",
+                    DescriptionEn = "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.",
+                    DescriptionAr = "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.",
+                    ImagePath = "/images/product/EMA-STYLE.jpg",
+                    BrochurePath = "/files/Style-brochure.pdf",
+                    DisplayOrder = 4,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                }
+            );
         }
     }
 }
