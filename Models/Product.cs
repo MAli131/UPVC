@@ -17,5 +17,8 @@ namespace UPVC.Models
         public string? CategoryEn { get; set; }
         public string? CategoryAr { get; set; }
         public int DisplayOrder { get; set; } = 0;
+        
+        // Navigation property to ProductDetails
+        public ProductDetails? ProductDetails { get; set; }
     }
 }

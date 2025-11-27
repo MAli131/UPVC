@@ -482,6 +482,21 @@ a.btn-outline-primary{
 .product-d-section .extra-info .colors .off-white{
   background-color: #FFFFB3;
 }
+.product-d-section .extra-info .colors .beige{
+  background-color: #F5F5DC;
+}
+.product-d-section .extra-info .colors .brown{
+  background-color: #8B4513;
+}
+.product-d-section .extra-info .colors .dark-grey{
+  background-color: #505050;
+}
+.product-d-section .extra-info .colors .light-grey{
+  background-color: #E8E8E8;
+}
+.product-d-section .extra-info .colors .dark-brown{
+  background-color: #4A2511;
+}
 .product-d-section .hero-image{
   display: flex;
   justify-content: flex-end;

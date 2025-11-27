@@ -126,9 +126,9 @@
                         </p>
 
                         <div class="product-btns">
-                            <a href="product-details.html" class="btn btn-outline-primary">See more</a>
-                            <a class="btn btn-outline-primary" id="productBrochure" href="@currentProduct?.BrochurePath" target="_blank">Download @currentProduct?.NameEn brochure</a>
-                            <a class="btn btn-outline-primary" href="~/files/EMAPEN-Catalog-new_compressed.pdf" target="_blank">Download full catalog</a>
+                            <a href="@Url.Action("Details", "Product", new { id = currentProduct?.Id })" class="btn btn-outline-primary" id="seeMoreBtn">@(isArabic ? "اعرف المزيد" : "See more")</a>
+                            <a class="btn btn-outline-primary" id="productBrochure" href="@currentProduct?.BrochurePath" target="_blank">@(isArabic ? $"تحميل بروشور {currentProduct?.NameAr}" : $"Download {currentProduct?.NameEn} brochure")</a>
+                            <a class="btn btn-outline-primary" href="~/files/EMAPEN-Catalog-new_compressed.pdf" target="_blank">@(isArabic ? "تحميل الكتالوج الكامل" : "Download full catalog")</a>
                         </div>
                     </div>
                 </div>
@@ -226,6 +226,7 @@
     <!-- Hidden products data for JavaScript -->
     <script type="application/json" id="productsData" data-lang="@(isArabic ? "ar" : "en")">
         @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.Select(p => new {
+            id = p.Id,
             nameEn = p.NameEn,
             nameAr = p.NameAr,
             subtitleEn = p.SubtitleEn,

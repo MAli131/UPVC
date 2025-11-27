@@ -5,7 +5,7 @@
 namespace UPVC.Migrations
 {
     /// <inheritdoc />
-    public partial class assww1231121124111 : Migration
+    public partial class ConvertAllToManyToManyAndFixImagePaths : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,35 +15,35 @@ namespace UPVC.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "PasswordHash",
-                value: "$2a$11$YlyGdmnxNoPjBCCyusFXiODl/2Xveacf0/OUET1up9.TeI.bzENHy");
+                value: "$2a$11$hY1cG.FW2BHHyEIs/isTquDRJ52tifARFFhcwJSxDbSvwM.MJqNjq");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 1,
-                column: "BrochurePath",
-                value: "/files/42s-brochure.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-42S.png");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 2,
-                column: "BrochurePath",
-                value: "/files/60-brochure.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-60.png");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 3,
-                column: "BrochurePath",
-                value: "/files/60s-brochure.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-60s.png");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 4,
-                column: "BrochurePath",
-                value: "/files/Style-brochure.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-STYLE.png");
         }
 
         /// <inheritdoc />
@@ -54,35 +54,35 @@ namespace UPVC.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "PasswordHash",
-                value: "$2a$11$.dnYQRp3mD2Pghc7qHP5PujxiDjFi1k5DR/LTYxPlslo8WuiPxXqC");
+                value: "$2a$11$wfSY3sLdW2KaQKIxx7Ch0e.ee9sg0I2VeQw6rZmMwC1W2FfFXhH9m");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 1,
-                column: "BrochurePath",
-                value: "/files/EMA-42S.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-42S.jpg");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 2,
-                column: "BrochurePath",
-                value: "/files/EMA-60.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-60.jpg");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 3,
-                column: "BrochurePath",
-                value: "/files/EMA-60S.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-60s.jpg");
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 4,
-                column: "BrochurePath",
-                value: "/files/EMA-STYLE.pdf");
+                column: "ImagePath",
+                value: "/images/product/EMA-STYLE.jpg");
         }
     }
 }

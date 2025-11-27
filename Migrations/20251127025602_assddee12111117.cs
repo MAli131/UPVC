@@ -5,7 +5,7 @@
 namespace UPVC.Migrations
 {
     /// <inheritdoc />
-    public partial class assww123112112 : Migration
+    public partial class assddee12111117 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace UPVC.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "PasswordHash",
-                value: "$2a$11$.dnYQRp3mD2Pghc7qHP5PujxiDjFi1k5DR/LTYxPlslo8WuiPxXqC");
+                value: "$2a$11$GYtXhi6VHlaZnW.hvwDUnekZnQdwmxK4zEZ4PUJMVyrzVbKnLXGUm");
         }
 
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace UPVC.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "PasswordHash",
-                value: "$2a$11$9I5Vt8nQTm4TV4uqUfIIuuWE5e831wVwJ2KArVUUiN3w2XKMT4gOy");
+                value: "$2a$11$hY1cG.FW2BHHyEIs/isTquDRJ52tifARFFhcwJSxDbSvwM.MJqNjq");
         }
     }
 }

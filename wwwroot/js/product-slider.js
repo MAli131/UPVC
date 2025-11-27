@@ -15,6 +15,7 @@
         const productDescription = document.getElementById('productDescription');
         const productImage = document.getElementById('productImage');
         const productBrochure = document.getElementById('productBrochure');
+        const seeMoreBtn = document.getElementById('seeMoreBtn');
 
         const dots = document.querySelectorAll('.horizontal-dots .dot');
         const prevBtn = document.querySelector('.dots-slider .btn-link:first-of-type');
@@ -30,6 +31,11 @@
             productImage.src = product.imagePath;
             productBrochure.href = product.brochurePath;
             productBrochure.textContent = `Download ${product.nameEn} brochure`;
+            
+            // Update See more button link
+            if (seeMoreBtn) {
+                seeMoreBtn.href = `/Product/Details/${product.id}`;
+            }
 
             // Update subtitle style based on displayOrder
             if (product.displayOrder === 1) {

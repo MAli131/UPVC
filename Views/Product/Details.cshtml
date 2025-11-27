@@ -24,10 +24,13 @@
         display: block;
     }
 </style>
-@model UPVC.Models.ProductModel
+@model UPVC.Models.Product
 @{
-    ViewData["Title"] = Model.Name;
+    ViewData["Title"] = ViewContext.HttpContext.Request.Cookies["Language"] == "ar" ? Model.NameAr : Model.NameEn;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    var isArabic = ViewContext.HttpContext.Request.Cookies["Language"] == "ar";
+    var productDetails = Model.ProductDetails;
 }
 
 <head>
@@ -47,70 +50,66 @@
             <div class="hero-content col order-1 order-lg-0">
                 <div class="hero-header">
                     <div>
-                        <h1 class="hero-title">Ema-42s</h1>
-                        <h2 class="hero-subtitle">ECONOMIC SLIDING WINDOW SYSTEM</h2>
+                        <h1 class="hero-title">@(isArabic ? Model.NameAr : Model.NameEn)</h1>
+                        <h2 class="hero-subtitle">@(isArabic ? Model.SubtitleAr : Model.SubtitleEn)</h2>
                     </div>
                     <img class="img-fluid" src="~/images/product/20year.png" alt="Hero Image" loading="lazy" />
                 </div>
                 <div class="row row-cols-1 row-cols-md-2">
                     <div class="tech-specs col">
-                        <h3>Technical specifications</h3>
-                        <ul>
-                            <li>42mm sash profile width</li>
-                            <li>90mm frame profile width</li>
-                            <li>2.3mm profile thickness</li>
-                            <li>4-6mm single glazing option</li>
-                            <li>Uf value of 1.1 W/m²K</li>
-                            <li>2 chambered system enhancing durability and insulation</li>
-                            <li>One type of steel reinforcement and gasket reducing storage costs</li>
-                            <li>TPE gasket available in black, white and grey</li>
-                        </ul>
+                        <h3>@(isArabic ? "المواصفات الفنية" : "Technical specifications")</h3>
+                        @if (productDetails?.Specifications != null && productDetails.Specifications.Any())
+                        {
+                            <ul>
+                                @foreach (var spec in productDetails.Specifications.OrderBy(s => s.DisplayOrder))
+                                {
+                                    <li>@(isArabic ? spec.Specification.NameAr : spec.Specification.NameEn)</li>
+                                }
+                            </ul>
+                        }
                     </div>
                     <div class="extra-info col">
                         <div>
-                            <h3>Available colors</h3>
-                            <ul class="colors">
-                                <li class="white">White</li>
-                                <li class="grey">Grey</li>
-                                <li class="off-white">Off white</li>
-                            </ul>
+                            <h3>@(isArabic ? "الألوان المتاحة" : "Available colors")</h3>
+                            @if (productDetails?.Colors != null && productDetails.Colors.Any())
+                            {
+                                <ul class="colors">
+                                    @foreach (var color in productDetails.Colors.OrderBy(c => c.DisplayOrder))
+                                    {
+                                        <li class="@color.Color.CssClass">@(isArabic ? color.Color.NameAr : color.Color.NameEn)</li>
+                                    }
+                                </ul>
+                            }
                         </div>
                         <div>
-                            <h3>Quality certificates</h3>
-                            <ul>
-                                <li><img class="img-fluid" src="/images/product/iso.png" width="40" alt="ISO" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/eos.png" width="40" alt="EOS" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/cer.png" width="40" alt="CER" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/NR.png" width="40" alt="NR" loading="lazy"></li>
-                            </ul>
+                            <h3>@(isArabic ? "شهادات الجودة" : "Quality certificates")</h3>
+                            @if (productDetails?.Certificates != null && productDetails.Certificates.Any())
+                            {
+                                <ul>
+                                    @foreach (var cert in productDetails.Certificates.OrderBy(c => c.DisplayOrder))
+                                    {
+                                        <li><img class="img-fluid" src="@cert.Certificate.ImagePath" width="@cert.Certificate.Width" alt="@cert.Certificate.AltText" loading="lazy"></li>
+                                    }
+                                </ul>
+                            }
                         </div>
                         <div>
-                            <h3>Design options</h3>
-                            <ul>
-                                <li><img class="img-fluid" src="/images/product/win1.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win2.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win3.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win4.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win5.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win6.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win7.png" alt="window" loading="lazy"></li>
-                            </ul>
-                            <ul>
-                                <li><img class="img-fluid" src="/images/product/win8.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win9.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win10.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win11.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win12.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win13.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win14.png" alt="window" loading="lazy"></li>
-                                <li><img class="img-fluid" src="/images/product/win15.png" alt="window" loading="lazy"></li>
-                            </ul>
+                            <h3>@(isArabic ? "خيارات التصميم" : "Design options")</h3>
+                            @if (productDetails?.DesignOptions != null && productDetails.DesignOptions.Any())
+                            {
+                                <ul>
+                                    @foreach (var design in productDetails.DesignOptions.OrderBy(d => d.DisplayOrder))
+                                    {
+                                        <li><img class="img-fluid" src="@design.DesignOption!.ImagePath" alt="@design.DesignOption.AltText" loading="lazy"></li>
+                                    }
+                                </ul>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
             <div class="hero-image col order-0 order-lg-1">
-                <img class="img-fluid" src="/images/product/product-d-hero1.png" alt="Hero Image" loading="lazy">
+                <img class="img-fluid" src="@(productDetails?.DetailHeroImagePath ?? Model.ImagePath)" alt="Hero Image" loading="lazy">
             </div>
         </div>
         <div class="hero-footer">
@@ -131,7 +130,7 @@
                         <path d="M136.828 50.2315C139.299 50.0129 139.309 50.0085 139.974 52.2035C140.505 53.9577 141.002 55.7225 141.519 57.4811C141.587 57.7145 141.687 57.9383 141.849 58.3686C142.234 57.7467 142.522 57.2589 142.83 56.7842C144.09 54.8462 145.376 52.9256 146.606 50.9684C146.996 50.3491 147.443 50.0677 148.171 50.1592C148.627 50.2167 149.097 50.1697 149.75 50.1697C149.125 51.1086 148.61 51.8891 148.087 52.6625C146.292 55.3166 144.464 57.9488 142.715 60.6324C142.128 61.5331 141.329 61.1794 140.614 61.162C140.379 61.1568 140.058 60.6281 139.944 60.2823C138.933 57.1927 137.957 54.091 136.978 50.991C136.906 50.7628 136.883 50.5198 136.828 50.2315Z" fill="white" />
                     </svg>
                 </a>
-                <a href="/Product">Back</a>
+                <a href="/Product">@(isArabic ? "رجوع" : "Back")</a>
             </div>
             <p>
                 &copy;

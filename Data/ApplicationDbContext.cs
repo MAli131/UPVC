@@ -18,6 +18,15 @@ namespace UPVC.Data
         public DbSet<HomePage> HomePages { get; set; }
         public DbSet<HomePageSection> HomePageSections { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductDetails> ProductDetails { get; set; }
+        public DbSet<Specification> Specifications { get; set; }
+        public DbSet<ProductSpecification> ProductSpecifications { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<ProductCertificate> ProductCertificates { get; set; }
+        public DbSet<DesignOption> DesignOptions { get; set; }
+        public DbSet<ProductDesignOption> ProductDesignOptions { get; set; }
         public DbSet<AboutPage> AboutPages { get; set; }
         public DbSet<ContactPage> ContactPages { get; set; }
         public DbSet<CompanyInfo> CompanyInfos { get; set; }
@@ -67,6 +76,84 @@ namespace UPVC.Data
                 .HasMany(p => p.Sections)
                 .WithOne(s => s.AboutPage)
                 .HasForeignKey(s => s.AboutPageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure Product -> ProductDetails relationship (one-to-one)
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.ProductDetails)
+                .WithOne(pd => pd.Product)
+                .HasForeignKey<ProductDetails>(pd => pd.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure Many-to-Many relationship: ProductDetails <-> Specification through ProductSpecification
+            modelBuilder.Entity<ProductSpecification>()
+                .HasKey(ps => ps.Id);
+
+            modelBuilder.Entity<ProductSpecification>()
+                .HasOne(ps => ps.ProductDetails)
+                .WithMany(pd => pd.Specifications)
+                .HasForeignKey(ps => ps.ProductDetailsId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProductSpecification>()
+                .HasOne(ps => ps.Specification)
+                .WithMany(s => s.ProductSpecifications)
+                .HasForeignKey(ps => ps.SpecificationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure Many-to-Many relationship: ProductDetails <-> Color through ProductColor
+            modelBuilder.Entity<ProductColor>()
+                .HasKey(pc => pc.Id);
+
+            modelBuilder.Entity<ProductColor>()
+                .HasOne(pc => pc.ProductDetails)
+                .WithMany(pd => pd.Colors)
+                .HasForeignKey(pc => pc.ProductDetailsId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProductColor>()
+                .HasOne(pc => pc.Color)
+                .WithMany(c => c.ProductColors)
+                .HasForeignKey(pc => pc.ColorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure ProductCertificate relationships
+            modelBuilder.Entity<ProductCertificate>()
+                .HasKey(pc => pc.Id);
+
+            modelBuilder.Entity<ProductCertificate>()
+                .HasOne(pc => pc.ProductDetails)
+                .WithMany(pd => pd.Certificates)
+                .HasForeignKey(pc => pc.ProductDetailsId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProductCertificate>()
+                .HasOne(pc => pc.Certificate)
+                .WithMany(c => c.ProductCertificates)
+                .HasForeignKey(pc => pc.CertificateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure ProductDesignOption relationships
+            modelBuilder.Entity<ProductDesignOption>()
+                .HasKey(pdo => pdo.Id);
+
+            modelBuilder.Entity<ProductDesignOption>()
+                .HasOne(pdo => pdo.ProductDetails)
+                .WithMany(pd => pd.DesignOptions)
+                .HasForeignKey(pdo => pdo.ProductDetailsId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProductDesignOption>()
+                .HasOne(pdo => pdo.DesignOption)
+                .WithMany(d => d.ProductDesignOptions)
+                .HasForeignKey(pdo => pdo.DesignOptionId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure ProductDetails -> ProductDesignOption relationship (one-to-many)
+            modelBuilder.Entity<ProductDetails>()
+                .HasMany(pd => pd.DesignOptions)
+                .WithOne(pdo => pdo.ProductDetails)
+                .HasForeignKey(pdo => pdo.ProductDetailsId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Seed default admin user (password: Admin@123)
@@ -437,7 +524,7 @@ namespace UPVC.Data
                     SubtitleAr = "نظام الجرار الإقتصادي",
                     DescriptionEn = "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.",
                     DescriptionAr = "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.",
-                    ImagePath = "/images/product/EMA-42S.jpg",
+                    ImagePath = "/images/product/EMA-42S.png",
                     BrochurePath = "/files/42s-brochure.pdf",
                     DisplayOrder = 1,
                     IsActive = true,
@@ -452,7 +539,7 @@ namespace UPVC.Data
                     SubtitleAr = "نظام المفصلي",
                     DescriptionEn = "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.",
                     DescriptionAr = "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.",
-                    ImagePath = "/images/product/EMA-60.jpg",
+                    ImagePath = "/images/product/EMA-60.png",
                     BrochurePath = "/files/60-brochure.pdf",
                     DisplayOrder = 2,
                     IsActive = true,
@@ -467,7 +554,7 @@ namespace UPVC.Data
                     SubtitleAr = "نظام الجرار",
                     DescriptionEn = "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.",
                     DescriptionAr = "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة",
-                    ImagePath = "/images/product/EMA-60s.jpg",
+                    ImagePath = "/images/product/EMA-60s.png",
                     BrochurePath = "/files/60s-brochure.pdf",
                     DisplayOrder = 3,
                     IsActive = true,
@@ -482,12 +569,262 @@ namespace UPVC.Data
                     SubtitleAr = "نظام الجرار المميز",
                     DescriptionEn = "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.",
                     DescriptionAr = "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.",
-                    ImagePath = "/images/product/EMA-STYLE.jpg",
+                    ImagePath = "/images/product/EMA-STYLE.png",
                     BrochurePath = "/files/Style-brochure.pdf",
                     DisplayOrder = 4,
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
+            );
+
+            // Seed Product Details
+            modelBuilder.Entity<ProductDetails>().HasData(
+                new ProductDetails
+                {
+                    Id = 1,
+                    ProductId = 1, // EMA-42S
+                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ProductDetails
+                {
+                    Id = 2,
+                    ProductId = 2, // EMA-60
+                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ProductDetails
+                {
+                    Id = 3,
+                    ProductId = 3, // EMA-60S
+                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ProductDetails
+                {
+                    Id = 4,
+                    ProductId = 4, // EMA-STYLE
+                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    IsActive = true,
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                }
+            );
+
+            // Seed Shared Specifications (unique specifications used across products)
+            modelBuilder.Entity<Specification>().HasData(
+                new Specification { Id = 1, NameEn = "42mm sash profile width", NameAr = "عرض ضلفة 42 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 2, NameEn = "47mm sash profile width", NameAr = "عرض ضلفة 47 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 3, NameEn = "60mm sash profile width", NameAr = "عرض ضلفة 60 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 4, NameEn = "60mm frame profile width", NameAr = "عرض إطار 60 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 5, NameEn = "90mm frame profile width", NameAr = "عرض إطار 90 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 6, NameEn = "110mm frame profile width", NameAr = "عرض إطار 110 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 7, NameEn = "126mm frame profile width", NameAr = "عرض إطار 126 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 8, NameEn = "2.3mm profile thickness", NameAr = "سُمك القطاع 2.3 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 9, NameEn = "2.5mm profile thickness", NameAr = "سُمك القطاع 2.5 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 10, NameEn = "2.6mm profile thickness", NameAr = "سُمك القطاع 2.6 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 11, NameEn = "4-6mm single glazing option", NameAr = "خيار زجاج أحادي 4-6 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 12, NameEn = "24mm double glazing option", NameAr = "خيار زجاج مزدوج 24 مم", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 13, NameEn = "Uf value of 1.1 W/m²K", NameAr = "قيمة Uf 1.1 واط/م²ك", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 14, NameEn = "2 chambered system enhancing profile durability and insulation.", NameAr = "نظام غرفتين يعزز متانة القطاع والعزل.", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 15, NameEn = "3 chambered system enhancing profile durability and insulation.", NameAr = "نظام 3 غرف يعزز متانة القطاع والعزل.", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 16, NameEn = "4 chambered system enhancing profile durability and insulation.", NameAr = "نظام 4 غرف يعزز متانة القطاع والعزل.", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 17, NameEn = "One type of steel reinforcement and gasket reducing storage costs.", NameAr = "نوع واحد من التسليح الفولاذي والجوان مما يقلل تكاليف التخزين.", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Specification { Id = 18, NameEn = "TPE gasket available in black, white and gray.", NameAr = "جوان TPE متوفر بالألوان الأسود والأبيض والرمادي.", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed Product-Specification relationships (Many-to-Many junction table)
+            modelBuilder.Entity<ProductSpecification>().HasData(
+                // EMA-42S Specifications (ProductDetailsId=1)
+                new ProductSpecification { Id = 1, ProductDetailsId = 1, SpecificationId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 42mm sash
+                new ProductSpecification { Id = 2, ProductDetailsId = 1, SpecificationId = 5, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 90mm frame
+                new ProductSpecification { Id = 3, ProductDetailsId = 1, SpecificationId = 8, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 2.3mm thickness
+                new ProductSpecification { Id = 4, ProductDetailsId = 1, SpecificationId = 11, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Single glazing
+                new ProductSpecification { Id = 5, ProductDetailsId = 1, SpecificationId = 13, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Uf value
+                new ProductSpecification { Id = 6, ProductDetailsId = 1, SpecificationId = 14, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 2 chambered
+                new ProductSpecification { Id = 7, ProductDetailsId = 1, SpecificationId = 17, DisplayOrder = 7, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Steel reinforcement
+                new ProductSpecification { Id = 8, ProductDetailsId = 1, SpecificationId = 18, DisplayOrder = 8, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // TPE gasket
+                
+                // EMA-60 Specifications (ProductDetailsId=2)
+                new ProductSpecification { Id = 9, ProductDetailsId = 2, SpecificationId = 3, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 60mm sash
+                new ProductSpecification { Id = 10, ProductDetailsId = 2, SpecificationId = 4, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 60mm frame
+                new ProductSpecification { Id = 11, ProductDetailsId = 2, SpecificationId = 9, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 2.5mm thickness
+                new ProductSpecification { Id = 12, ProductDetailsId = 2, SpecificationId = 11, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Single glazing
+                new ProductSpecification { Id = 13, ProductDetailsId = 2, SpecificationId = 12, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Double glazing
+                new ProductSpecification { Id = 14, ProductDetailsId = 2, SpecificationId = 13, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Uf value
+                new ProductSpecification { Id = 15, ProductDetailsId = 2, SpecificationId = 16, DisplayOrder = 7, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 4 chambered
+                new ProductSpecification { Id = 16, ProductDetailsId = 2, SpecificationId = 17, DisplayOrder = 8, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Steel reinforcement
+                new ProductSpecification { Id = 17, ProductDetailsId = 2, SpecificationId = 18, DisplayOrder = 9, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // TPE gasket
+                
+                // EMA-60S Specifications (ProductDetailsId=3)
+                new ProductSpecification { Id = 18, ProductDetailsId = 3, SpecificationId = 3, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 60mm sash
+                new ProductSpecification { Id = 19, ProductDetailsId = 3, SpecificationId = 7, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 126mm frame
+                new ProductSpecification { Id = 20, ProductDetailsId = 3, SpecificationId = 8, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 2.3mm thickness
+                new ProductSpecification { Id = 21, ProductDetailsId = 3, SpecificationId = 11, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Single glazing
+                new ProductSpecification { Id = 22, ProductDetailsId = 3, SpecificationId = 12, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Double glazing
+                new ProductSpecification { Id = 23, ProductDetailsId = 3, SpecificationId = 13, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Uf value
+                new ProductSpecification { Id = 24, ProductDetailsId = 3, SpecificationId = 15, DisplayOrder = 7, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 3 chambered
+                new ProductSpecification { Id = 25, ProductDetailsId = 3, SpecificationId = 17, DisplayOrder = 8, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Steel reinforcement
+                new ProductSpecification { Id = 26, ProductDetailsId = 3, SpecificationId = 18, DisplayOrder = 9, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // TPE gasket
+                
+                // EMA-STYLE Specifications (ProductDetailsId=4)
+                new ProductSpecification { Id = 27, ProductDetailsId = 4, SpecificationId = 2, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 47mm sash
+                new ProductSpecification { Id = 28, ProductDetailsId = 4, SpecificationId = 6, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // 110mm frame
+                new ProductSpecification { Id = 29, ProductDetailsId = 4, SpecificationId = 10, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 2.6mm thickness
+                new ProductSpecification { Id = 30, ProductDetailsId = 4, SpecificationId = 11, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Single glazing
+                new ProductSpecification { Id = 31, ProductDetailsId = 4, SpecificationId = 12, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Double glazing
+                new ProductSpecification { Id = 32, ProductDetailsId = 4, SpecificationId = 13, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Uf value
+                new ProductSpecification { Id = 33, ProductDetailsId = 4, SpecificationId = 14, DisplayOrder = 7, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // 2 chambered
+                new ProductSpecification { Id = 34, ProductDetailsId = 4, SpecificationId = 17, DisplayOrder = 8, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }, // Steel reinforcement
+                new ProductSpecification { Id = 35, ProductDetailsId = 4, SpecificationId = 18, DisplayOrder = 9, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }  // TPE gasket
+            );
+
+            // Seed Shared Colors (available colors used across products)
+            modelBuilder.Entity<Color>().HasData(
+                new Color { Id = 1, NameEn = "White", NameAr = "أبيض", CssClass = "white", HexCode = "#FFFFFF", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 2, NameEn = "Grey", NameAr = "رمادي", CssClass = "grey", HexCode = "#D9D9D9", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 3, NameEn = "Off white", NameAr = "أبيض فاتح", CssClass = "off-white", HexCode = "#FFFFB3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 4, NameEn = "Beige", NameAr = "بيج", CssClass = "beige", HexCode = "#F5F5DC", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 5, NameEn = "Brown", NameAr = "بني", CssClass = "brown", HexCode = "#8B4513", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 6, NameEn = "Dark Grey", NameAr = "رمادي غامق", CssClass = "dark-grey", HexCode = "#505050", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 7, NameEn = "Light Grey", NameAr = "رمادي فاتح", CssClass = "light-grey", HexCode = "#E8E8E8", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Color { Id = 8, NameEn = "Dark Brown", NameAr = "بني غامق", CssClass = "dark-brown", HexCode = "#4A2511", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed Product-Color relationships (Many-to-Many junction table)
+            modelBuilder.Entity<ProductColor>().HasData(
+                // EMA-42S Colors (4 colors)
+                new ProductColor { Id = 1, ProductDetailsId = 1, ColorId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // White
+                new ProductColor { Id = 2, ProductDetailsId = 1, ColorId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Grey
+                new ProductColor { Id = 3, ProductDetailsId = 1, ColorId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Off white
+                new ProductColor { Id = 4, ProductDetailsId = 1, ColorId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Beige
+                
+                // EMA-60 Colors (4 colors)
+                new ProductColor { Id = 5, ProductDetailsId = 2, ColorId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // White
+                new ProductColor { Id = 6, ProductDetailsId = 2, ColorId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Grey
+                new ProductColor { Id = 7, ProductDetailsId = 2, ColorId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Off white
+                new ProductColor { Id = 8, ProductDetailsId = 2, ColorId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Beige
+                
+                // EMA-60S Colors (4 colors)
+                new ProductColor { Id = 9, ProductDetailsId = 3, ColorId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },   // White
+                new ProductColor { Id = 10, ProductDetailsId = 3, ColorId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Grey
+                new ProductColor { Id = 11, ProductDetailsId = 3, ColorId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Off white
+                new ProductColor { Id = 12, ProductDetailsId = 3, ColorId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Beige
+                
+                // EMA-STYLE Colors (8 colors - all available colors)
+                new ProductColor { Id = 13, ProductDetailsId = 4, ColorId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // White
+                new ProductColor { Id = 14, ProductDetailsId = 4, ColorId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Grey
+                new ProductColor { Id = 15, ProductDetailsId = 4, ColorId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Off white
+                new ProductColor { Id = 16, ProductDetailsId = 4, ColorId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Beige
+                new ProductColor { Id = 17, ProductDetailsId = 4, ColorId = 5, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Brown
+                new ProductColor { Id = 18, ProductDetailsId = 4, ColorId = 6, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Dark Grey
+                new ProductColor { Id = 19, ProductDetailsId = 4, ColorId = 7, DisplayOrder = 7, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // Light Grey
+                new ProductColor { Id = 20, ProductDetailsId = 4, ColorId = 8, DisplayOrder = 8, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }   // Dark Brown
+            );
+
+            // Seed Shared Certificates (certificates used across products)
+            modelBuilder.Entity<Certificate>().HasData(
+                new Certificate { Id = 1, NameEn = "ISO", NameAr = "ايزو", ImagePath = "/images/product/iso.png", AltText = "ISO", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Certificate { Id = 2, NameEn = "EOS", NameAr = "المواصفات المصرية", ImagePath = "/images/product/eos.png", AltText = "EOS", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Certificate { Id = 3, NameEn = "CER", NameAr = "شهادة", ImagePath = "/images/product/cer.png", AltText = "CER", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Certificate { Id = 4, NameEn = "NR", NameAr = "NR", ImagePath = "/images/product/NR.png", AltText = "NR", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed Product-Certificate relationships (Many-to-Many junction table)
+            modelBuilder.Entity<ProductCertificate>().HasData(
+                // EMA-42S Certificates (all 4)
+                new ProductCertificate { Id = 1, ProductDetailsId = 1, CertificateId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // ISO
+                new ProductCertificate { Id = 2, ProductDetailsId = 1, CertificateId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // EOS
+                new ProductCertificate { Id = 3, ProductDetailsId = 1, CertificateId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // CER
+                new ProductCertificate { Id = 4, ProductDetailsId = 1, CertificateId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // NR
+                
+                // EMA-60 Certificates (all 4)
+                new ProductCertificate { Id = 5, ProductDetailsId = 2, CertificateId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // ISO
+                new ProductCertificate { Id = 6, ProductDetailsId = 2, CertificateId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // EOS
+                new ProductCertificate { Id = 7, ProductDetailsId = 2, CertificateId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // CER
+                new ProductCertificate { Id = 8, ProductDetailsId = 2, CertificateId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // NR
+                
+                // EMA-60S Certificates (all 4)
+                new ProductCertificate { Id = 9, ProductDetailsId = 3, CertificateId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },   // ISO
+                new ProductCertificate { Id = 10, ProductDetailsId = 3, CertificateId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // EOS
+                new ProductCertificate { Id = 11, ProductDetailsId = 3, CertificateId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // CER
+                new ProductCertificate { Id = 12, ProductDetailsId = 3, CertificateId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // NR
+                
+                // EMA-STYLE Certificates (all 4)
+                new ProductCertificate { Id = 13, ProductDetailsId = 4, CertificateId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // ISO
+                new ProductCertificate { Id = 14, ProductDetailsId = 4, CertificateId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // EOS
+                new ProductCertificate { Id = 15, ProductDetailsId = 4, CertificateId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },  // CER
+                new ProductCertificate { Id = 16, ProductDetailsId = 4, CertificateId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }   // NR
+            );
+
+            // Seed Design Options (shared images)
+            modelBuilder.Entity<DesignOption>().HasData(
+                // Unique design options with images only
+                new DesignOption { Id = 1, ImagePath = "/images/product/win1.png", AltText = "Single panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 2, ImagePath = "/images/product/win2.png", AltText = "Two panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 3, ImagePath = "/images/product/win3.png", AltText = "Three panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 4, ImagePath = "/images/product/win4.png", AltText = "Four panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 5, ImagePath = "/images/product/win5.png", AltText = "Five panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 6, ImagePath = "/images/product/win6.png", AltText = "Six panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 7, ImagePath = "/images/product/win7.png", AltText = "EMA-60 design 1", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 8, ImagePath = "/images/product/win8.png", AltText = "EMA-60 design 2", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 9, ImagePath = "/images/product/win9.png", AltText = "EMA-60 design 3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 10, ImagePath = "/images/product/win10.png", AltText = "EMA-60 design 4", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 11, ImagePath = "/images/product/win11.png", AltText = "EMA-60 design 5", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 12, ImagePath = "/images/product/win12.png", AltText = "EMA-60 design 6", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 13, ImagePath = "/images/product/win13.png", AltText = "EMA-60 design 7", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 14, ImagePath = "/images/product/win14.png", AltText = "EMA-60 design 8", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 15, ImagePath = "/images/product/win1.png", AltText = "EMA-60S design 1", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 16, ImagePath = "/images/product/win2.png", AltText = "EMA-60S design 2", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 17, ImagePath = "/images/product/win3.png", AltText = "EMA-60S design 3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 18, ImagePath = "/images/product/win4.png", AltText = "EMA-60S design 4", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 19, ImagePath = "/images/product/win5.png", AltText = "EMA-60S design 5", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 20, ImagePath = "/images/product/win6.png", AltText = "EMA-60S design 6", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 21, ImagePath = "/images/product/win1.png", AltText = "EMA-STYLE design 1", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 22, ImagePath = "/images/product/win2.png", AltText = "EMA-STYLE design 2", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 23, ImagePath = "/images/product/win3.png", AltText = "EMA-STYLE design 3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 24, ImagePath = "/images/product/win4.png", AltText = "EMA-STYLE design 4", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 25, ImagePath = "/images/product/win5.png", AltText = "EMA-STYLE design 5", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 26, ImagePath = "/images/product/win6.png", AltText = "EMA-STYLE design 6", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed ProductDesignOption relationships (junction table)
+            modelBuilder.Entity<ProductDesignOption>().HasData(
+                // EMA-42S Design Options (6 options)
+                new ProductDesignOption { Id = 1, ProductDetailsId = 1, DesignOptionId = 1, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 2, ProductDetailsId = 1, DesignOptionId = 2, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 3, ProductDetailsId = 1, DesignOptionId = 3, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 4, ProductDetailsId = 1, DesignOptionId = 4, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 5, ProductDetailsId = 1, DesignOptionId = 5, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 6, ProductDetailsId = 1, DesignOptionId = 6, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                
+                // EMA-60 Design Options (8 options)
+                new ProductDesignOption { Id = 7, ProductDetailsId = 2, DesignOptionId = 7, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 8, ProductDetailsId = 2, DesignOptionId = 8, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 9, ProductDetailsId = 2, DesignOptionId = 9, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 10, ProductDetailsId = 2, DesignOptionId = 10, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 11, ProductDetailsId = 2, DesignOptionId = 11, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 12, ProductDetailsId = 2, DesignOptionId = 12, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 13, ProductDetailsId = 2, DesignOptionId = 13, DisplayOrder = 7, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 14, ProductDetailsId = 2, DesignOptionId = 14, DisplayOrder = 8, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                
+                // EMA-60S Design Options (6 options)
+                new ProductDesignOption { Id = 15, ProductDetailsId = 3, DesignOptionId = 15, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 16, ProductDetailsId = 3, DesignOptionId = 16, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 17, ProductDetailsId = 3, DesignOptionId = 17, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 18, ProductDetailsId = 3, DesignOptionId = 18, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 19, ProductDetailsId = 3, DesignOptionId = 19, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 20, ProductDetailsId = 3, DesignOptionId = 20, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                
+                // EMA-STYLE Design Options (6 options)
+                new ProductDesignOption { Id = 21, ProductDetailsId = 4, DesignOptionId = 21, DisplayOrder = 1, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 22, ProductDetailsId = 4, DesignOptionId = 22, DisplayOrder = 2, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 23, ProductDetailsId = 4, DesignOptionId = 23, DisplayOrder = 3, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 24, ProductDetailsId = 4, DesignOptionId = 24, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 25, ProductDetailsId = 4, DesignOptionId = 25, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new ProductDesignOption { Id = 26, ProductDetailsId = 4, DesignOptionId = 26, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
             );
         }
     }

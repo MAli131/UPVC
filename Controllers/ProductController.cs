@@ -17,6 +17,18 @@ namespace UPVC.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _context.Products
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.Specifications.OrderBy(s => s.DisplayOrder))
+                        .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.Colors.OrderBy(c => c.DisplayOrder))
+                        .ThenInclude(pc => pc.Color)
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.Certificates.OrderBy(c => c.DisplayOrder))
+                        .ThenInclude(pc => pc.Certificate)
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.DesignOptions.OrderBy(d => d.DisplayOrder))
+                        .ThenInclude(pdo => pdo.DesignOption)
                 .Where(p => p.IsActive && !p.IsDeleted)
                 .OrderBy(p => p.DisplayOrder)
                 .ToListAsync();
@@ -42,13 +54,28 @@ namespace UPVC.Controllers
             return View("Category", facadeProducts);
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            var product = GetProductById(id);
+            var product = await _context.Products
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.Specifications.OrderBy(s => s.DisplayOrder))
+                        .ThenInclude(ps => ps.Specification)
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.Colors.OrderBy(c => c.DisplayOrder))
+                        .ThenInclude(pc => pc.Color)
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.Certificates.OrderBy(c => c.DisplayOrder))
+                        .ThenInclude(pc => pc.Certificate)
+                .Include(p => p.ProductDetails!)
+                    .ThenInclude(pd => pd.DesignOptions.OrderBy(d => d.DisplayOrder))
+                        .ThenInclude(pdo => pdo.DesignOption)
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive && !p.IsDeleted);
+                
             if (product == null)
             {
                 return NotFound();
             }
+            
             return View(product);
         }
 

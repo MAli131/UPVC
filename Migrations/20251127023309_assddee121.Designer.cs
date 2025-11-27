@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UPVC.Data;
 
@@ -11,9 +12,11 @@ using UPVC.Data;
 namespace UPVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251127023309_assddee121")]
+    partial class assddee121
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$QBDece6cOLp1D64ffloxI.TRyyVakcO4RznhZX8AnFG3C1kDZMH0K",
+                            PasswordHash = "$2a$11$wfSY3sLdW2KaQKIxx7Ch0e.ee9sg0I2VeQw6rZmMwC1W2FfFXhH9m",
                             Username = "admin"
                         });
                 });
@@ -934,7 +937,7 @@ namespace UPVC.Migrations
                             Id = 1,
                             AltText = "Single panel design",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win1.png",
+                            ImagePath = "/images/product/ema42s-win1.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -943,7 +946,7 @@ namespace UPVC.Migrations
                             Id = 2,
                             AltText = "Two panel design",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win2.png",
+                            ImagePath = "/images/product/ema42s-win2.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -952,7 +955,7 @@ namespace UPVC.Migrations
                             Id = 3,
                             AltText = "Three panel design",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win3.png",
+                            ImagePath = "/images/product/ema42s-win3.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -961,7 +964,7 @@ namespace UPVC.Migrations
                             Id = 4,
                             AltText = "Four panel design",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win4.png",
+                            ImagePath = "/images/product/ema42s-win4.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -970,7 +973,7 @@ namespace UPVC.Migrations
                             Id = 5,
                             AltText = "Five panel design",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win5.png",
+                            ImagePath = "/images/product/ema42s-win5.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -979,7 +982,7 @@ namespace UPVC.Migrations
                             Id = 6,
                             AltText = "Six panel design",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win6.png",
+                            ImagePath = "/images/product/ema42s-win6.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -988,7 +991,7 @@ namespace UPVC.Migrations
                             Id = 7,
                             AltText = "EMA-60 design 1",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win7.png",
+                            ImagePath = "/images/product/ema60-win1.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -997,7 +1000,7 @@ namespace UPVC.Migrations
                             Id = 8,
                             AltText = "EMA-60 design 2",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win8.png",
+                            ImagePath = "/images/product/ema60-win2.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1006,7 +1009,7 @@ namespace UPVC.Migrations
                             Id = 9,
                             AltText = "EMA-60 design 3",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win9.png",
+                            ImagePath = "/images/product/ema60-win3.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1015,7 +1018,7 @@ namespace UPVC.Migrations
                             Id = 10,
                             AltText = "EMA-60 design 4",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win10.png",
+                            ImagePath = "/images/product/ema60-win4.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1024,7 +1027,7 @@ namespace UPVC.Migrations
                             Id = 11,
                             AltText = "EMA-60 design 5",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win11.png",
+                            ImagePath = "/images/product/ema60-win5.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1033,7 +1036,7 @@ namespace UPVC.Migrations
                             Id = 12,
                             AltText = "EMA-60 design 6",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win12.png",
+                            ImagePath = "/images/product/ema60-win6.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1042,7 +1045,7 @@ namespace UPVC.Migrations
                             Id = 13,
                             AltText = "EMA-60 design 7",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win13.png",
+                            ImagePath = "/images/product/ema60-win7.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1051,7 +1054,7 @@ namespace UPVC.Migrations
                             Id = 14,
                             AltText = "EMA-60 design 8",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win14.png",
+                            ImagePath = "/images/product/ema60-win8.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1060,7 +1063,7 @@ namespace UPVC.Migrations
                             Id = 15,
                             AltText = "EMA-60S design 1",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win1.png",
+                            ImagePath = "/images/product/ema60s-win1.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1069,7 +1072,7 @@ namespace UPVC.Migrations
                             Id = 16,
                             AltText = "EMA-60S design 2",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win2.png",
+                            ImagePath = "/images/product/ema60s-win2.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1078,7 +1081,7 @@ namespace UPVC.Migrations
                             Id = 17,
                             AltText = "EMA-60S design 3",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win3.png",
+                            ImagePath = "/images/product/ema60s-win3.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1087,7 +1090,7 @@ namespace UPVC.Migrations
                             Id = 18,
                             AltText = "EMA-60S design 4",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win4.png",
+                            ImagePath = "/images/product/ema60s-win4.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1096,7 +1099,7 @@ namespace UPVC.Migrations
                             Id = 19,
                             AltText = "EMA-60S design 5",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win5.png",
+                            ImagePath = "/images/product/ema60s-win5.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1105,7 +1108,7 @@ namespace UPVC.Migrations
                             Id = 20,
                             AltText = "EMA-60S design 6",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win6.png",
+                            ImagePath = "/images/product/ema60s-win6.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1114,7 +1117,7 @@ namespace UPVC.Migrations
                             Id = 21,
                             AltText = "EMA-STYLE design 1",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win1.png",
+                            ImagePath = "/images/product/emastyle-win1.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1123,7 +1126,7 @@ namespace UPVC.Migrations
                             Id = 22,
                             AltText = "EMA-STYLE design 2",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win2.png",
+                            ImagePath = "/images/product/emastyle-win2.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1132,7 +1135,7 @@ namespace UPVC.Migrations
                             Id = 23,
                             AltText = "EMA-STYLE design 3",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win3.png",
+                            ImagePath = "/images/product/emastyle-win3.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1141,7 +1144,7 @@ namespace UPVC.Migrations
                             Id = 24,
                             AltText = "EMA-STYLE design 4",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win4.png",
+                            ImagePath = "/images/product/emastyle-win4.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1150,7 +1153,7 @@ namespace UPVC.Migrations
                             Id = 25,
                             AltText = "EMA-STYLE design 5",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win5.png",
+                            ImagePath = "/images/product/emastyle-win5.png",
                             IsActive = true,
                             IsDeleted = false
                         },
@@ -1159,7 +1162,7 @@ namespace UPVC.Migrations
                             Id = 26,
                             AltText = "EMA-STYLE design 6",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            ImagePath = "/images/product/win6.png",
+                            ImagePath = "/images/product/emastyle-win6.png",
                             IsActive = true,
                             IsDeleted = false
                         });
@@ -1579,7 +1582,7 @@ namespace UPVC.Migrations
                             DescriptionAr = "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.",
                             DescriptionEn = "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.",
                             DisplayOrder = 1,
-                            ImagePath = "/images/product/EMA-42S.png",
+                            ImagePath = "/images/product/EMA-42S.jpg",
                             IsActive = true,
                             IsDeleted = false,
                             NameAr = "EMA-42S",
@@ -1595,7 +1598,7 @@ namespace UPVC.Migrations
                             DescriptionAr = "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.",
                             DescriptionEn = "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.",
                             DisplayOrder = 2,
-                            ImagePath = "/images/product/EMA-60.png",
+                            ImagePath = "/images/product/EMA-60.jpg",
                             IsActive = true,
                             IsDeleted = false,
                             NameAr = "EMA-60",
@@ -1611,7 +1614,7 @@ namespace UPVC.Migrations
                             DescriptionAr = "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة",
                             DescriptionEn = "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.",
                             DisplayOrder = 3,
-                            ImagePath = "/images/product/EMA-60s.png",
+                            ImagePath = "/images/product/EMA-60s.jpg",
                             IsActive = true,
                             IsDeleted = false,
                             NameAr = "EMA-60S",
@@ -1627,7 +1630,7 @@ namespace UPVC.Migrations
                             DescriptionAr = "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.",
                             DescriptionEn = "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.",
                             DisplayOrder = 4,
-                            ImagePath = "/images/product/EMA-STYLE.png",
+                            ImagePath = "/images/product/EMA-STYLE.jpg",
                             IsActive = true,
                             IsDeleted = false,
                             NameAr = "EMA-STYLE",
