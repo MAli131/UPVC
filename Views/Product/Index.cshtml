@@ -1,6 +1,9 @@
 @model List<UPVC.Models.Product>
 @using System.Globalization
 @{
+    Layout = null;
+}
+@{
     ViewData["Title"] = "Products - EMAPEN";
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
     var currentProduct = Model?.FirstOrDefault();

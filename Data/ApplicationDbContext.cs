@@ -583,7 +583,7 @@ namespace UPVC.Data
                 {
                     Id = 1,
                     ProductId = 1, // EMA-42S
-                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    DetailHeroImagePath = "/images/product/Ema-42s-hero.png",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -591,7 +591,7 @@ namespace UPVC.Data
                 {
                     Id = 2,
                     ProductId = 2, // EMA-60
-                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    DetailHeroImagePath = "/images/product/EMA-60-hero.png",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -599,7 +599,7 @@ namespace UPVC.Data
                 {
                     Id = 3,
                     ProductId = 3, // EMA-60S
-                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    DetailHeroImagePath = "/images/product/EMA-60S-hero.png",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -607,7 +607,7 @@ namespace UPVC.Data
                 {
                     Id = 4,
                     ProductId = 4, // EMA-STYLE
-                    DetailHeroImagePath = "/images/product/product-d-hero1.png",
+                    DetailHeroImagePath = "/images/product/EMA-STYLE-hero.png",
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
@@ -768,14 +768,16 @@ namespace UPVC.Data
                 new DesignOption { Id = 4, ImagePath = "/images/product/win4.png", AltText = "Four panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
                 new DesignOption { Id = 5, ImagePath = "/images/product/win5.png", AltText = "Five panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
                 new DesignOption { Id = 6, ImagePath = "/images/product/win6.png", AltText = "Six panel design", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 7, ImagePath = "/images/product/win7.png", AltText = "EMA-60 design 1", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 8, ImagePath = "/images/product/win8.png", AltText = "EMA-60 design 2", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 9, ImagePath = "/images/product/win9.png", AltText = "EMA-60 design 3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 10, ImagePath = "/images/product/win10.png", AltText = "EMA-60 design 4", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 11, ImagePath = "/images/product/win11.png", AltText = "EMA-60 design 5", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 12, ImagePath = "/images/product/win12.png", AltText = "EMA-60 design 6", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 13, ImagePath = "/images/product/win13.png", AltText = "EMA-60 design 7", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new DesignOption { Id = 14, ImagePath = "/images/product/win14.png", AltText = "EMA-60 design 8", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+              
+                new DesignOption { Id = 7, ImagePath = "/images/product/win8.png", AltText = "EMA-60 design 1", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 8, ImagePath = "/images/product/win9.png", AltText = "EMA-60 design 2", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 9, ImagePath = "/images/product/win10.png", AltText = "EMA-60 design 3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 10, ImagePath = "/images/product/win11.png", AltText = "EMA-60 design 4", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 11, ImagePath = "/images/product/win12.png", AltText = "EMA-60 design 5", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 12, ImagePath = "/images/product/win13.png", AltText = "EMA-60 design 6", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 13, ImagePath = "/images/product/win14.png", AltText = "EMA-60 design 7", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new DesignOption { Id = 14, ImagePath = "/images/product/win7.png", AltText = "EMA-60 design 8", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+
                 new DesignOption { Id = 15, ImagePath = "/images/product/win1.png", AltText = "EMA-60S design 1", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
                 new DesignOption { Id = 16, ImagePath = "/images/product/win2.png", AltText = "EMA-60S design 2", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
                 new DesignOption { Id = 17, ImagePath = "/images/product/win3.png", AltText = "EMA-60S design 3", IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
