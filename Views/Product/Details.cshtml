@@ -1,4 +1,10 @@
 <style>
+    #navbarNav {
+        display: none !important;
+    }
+    #logo-svg {
+        display: none !important;
+    }
     .design-options-grid {
         display: grid;
         background: transparent;
@@ -26,18 +32,14 @@
 </style>
 @model UPVC.Models.Product
 @{
-    ViewData["Title"] = ViewContext.HttpContext.Request.Cookies["Language"] == "ar" ? Model.NameAr : Model.NameEn;
+    ViewData["Title"] =Model.NameEn;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    var isArabic = ViewContext.HttpContext.Request.Cookies["Language"] == "ar";
+    var isArabic =false ;
     var productDetails = Model.ProductDetails;
 }
 
-<head>
-<link rel="stylesheet" href="~/css/css/style.css" />
-</head>
-<body class="product-details-page">
 <!-- ===== NAVBAR ===== -->
+<body class="product-details-page">
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark white-navbar">
     <div class="container">
         <span class="navbar-slogan">EMAPEN uPVC systems for doors and windows</span>
