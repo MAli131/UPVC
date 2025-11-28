@@ -1,149 +1,184 @@
 @model UPVC.Models.CompanyInfo
 
 @{
-    Layout = "~/Views/Admin/Dashboard/Index.cshtml";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "إدارة بيانات الشركة";
 }
 
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col">
-            <h2 class="mb-0">إدارة بيانات الشركة</h2>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">إدارة بيانات الشركة</h2>
+                    <p class="text-muted mb-0">تحديث وإدارة معلومات الشركة الأساسية</p>
+                </div>
+                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-right me-2"></i> رجوع للوحة التحكم
+                </a>
+            </div>
         </div>
     </div>
 
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            @TempData["SuccessMessage"]
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <strong>تم بنجاح!</strong> @TempData["SuccessMessage"]
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     }
 
-    <div class="card">
-        <div class="card-body">
-            <form asp-action="Edit" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="mb-3">البيانات الأساسية</h5>
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="row g-4">
+            <!-- البيانات الأساسية -->
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>البيانات الأساسية</h5>
+                    </div>
+                    <div class="card-body">
                         
                         <div class="mb-3">
-                            <label class="form-label">اسم الشركة (عربي)</label>
-                            <input asp-for="NameAr" class="form-control" />
+                            <label class="form-label fw-bold">اسم الشركة (عربي) <span class="text-danger">*</span></label>
+                            <input asp-for="NameAr" class="form-control" placeholder="أدخل اسم الشركة بالعربي" required />
+                            <span asp-validation-for="NameAr" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">اسم الشركة (إنجليزي)</label>
-                            <input asp-for="NameEn" class="form-control" />
+                            <label class="form-label fw-bold">اسم الشركة (إنجليزي) <span class="text-danger">*</span></label>
+                            <input asp-for="NameEn" class="form-control" placeholder="Enter company name in English" required />
+                            <span asp-validation-for="NameEn" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">الهاتف</label>
-                            <input asp-for="Phone" class="form-control" />
+                            <label class="form-label fw-bold">الهاتف <span class="text-danger">*</span></label>
+                            <input asp-for="Phone" class="form-control" placeholder="مثال: +20 123 456 7890" required />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">الجوال</label>
-                            <input asp-for="Mobile" class="form-control" />
+                            <label class="form-label fw-bold">الجوال <span class="text-danger">*</span></label>
+                            <input asp-for="Mobile" class="form-control" placeholder="مثال: +20 100 000 0000" required />
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">البريد الإلكتروني</label>
-                            <input asp-for="Email" type="email" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h5 class="mb-3">العنوان والوصف</h5>
-
-                        <div class="mb-3">
-                            <label class="form-label">العنوان (عربي)</label>
-                            <textarea asp-for="AddressAr" class="form-control" rows="2"></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">العنوان (إنجليزي)</label>
-                            <textarea asp-for="AddressEn" class="form-control" rows="2"></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">الوصف (عربي)</label>
-                            <textarea asp-for="DescriptionAr" class="form-control" rows="3"></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">الوصف (إنجليزي)</label>
-                            <textarea asp-for="DescriptionEn" class="form-control" rows="3"></textarea>
+                            <label class="form-label fw-bold">البريد الإلكتروني <span class="text-danger">*</span></label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="example@company.com" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <hr class="my-4">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="mb-3">الشعار والأيقونة</h5>
+            <!-- العنوان والوصف -->
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>العنوان والوصف</h5>
+                    </div>
+                    <div class="card-body">
 
                         <div class="mb-3">
-                            <label class="form-label">الشعار (Logo)</label>
-                            @if (!string.IsNullOrEmpty(Model?.LogoPath))
-                            {
-                                <div class="mb-2">
-                                    <img src="@Model.LogoPath" alt="Logo" style="max-height: 100px;" class="img-thumbnail">
-                                </div>
-                            }
-                            <input type="file" name="logoFile" class="form-control" accept="image/*" />
-                            <small class="text-muted">يُفضل صورة بخلفية شفافة (PNG)</small>
+                            <label class="form-label fw-bold">العنوان (عربي) <span class="text-danger">*</span></label>
+                            <textarea asp-for="AddressAr" class="form-control" rows="2" placeholder="أدخل العنوان بالعربي" required></textarea>
+                            <span asp-validation-for="AddressAr" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">الأيقونة (Favicon)</label>
-                            @if (!string.IsNullOrEmpty(Model?.FaviconPath))
-                            {
-                                <div class="mb-2">
-                                    <img src="@Model.FaviconPath" alt="Favicon" style="max-height: 50px;" class="img-thumbnail">
-                                </div>
-                            }
-                            <input type="file" name="faviconFile" class="form-control" accept="image/*" />
-                            <small class="text-muted">يُفضل صورة مربعة 32x32 أو 64x64 بكسل</small>
+                            <label class="form-label fw-bold">العنوان (إنجليزي) <span class="text-danger">*</span></label>
+                            <textarea asp-for="AddressEn" class="form-control" rows="2" placeholder="Enter address in English" required></textarea>
+                            <span asp-validation-for="AddressEn" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">الوصف (عربي) <span class="text-danger">*</span></label>
+                            <textarea asp-for="DescriptionAr" class="form-control" rows="3" placeholder="وصف مختصر عن الشركة بالعربي" required></textarea>
+                            <span asp-validation-for="DescriptionAr" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">الوصف (إنجليزي) <span class="text-danger">*</span></label>
+                            <textarea asp-for="DescriptionEn" class="form-control" rows="3" placeholder="Brief description in English" required></textarea>
+                            <span asp-validation-for="DescriptionEn" class="text-danger"></span>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-md-6">
-                        <h5 class="mb-3">ساعات العمل</h5>
+            <!-- الشعارات -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="bi bi-chat-quote me-2"></i>الشعارات</h5>
+                    </div>
+                    <div class="card-body">
 
                         <div class="mb-3">
-                            <label class="form-label">ساعات العمل (JSON)</label>
-                            <textarea asp-for="WorkingHoursJson" class="form-control" rows="8"></textarea>
+                            <label class="form-label fw-bold">الشعار (عربي) <span class="text-danger">*</span></label>
+                            <input asp-for="SloganAr" class="form-control" placeholder="مثال: أنظمة EMAPEN لـ uPVC للأبواب والنوافذ" required />
+                            <span asp-validation-for="SloganAr" class="text-danger"></span>
+                            <small class="text-muted">الشعار الذي يظهر في الموقع بالعربي</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">الشعار (إنجليزي) <span class="text-danger">*</span></label>
+                            <input asp-for="SloganEn" class="form-control" placeholder="Example: EMAPEN uPVC systems for doors and windows" required />
+                            <span asp-validation-for="SloganEn" class="text-danger"></span>
+                            <small class="text-muted">The slogan that appears on the website in English</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- حقوق النشر -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="bi bi-c-circle me-2"></i>حقوق النشر</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">نص حقوق النشر (عربي) <span class="text-danger">*</span></label>
+                            <input asp-for="CopyrightTextAr" class="form-control" placeholder="مثال: جميع الحقوق محفوظة لشركة إيمابن" required />
+                            <span asp-validation-for="CopyrightTextAr" class="text-danger"></span>
+                            <small class="text-muted">النص الذي يظهر في أسفل الموقع بالعربي</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">نص حقوق النشر (إنجليزي) <span class="text-danger">*</span></label>
+                            <input asp-for="CopyrightTextEn" class="form-control" placeholder="Example: All rights reserved for EMAPEN Company" required />
+                            <span asp-validation-for="CopyrightTextEn" class="text-danger"></span>
+                            <small class="text-muted">The text that appears at the bottom of the website in English</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- أزرار الحفظ -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="bi bi-check-circle me-2"></i> حفظ التغييرات
+                                </button>
+                                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-secondary btn-lg px-4 ms-2">
+                                    <i class="bi bi-x-circle me-2"></i> إلغاء
+                                </a>
+                            </div>
                             <small class="text-muted">
-                                مثال:<br>
-                                {<br>
-                                &nbsp;&nbsp;"ar": "السبت - الخميس: 9 صباحاً - 6 مساءً",<br>
-                                &nbsp;&nbsp;"en": "Saturday - Thursday: 9 AM - 6 PM"<br>
-                                }
+                                <i class="bi bi-info-circle me-1"></i>
+                                جميع الحقول المميزة بـ <span class="text-danger">*</span> إلزامية
                             </small>
                         </div>
-
-                        <div class="form-check mb-3">
-                            <input asp-for="IsActive" class="form-check-input" type="checkbox" />
-                            <label class="form-check-label">
-                                نشط
-                            </label>
-                        </div>
                     </div>
                 </div>
-
-                <div class="row mt-4">
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> حفظ التغييرات
-                        </button>
-                        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">
-                            <i class="bi bi-arrow-right"></i> رجوع
-                        </a>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>

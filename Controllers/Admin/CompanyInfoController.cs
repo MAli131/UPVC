@@ -58,6 +58,10 @@ namespace UPVC.Controllers.Admin
             companyInfo.AddressAr = model.AddressAr;
             companyInfo.DescriptionEn = model.DescriptionEn;
             companyInfo.DescriptionAr = model.DescriptionAr;
+            companyInfo.SloganEn = model.SloganEn;
+            companyInfo.SloganAr = model.SloganAr;
+            companyInfo.CopyrightTextEn = model.CopyrightTextEn;
+            companyInfo.CopyrightTextAr = model.CopyrightTextAr;
             companyInfo.WorkingHoursJson = model.WorkingHoursJson;
             companyInfo.IsActive = model.IsActive;
             companyInfo.UpdatedAt = DateTime.UtcNow;
