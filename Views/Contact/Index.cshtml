@@ -89,19 +89,21 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link @(currentController == "Home" ? "active" : "")" 
-                           asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
+                           asp-controller="Home" asp-action="Index">@(isArabic ? "الرئيسية" : "Home")</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(currentController == "Product" ? "active" : "")" 
-                           asp-controller="Product" asp-action="Index">@SharedLocalizer["Products"]</a>
+                           asp-controller="Product" asp-action="Index">
+                            @(isArabic ? "المنتجات" : "Products")
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(currentController == "About" ? "active" : "")" 
-                           asp-controller="About" asp-action="Index">@SharedLocalizer["About"]</a>
+                           asp-controller="About" asp-action="Index">@(isArabic ? "من نحن" : "About")</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @(currentController == "Contact" ? "active" : "")" 
-                           asp-controller="Contact" asp-action="Index">@SharedLocalizer["Contact"]</a>
+                           asp-controller="Contact" asp-action="Index">@(isArabic ? "تواصل معنا" : "Contact")</a>
                     </li>
                 </ul>
                 <div class="navbar-lang">
@@ -160,9 +162,9 @@
                 }
 
                 <div class="hero-category">
-                    <label for="category" class="form-label">@ContactLocalizer["SelectCategory"]</label>
+                    <label for="category" class="form-label">@(isArabic ? "اختر الفئة" : "Select Category")</label>
                     <select class="form-select" id="category" name="CategorySelect" required onchange="setCategoryData(this)">
-                            <option value="" disabled selected>@ContactLocalizer["Choose"]</option>
+                            <option value="" disabled selected>@(isArabic ? "اختر..." : "Choose...")</option>
                         @if (Model?.Categories != null && Model.Categories.Any())
                         {
                             foreach (var category in Model.Categories)
@@ -202,29 +204,29 @@
                     <input type="hidden" id="categoryId" name="NewMessage.CategoryId" />
                     <input type="hidden" id="categoryName" name="NewMessage.Category" />
                     <div class="col-12 col-md-5">
-                        <input type="text" class="form-control" id="name" placeholder="Name" asp-for="NewMessage.Name" required>
+                        <input type="text" class="form-control" id="name" placeholder="@(isArabic ? "الاسم" : "Name")" asp-for="NewMessage.Name" required>
                         <span asp-validation-for="NewMessage.Name" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-7">
-                        <input type="email" class="form-control" id="email" placeholder="Email" asp-for="NewMessage.Email" required>
+                        <input type="email" class="form-control" id="email" placeholder="@(isArabic ? "البريد الإلكتروني" : "Email")" asp-for="NewMessage.Email" required>
                         <span asp-validation-for="NewMessage.Email" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="text" class="form-control" id="country" placeholder="Country" asp-for="NewMessage.Country">
+                        <input type="text" class="form-control" id="country" placeholder="@(isArabic ? "الدولة" : "Country")" asp-for="NewMessage.Country">
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="text" class="form-control" id="city" placeholder="City" asp-for="NewMessage.City">
+                        <input type="text" class="form-control" id="city" placeholder="@(isArabic ? "المدينة" : "City")" asp-for="NewMessage.City">
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="tel" class="form-control" id="tel" placeholder="Telephone" asp-for="NewMessage.Telephone">
+                        <input type="tel" class="form-control" id="tel" placeholder="@(isArabic ? "الهاتف" : "Telephone")" asp-for="NewMessage.Telephone">
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" id="message" rows="5" placeholder="Content" asp-for="NewMessage.Content" required></textarea>
+                        <textarea class="form-control" id="message" rows="5" placeholder="@(isArabic ? "الرسالة" : "Message")" asp-for="NewMessage.Content" required></textarea>
                         <span asp-validation-for="NewMessage.Content" class="text-danger"></span>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">
-                                @(isArabic ? "ارسال" : "Send")
+                                @(isArabic ? "إرسال" : "Send")
                             <svg width="16" height="16" viewBox="0 0 25 19" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

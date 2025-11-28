@@ -2,10 +2,8 @@
 @using System.Globalization
 @{
     Layout = null;
-}
-@{
-    ViewData["Title"] = "Products - EMAPEN";
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+    var Title = isArabic ? "المنتجات - إيمابن" : "Products - EMAPEN";
     var currentProduct = Model?.FirstOrDefault();
 }
 <!DOCTYPE html>
@@ -18,7 +16,7 @@
     <meta name="description" content="EMAPEN" />
     <meta name="keywords" content="EMAPEN, uPVC, windows, doors" />
 
-    <title>EMAPEN</title>
+    <title>@Title</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/favicon/favicon.svg" />
@@ -85,10 +83,10 @@
             <!-- links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-controller="Product" asp-action="Index">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="About" asp-action="Index">About</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">@(isArabic ? "الرئيسية" : "Home")</a></li>
+                    <li class="nav-item"><a class="nav-link active" asp-controller="Product" asp-action="Index">@(isArabic ? "المنتجات" : "Products")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="About" asp-action="Index">@(isArabic ? "من نحن" : "About")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">@(isArabic ? "تواصل معنا" : "Contact")</a></li>
                 </ul>
                 <div class="navbar-lang">
                     <input type="radio" class="btn-check" name="lang" id="en-lang" autocomplete="off" checked>
@@ -97,7 +95,7 @@
                     <input type="radio" class="btn-check" name="lang" id="ar-lang" autocomplete="off">
                     <label class="btn" for="ar-lang">AR</label>
                 </div>
-                <span class="navbar-slogan d-none d-lg-block">EMAPEN uPVC systems for doors and windows</span>
+                <span class="navbar-slogan d-none d-lg-block">@(isArabic ? ViewBag.CompanyInfo?.SloganAr : ViewBag.CompanyInfo?.SloganEn)</span>
             </div>
         </div>
     </nav>
@@ -215,7 +213,7 @@
                     </script>
                     @if (ViewBag.CompanyInfo != null)
                     {
-                        @(ViewBag.CompanyInfo.CopyrightTextEn ?? "EMAPEN all rights reserved")
+                        @(isArabic ? ViewBag.CompanyInfo.CopyrightTextAr : ViewBag.CompanyInfo.CopyrightTextEn)
                     }
                     else
                     {

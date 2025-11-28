@@ -30,4 +30,7 @@
   <data name="Submit" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
 </root>
