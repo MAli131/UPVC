@@ -6,7 +6,6 @@ using UPVC.Models;
 
 namespace UPVC.Controllers.Admin
 {
-    [Route("Admin/[controller]")]
     [AdminAuth]
     public class HomePagesController : Controller
     {
@@ -18,6 +17,8 @@ namespace UPVC.Controllers.Admin
         }
 
         // GET: Admin/HomePages
+        [HttpGet]
+        [Route("Admin/HomePages")]
         public async Task<IActionResult> Index()
         {
             var homePages = await _context.HomePages
@@ -28,6 +29,8 @@ namespace UPVC.Controllers.Admin
         }
 
         // GET: Admin/HomePages/Edit/5
+        [HttpGet]
+        [Route("Admin/HomePages/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -46,6 +49,7 @@ namespace UPVC.Controllers.Admin
 
         // POST: Admin/HomePages/Edit/5
         [HttpPost]
+        [Route("Admin/HomePages/Edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, HomePage homePage)
         {

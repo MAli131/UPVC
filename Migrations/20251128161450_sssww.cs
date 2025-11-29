@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UPVC.Migrations
 {
     /// <inheritdoc />
-    public partial class assddee121 : Migration
+    public partial class sssww : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -565,7 +565,7 @@ namespace UPVC.Migrations
             migrationBuilder.InsertData(
                 table: "AdminUsers",
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "Email", "IsActive", "LastLoginAt", "PasswordHash", "UpdatedAt", "Username" },
-                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@emapen.com", true, null, "$2a$11$wfSY3sLdW2KaQKIxx7Ch0e.ee9sg0I2VeQw6rZmMwC1W2FfFXhH9m", null, "admin" });
+                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@emapen.com", true, null, "$2a$11$jZSi2UY5j7D1UrE69o0KvuOMfw4MOSzp6lBSDnERdarrK1VZ.bMMC", null, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -620,32 +620,32 @@ namespace UPVC.Migrations
                 columns: new[] { "Id", "AltText", "CreatedAt", "DeletedAt", "ImagePath", "IsActive", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Single panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema42s-win1.png", true, null },
-                    { 2, "Two panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema42s-win2.png", true, null },
-                    { 3, "Three panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema42s-win3.png", true, null },
-                    { 4, "Four panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema42s-win4.png", true, null },
-                    { 5, "Five panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema42s-win5.png", true, null },
-                    { 6, "Six panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema42s-win6.png", true, null },
-                    { 7, "EMA-60 design 1", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win1.png", true, null },
-                    { 8, "EMA-60 design 2", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win2.png", true, null },
-                    { 9, "EMA-60 design 3", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win3.png", true, null },
-                    { 10, "EMA-60 design 4", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win4.png", true, null },
-                    { 11, "EMA-60 design 5", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win5.png", true, null },
-                    { 12, "EMA-60 design 6", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win6.png", true, null },
-                    { 13, "EMA-60 design 7", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win7.png", true, null },
-                    { 14, "EMA-60 design 8", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60-win8.png", true, null },
-                    { 15, "EMA-60S design 1", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60s-win1.png", true, null },
-                    { 16, "EMA-60S design 2", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60s-win2.png", true, null },
-                    { 17, "EMA-60S design 3", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60s-win3.png", true, null },
-                    { 18, "EMA-60S design 4", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60s-win4.png", true, null },
-                    { 19, "EMA-60S design 5", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60s-win5.png", true, null },
-                    { 20, "EMA-60S design 6", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/ema60s-win6.png", true, null },
-                    { 21, "EMA-STYLE design 1", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/emastyle-win1.png", true, null },
-                    { 22, "EMA-STYLE design 2", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/emastyle-win2.png", true, null },
-                    { 23, "EMA-STYLE design 3", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/emastyle-win3.png", true, null },
-                    { 24, "EMA-STYLE design 4", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/emastyle-win4.png", true, null },
-                    { 25, "EMA-STYLE design 5", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/emastyle-win5.png", true, null },
-                    { 26, "EMA-STYLE design 6", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/emastyle-win6.png", true, null }
+                    { 1, "Single panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win1.png", true, null },
+                    { 2, "Two panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win2.png", true, null },
+                    { 3, "Three panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win3.png", true, null },
+                    { 4, "Four panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win4.png", true, null },
+                    { 5, "Five panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win5.png", true, null },
+                    { 6, "Six panel design", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win6.png", true, null },
+                    { 7, "EMA-60 design 1", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win8.png", true, null },
+                    { 8, "EMA-60 design 2", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win9.png", true, null },
+                    { 9, "EMA-60 design 3", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win10.png", true, null },
+                    { 10, "EMA-60 design 4", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win11.png", true, null },
+                    { 11, "EMA-60 design 5", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win12.png", true, null },
+                    { 12, "EMA-60 design 6", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win13.png", true, null },
+                    { 13, "EMA-60 design 7", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win14.png", true, null },
+                    { 14, "EMA-60 design 8", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win7.png", true, null },
+                    { 15, "EMA-60S design 1", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win1.png", true, null },
+                    { 16, "EMA-60S design 2", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win2.png", true, null },
+                    { 17, "EMA-60S design 3", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win3.png", true, null },
+                    { 18, "EMA-60S design 4", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win4.png", true, null },
+                    { 19, "EMA-60S design 5", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win5.png", true, null },
+                    { 20, "EMA-60S design 6", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win6.png", true, null },
+                    { 21, "EMA-STYLE design 1", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win1.png", true, null },
+                    { 22, "EMA-STYLE design 2", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win2.png", true, null },
+                    { 23, "EMA-STYLE design 3", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win3.png", true, null },
+                    { 24, "EMA-STYLE design 4", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win4.png", true, null },
+                    { 25, "EMA-STYLE design 5", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win5.png", true, null },
+                    { 26, "EMA-STYLE design 6", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/win6.png", true, null }
                 });
 
             migrationBuilder.InsertData(
@@ -664,10 +664,10 @@ namespace UPVC.Migrations
                 columns: new[] { "Id", "BrochurePath", "CategoryAr", "CategoryEn", "CreatedAt", "DeletedAt", "DescriptionAr", "DescriptionEn", "DetailsAr", "DetailsEn", "DisplayOrder", "GalleryImagesJson", "ImagePath", "IsActive", "NameAr", "NameEn", "SubtitleAr", "SubtitleEn", "ThumbnailPath", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "/files/42s-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.", "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.", null, null, 1, null, "/images/product/EMA-42S.jpg", true, "EMA-42S", "Ema-42s", "نظام الجرار الإقتصادي", "ECONOMIC SLIDING WINDOW SYSTEM", null, null },
-                    { 2, "/files/60-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.", "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.", null, null, 2, null, "/images/product/EMA-60.jpg", true, "EMA-60", "EMA-60", "نظام المفصلي", "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM", null, null },
-                    { 3, "/files/60s-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة", "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.", null, null, 3, null, "/images/product/EMA-60s.jpg", true, "EMA-60S", "EMA-60S", "نظام الجرار", "STANDARD SLIDING WINDOW SYSTEM", null, null },
-                    { 4, "/files/Style-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.", "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.", null, null, 4, null, "/images/product/EMA-STYLE.jpg", true, "EMA-STYLE", "EMA-STYLE", "نظام الجرار المميز", "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM", null, null }
+                    { 1, "/files/42s-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.", "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.", null, null, 1, null, "/images/product/EMA-42S.png", true, "EMA-42S", "Ema-42s", "نظام الجرار الإقتصادي", "ECONOMIC SLIDING WINDOW SYSTEM", null, null },
+                    { 2, "/files/60-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.", "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.", null, null, 2, null, "/images/product/EMA-60.png", true, "EMA-60", "EMA-60", "نظام المفصلي", "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM", null, null },
+                    { 3, "/files/60s-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة", "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.", null, null, 3, null, "/images/product/EMA-60s.png", true, "EMA-60S", "EMA-60S", "نظام الجرار", "STANDARD SLIDING WINDOW SYSTEM", null, null },
+                    { 4, "/files/Style-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.", "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.", null, null, 4, null, "/images/product/EMA-STYLE.png", true, "EMA-STYLE", "EMA-STYLE", "نظام الجرار المميز", "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -736,10 +736,10 @@ namespace UPVC.Migrations
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "DetailHeroImagePath", "IsActive", "ProductId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/product-d-hero1.png", true, 1, null },
-                    { 2, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/product-d-hero1.png", true, 2, null },
-                    { 3, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/product-d-hero1.png", true, 3, null },
-                    { 4, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/product-d-hero1.png", true, 4, null }
+                    { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/Ema-42s-hero.png", true, 1, null },
+                    { 2, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/EMA-60-hero.png", true, 2, null },
+                    { 3, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/EMA-60S-hero.png", true, 3, null },
+                    { 4, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/EMA-STYLE-hero.png", true, 4, null }
                 });
 
             migrationBuilder.InsertData(

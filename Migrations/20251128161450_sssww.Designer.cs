@@ -12,8 +12,8 @@ using UPVC.Data;
 namespace UPVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251127233656_aawhwhw11")]
-    partial class aawhwhw11
+    [Migration("20251128161450_sssww")]
+    partial class sssww
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -256,7 +256,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$2CcCMd5Cvk8yzXU14GVuXuyEVA/KQsJD.85fAaHkSgwyAz5PC5WzK",
+                            PasswordHash = "$2a$11$jZSi2UY5j7D1UrE69o0KvuOMfw4MOSzp6lBSDnERdarrK1VZ.bMMC",
                             Username = "admin"
                         });
                 });

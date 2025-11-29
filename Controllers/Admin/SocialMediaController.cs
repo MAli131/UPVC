@@ -6,7 +6,6 @@ using UPVC.Models;
 
 namespace UPVC.Controllers.Admin
 {
-    [Route("Admin/[controller]")]
     [AdminAuth]
     public class SocialMediaController : Controller
     {
@@ -17,6 +16,8 @@ namespace UPVC.Controllers.Admin
             _context = context;
         }
 
+        [HttpGet]
+        [Route("Admin/SocialMedia")]
         public async Task<IActionResult> Index()
         {
             var socialMedia = await _context.SocialMedias
@@ -27,12 +28,15 @@ namespace UPVC.Controllers.Admin
             return View("~/Views/Admin/SocialMedia/Index.cshtml", socialMedia);
         }
 
+        [HttpGet]
+        [Route("Admin/SocialMedia/Create")]
         public IActionResult Create()
         {
             return View("~/Views/Admin/SocialMedia/Create.cshtml");
         }
 
         [HttpPost]
+        [Route("Admin/SocialMedia/Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SocialMedia model)
         {
@@ -55,6 +59,8 @@ namespace UPVC.Controllers.Admin
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        [Route("Admin/SocialMedia/Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
             var socialMedia = await _context.SocialMedias
@@ -70,6 +76,7 @@ namespace UPVC.Controllers.Admin
         }
 
         [HttpPost]
+        [Route("Admin/SocialMedia/Edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SocialMedia model)
         {
@@ -82,18 +89,8 @@ namespace UPVC.Controllers.Admin
                 return NotFound();
             }
 
-            // Check if platform already exists (excluding current record)
-            var exists = await _context.SocialMedias
-                .Where(s => !s.IsDeleted && s.Platform == model.Platform && s.Id != id)
-                .AnyAsync();
-
-            if (exists)
-            {
-                ModelState.AddModelError("Platform", "هذه المنصة موجودة بالفعل");
-                return View("~/Views/Admin/SocialMedia/Edit.cshtml", model);
-            }
-
-            socialMedia.Platform = model.Platform;
+            // Don't allow changing Platform - keep the original
+            // Only update URL and other fields
             socialMedia.Url = model.Url;
             socialMedia.IconClass = model.IconClass;
             socialMedia.DisplayOrder = model.DisplayOrder;
@@ -107,6 +104,7 @@ namespace UPVC.Controllers.Admin
         }
 
         [HttpPost]
+        [Route("Admin/SocialMedia/Delete/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {

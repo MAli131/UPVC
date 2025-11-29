@@ -253,7 +253,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$2CcCMd5Cvk8yzXU14GVuXuyEVA/KQsJD.85fAaHkSgwyAz5PC5WzK",
+                            PasswordHash = "$2a$11$jZSi2UY5j7D1UrE69o0KvuOMfw4MOSzp6lBSDnERdarrK1VZ.bMMC",
                             Username = "admin"
                         });
                 });

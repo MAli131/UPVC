@@ -1,122 +1,118 @@
 @model UPVC.Models.SocialMedia
 
 @{
-    Layout = "~/Views/Admin/Dashboard/Index.cshtml";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "تعديل حساب التواصل الاجتماعي";
 }
 
-<div class="container-fluid">
-    <div class="row mb-4">
-        <div class="col">
-            <h2 class="mb-0">تعديل حساب التواصل الاجتماعي</h2>
-        </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2><i class="bi bi-pencil-square me-2"></i>تعديل حساب التواصل الاجتماعي</h2>
+        <p class="text-muted">تحديث رابط ومعلومات حساب @Model.Platform</p>
     </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-right me-2"></i>رجوع للقائمة
+    </a>
+</div>
 
-    <div class="card">
-        <div class="card-body">
-            <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label">المنصة</label>
-                            <input asp-for="Platform" class="form-control" placeholder="مثال: Facebook, Twitter, Instagram" />
-                            <span asp-validation-for="Platform" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">الرابط</label>
-                            <input asp-for="Url" type="url" class="form-control" placeholder="https://..." />
-                            <span asp-validation-for="Url" class="text-danger"></span>
-                        </div>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            
+            <!-- Hidden field to preserve Platform value -->
+            <input type="hidden" asp-for="Platform" />
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-app me-2"></i>المنصة
+                        </label>
+                        <input type="text" class="form-control" value="@Model.Platform" disabled readonly />
+                        <small class="text-muted">لا يمكن تعديل نوع المنصة</small>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label">فئة الأيقونة (Bootstrap Icons)</label>
-                            <select asp-for="IconClass" class="form-select" id="iconSelect">
-                                <option value="">-- اختر أيقونة --</option>
-                                <option value="bi bi-facebook">Facebook</option>
-                                <option value="bi bi-twitter">Twitter / X</option>
-                                <option value="bi bi-instagram">Instagram</option>
-                                <option value="bi bi-linkedin">LinkedIn</option>
-                                <option value="bi bi-whatsapp">WhatsApp</option>
-                                <option value="bi bi-youtube">YouTube</option>
-                                <option value="bi bi-tiktok">TikTok</option>
-                                <option value="bi bi-telegram">Telegram</option>
-                                <option value="bi bi-snapchat">Snapchat</option>
-                                <option value="bi bi-pinterest">Pinterest</option>
-                                <option value="bi bi-reddit">Reddit</option>
-                                <option value="bi bi-discord">Discord</option>
-                                <option value="bi bi-twitch">Twitch</option>
-                                <option value="bi bi-github">GitHub</option>
-                            </select>
-                            <span asp-validation-for="IconClass" class="text-danger"></span>
-                            <div class="mt-2">
-                                <small class="text-muted">معاينة الأيقونة: </small>
-                                <i id="iconPreview" class="@Model.IconClass fs-3 me-2"></i>
-                                <span id="iconText">@Model.IconClass</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">الترتيب</label>
-                            <input asp-for="DisplayOrder" type="number" class="form-control" />
-                            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-link-45deg me-2"></i>الرابط <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Url" type="url" class="form-control" placeholder="https://..." required />
+                        <span asp-validation-for="Url" class="text-danger"></span>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-check mb-3">
-                    <input asp-for="IsActive" class="form-check-input" type="checkbox" />
-                    <label class="form-check-label">
-                        نشط
-                    </label>
-                </div>
+            <!-- Hidden fields to preserve values -->
+            <input type="hidden" asp-for="IconClass" />
+            <input type="hidden" asp-for="DisplayOrder" />
+            <input type="hidden" asp-for="IsActive" />
 
-                <div class="row mt-4">
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> حفظ التغييرات
-                        </button>
-                        <a asp-action="Index" class="btn btn-secondary">
-                            <i class="bi bi-arrow-right"></i> رجوع
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-save me-2"></i>حفظ التغييرات
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-x-circle me-2"></i>إلغاء
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 
-<div class="card mt-4">
-    <div class="card-header">
-        <h5 class="mb-0">أمثلة على الأيقونات</h5>
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-light">
+        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>أمثلة على الأيقونات المتاحة </h5>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-facebook fs-3 me-2"></i> <code>bi bi-facebook</code>
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-facebook fs-2 text-primary"></i>
+                    <div><small><code>bi bi-facebook</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-twitter fs-3 me-2"></i> <code>bi bi-twitter</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-twitter-x fs-2"></i>
+                    <div><small><code>bi bi-twitter-x</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-instagram fs-3 me-2"></i> <code>bi bi-instagram</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-instagram fs-2 text-danger"></i>
+                    <div><small><code>bi bi-instagram</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-linkedin fs-3 me-2"></i> <code>bi bi-linkedin</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-linkedin fs-2 text-primary"></i>
+                    <div><small><code>bi bi-linkedin</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-whatsapp fs-3 me-2"></i> <code>bi bi-whatsapp</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-whatsapp fs-2 text-success"></i>
+                    <div><small><code>bi bi-whatsapp</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-youtube fs-3 me-2"></i> <code>bi bi-youtube</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-youtube fs-2 text-danger"></i>
+                    <div><small><code>bi bi-youtube</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-tiktok fs-3 me-2"></i> <code>bi bi-tiktok</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-tiktok fs-2"></i>
+                    <div><small><code>bi bi-tiktok</code></small></div>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <i class="bi bi-telegram fs-3 me-2"></i> <code>bi bi-telegram</code>
+            <div class="col-md-3">
+                <div class="p-2 border rounded text-center">
+                    <i class="bi bi-telegram fs-2 text-info"></i>
+                    <div><small><code>bi bi-telegram</code></small></div>
+                </div>
             </div>
         </div>
     </div>
@@ -124,15 +120,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        // Icon preview functionality
-        document.getElementById('iconSelect').addEventListener('change', function() {
-            const iconClass = this.value;
-            const iconPreview = document.getElementById('iconPreview');
-            const iconText = document.getElementById('iconText');
-            
-            iconPreview.className = iconClass + ' fs-3 me-2';
-            iconText.textContent = iconClass ? iconClass : '';
-        });
-    </script>
 }
