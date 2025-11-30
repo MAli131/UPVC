@@ -1,0 +1,316 @@
+@model IEnumerable<UPVC.Models.ContactMessage>
+@{
+    ViewData["Title"] = "رسائل العملاء";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    var unreadCount = ViewBag.UnreadCount ?? 0;
+    var currentPage = ViewBag.CurrentPage ?? 1;
+    var totalPages = ViewBag.TotalPages ?? 1;
+}
+
+<!-- Success/Error Alerts -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-info" style="min-height: 80px;">
+            <span class="info-box-icon" style="width: 80px; height: 80px; line-height: 80px;">
+                <i class="fas fa-envelope" style="font-size: 2rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 1rem;">رسائل العملاء</span>
+                <span class="info-box-number" style="font-size: 1.5rem;">
+                    @Model.Count() رسالة | 
+                    <span class="badge badge-warning" style="font-size: 0.9rem;">@unreadCount غير مقروء</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Actions Bar -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="padding: 0.75rem;">
+                <form asp-action="MarkAllAsRead" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-success btn-sm" @(unreadCount == 0 ? "disabled" : "")>
+                        <i class="fas fa-check-double"></i> وضع علامة مقروء على الكل
+                    </button>
+                </form>
+
+                <button type="button" class="btn btn-danger btn-sm" onclick="deleteSelected()" id="deleteSelectedBtn" disabled>
+                    <i class="fas fa-trash"></i> حذف المحدد
+                </button>
+
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteAll()">
+                    <i class="fas fa-trash-alt"></i> حذف الكل
+                </button>
+
+                <div class="float-left">
+                    <span class="badge badge-info">الصفحة @currentPage من @totalPages</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Messages Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="padding: 0;">
+                @if (Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm mb-0">
+                            <thead style="background-color: #f8f9fa;">
+                                <tr>
+                                    <th style="width: 40px; padding: 0.5rem;">
+                                        <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+                                    </th>
+                                    <th style="padding: 0.5rem;">الاسم</th>
+                                    <th style="padding: 0.5rem;">البريد الإلكتروني</th>
+                                    <th style="padding: 0.5rem;">الدولة</th>
+                                    <th style="padding: 0.5rem;">المدينة</th>
+                                    <th style="padding: 0.5rem;">الفئة</th>
+                                    <th style="padding: 0.5rem;">الموضوع</th>
+                                    <th style="padding: 0.5rem;">التاريخ</th>
+                                    <th style="padding: 0.5rem; width: 150px;">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var message in Model)
+                                {
+                                    <tr style="@(message.IsRead ? "" : "background-color: #fff3cd;")" class="message-row">
+                                        <td style="padding: 0.5rem;">
+                                            <input type="checkbox" class="message-checkbox" value="@message.Id" onchange="updateDeleteButton()">
+                                        </td>
+                                        <td style="padding: 0.5rem;">
+                                            @if (!message.IsRead)
+                                            {
+                                                <i class="fas fa-circle text-warning" style="font-size: 0.5rem;"></i>
+                                            }
+                                            <strong>@message.Name</strong>
+                                        </td>
+                                        <td style="padding: 0.5rem; font-size: 0.85rem;">@message.Email</td>
+                                        <td style="padding: 0.5rem; font-size: 0.85rem;">
+                                            @(message.Country ?? "-")
+                                        </td>
+                                        <td style="padding: 0.5rem; font-size: 0.85rem;">
+                                            @(message.City ?? "-")
+                                        </td>
+                                        <td style="padding: 0.5rem; font-size: 0.85rem;">
+                                            @if (!string.IsNullOrEmpty(message.Category))
+                                            {
+                                                <span class="badge badge-info">@message.Category</span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                        </td>
+                                        <td style="padding: 0.5rem; font-size: 0.85rem;">
+                                            @(message.Content?.Length > 40 ? message.Content.Substring(0, 40) + "..." : message.Content)
+                                        </td>
+                                        <td style="padding: 0.5rem; font-size: 0.8rem; color: #666;">
+                                            @message.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                                        </td>
+                                        <td style="padding: 0.5rem;">
+                                            <a asp-action="Details" asp-route-id="@message.Id" class="btn btn-info btn-xs" title="عرض">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            @if (!message.IsRead)
+                                            {
+                                                <button type="button" class="btn btn-success btn-xs" onclick="markAsRead(@message.Id)" title="وضع علامة كمقروء">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            }
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="deleteMessage(@message.Id)" title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-4 text-center">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="mt-2" style="color: #999;">لا توجد رسائل</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination -->
+@if (totalPages > 1)
+{
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav>
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                        <a class="page-link" href="?page=@(currentPage - 1)">السابق</a>
+                    </li>
+
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="page-item @(i == currentPage ? "active" : "")">
+                            <a class="page-link" href="?page=@i">@i</a>
+                        </li>
+                    }
+
+                    <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                        <a class="page-link" href="?page=@(currentPage + 1)">التالي</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+}
+
+<!-- Delete All Modal -->
+<div class="modal fade" id="deleteAllModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تأكيد الحذف</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>تحذير:</strong> هل أنت متأكد من حذف جميع الرسائل؟</p>
+                <p class="text-danger">لا يمكن التراجع عن هذا الإجراء!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                <form asp-action="DeleteAll" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="confirmDelete" value="true" />
+                    <button type="submit" class="btn btn-danger">نعم، احذف الكل</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+<script>
+function toggleSelectAll(checkbox) {
+    const checkboxes = document.querySelectorAll('.message-checkbox');
+    checkboxes.forEach(cb => cb.checked = checkbox.checked);
+    updateDeleteButton();
+}
+
+function updateDeleteButton() {
+    const checkedBoxes = document.querySelectorAll('.message-checkbox:checked');
+    const deleteBtn = document.getElementById('deleteSelectedBtn');
+    deleteBtn.disabled = checkedBoxes.length === 0;
+}
+
+function markAsRead(id) {
+    if (!confirm('وضع علامة كمقروء على هذه الرسالة؟')) return;
+    
+    fetch('/Admin/ContactMessages/MarkAsRead/' + id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert('حدث خطأ');
+        console.error('Error:', error);
+    });
+}
+
+function deleteMessage(id) {
+    if (!confirm('هل أنت متأكد من حذف هذه الرسالة؟')) return;
+    
+    fetch('/Admin/ContactMessages/Delete/' + id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert('حدث خطأ');
+        console.error('Error:', error);
+    });
+}
+
+function deleteSelected() {
+    const checkedBoxes = document.querySelectorAll('.message-checkbox:checked');
+    if (checkedBoxes.length === 0) return;
+    
+    if (!confirm(`هل أنت متأكد من حذف ${checkedBoxes.length} رسالة؟`)) return;
+    
+    const selectedIds = Array.from(checkedBoxes).map(cb => cb.value);
+    
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/Admin/ContactMessages/DeleteSelected';
+    
+    const token = document.querySelector('input[name="__RequestVerificationToken"]');
+    form.appendChild(token.cloneNode());
+    
+    selectedIds.forEach(id => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'selectedIds';
+        input.value = id;
+        form.appendChild(input);
+    });
+    
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function confirmDeleteAll() {
+    $('#deleteAllModal').modal('show');
+}
+</script>

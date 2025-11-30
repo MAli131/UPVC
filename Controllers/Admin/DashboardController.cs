@@ -24,6 +24,8 @@ namespace UPVC.Controllers.Admin
             ViewBag.TotalProducts = await _context.Products.CountAsync(p => !p.IsDeleted);
             ViewBag.ActiveProducts = await _context.Products.CountAsync(p => p.IsActive && !p.IsDeleted);
             ViewBag.TotalHomePages = await _context.HomePages.CountAsync(h => !h.IsDeleted);
+            ViewBag.TotalMessages = await _context.ContactMessages.CountAsync();
+            ViewBag.UnreadMessages = await _context.ContactMessages.CountAsync(m => !m.IsRead);
             
             return View("~/Views/Admin/Dashboard/Index.cshtml");
         }

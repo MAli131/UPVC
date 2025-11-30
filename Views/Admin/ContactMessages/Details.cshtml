@@ -1,0 +1,266 @@
+@model UPVC.Models.ContactMessage
+@{
+    ViewData["Title"] = "تفاصيل الرسالة";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Back Button -->
+<div class="row mb-2">
+    <div class="col-12">
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-right"></i> العودة للقائمة
+        </a>
+    </div>
+</div>
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box @(Model.IsRead ? "bg-gradient-success" : "bg-gradient-warning")" style="min-height: 80px;">
+            <span class="info-box-icon" style="width: 80px; height: 80px; line-height: 80px;">
+                <i class="fas fa-envelope-open" style="font-size: 2rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 1rem;">رسالة من @Model.Name</span>
+                <span class="info-box-number" style="font-size: 1.2rem;">
+                    @if (Model.IsRead)
+                    {
+                        <span class="badge badge-success">مقروء</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">غير مقروء</span>
+                    }
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Information -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-user"></i> معلومات المرسل
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.75rem;">
+                <div class="row">
+                    <!-- الاسم -->
+                    <div class="col-md-3 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-user"></i> الاسم
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @Model.Name
+                        </p>
+                    </div>
+
+                    <!-- البريد الإلكتروني -->
+                    <div class="col-md-3 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-envelope"></i> البريد الإلكتروني
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            <a href="mailto:@Model.Email">@Model.Email</a>
+                        </p>
+                    </div>
+
+                    <!-- الهاتف -->
+                    <div class="col-md-2 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-phone"></i> الهاتف
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @if (!string.IsNullOrEmpty(Model.Telephone))
+                            {
+                                <a href="tel:@Model.Telephone">@Model.Telephone</a>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </p>
+                    </div>
+
+                    <!-- الدولة -->
+                    <div class="col-md-2 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-globe"></i> الدولة
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @(Model.Country ?? "-")
+                        </p>
+                    </div>
+
+                    <!-- المدينة -->
+                    <div class="col-md-2 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-map-marker-alt"></i> المدينة
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @(Model.City ?? "-")
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- الفئة -->
+                    <div class="col-md-3 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-tag"></i> الفئة
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #e3f2fd; border-radius: 4px;">
+                            @if (!string.IsNullOrEmpty(Model.Category))
+                            {
+                                <span class="badge badge-info" style="font-size: 0.9rem;">@Model.Category</span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </p>
+                    </div>
+
+                    <!-- تاريخ الإرسال -->
+                    <div class="col-md-3 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-calendar"></i> تاريخ الإرسال
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @Model.SubmittedAt.ToString("dd/MM/yyyy HH:mm")
+                        </p>
+                    </div>
+
+                    <!-- تم الحفظ في -->
+                    <div class="col-md-3 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-database"></i> تم الحفظ في
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                        </p>
+                    </div>
+
+                    <!-- حالة القراءة -->
+                    <div class="col-md-3 mb-2">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.25rem;">
+                            <i class="fas fa-eye"></i> الحالة
+                        </label>
+                        <p style="font-size: 0.9rem; margin: 0; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">
+                            @if (Model.IsRead)
+                            {
+                                <span class="badge badge-success">مقروء</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-warning">غير مقروء</span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Actions and Message Content -->
+<div class="row">
+    <!-- Actions Card -->
+    <div class="col-md-2">
+        <div class="card card-danger card-outline">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-cog"></i> الإجراءات
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.75rem;">
+                @if (!Model.IsRead)
+                {
+                    <button type="button" class="btn btn-success btn-sm btn-block" onclick="markAsRead()">
+                        <i class="fas fa-check"></i> وضع علامة كمقروء
+                    </button>
+                }
+                
+                <button type="button" class="btn btn-danger btn-sm btn-block" onclick="deleteMessage()">
+                    <i class="fas fa-trash"></i> حذف الرسالة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Content -->
+    <div class="col-md-10">
+        <div class="card card-info card-outline">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-comment"></i> محتوى الرسالة
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 1rem;">
+                <div>
+                    <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 0.5rem; color: #666;">
+                        محتوى الرسالة
+                    </label>
+                    <div style="padding: 1rem; background-color: #f8f9fa; border-radius: 4px; border: 1px solid #dee2e6; min-height: 200px; line-height: 1.8; font-size: 0.95rem;">
+                        @Html.Raw(Model.Content.Replace("\n", "<br>"))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+<script>
+function markAsRead() {
+    if (!confirm('وضع علامة كمقروء على هذه الرسالة؟')) return;
+    
+    fetch('/Admin/ContactMessages/MarkAsRead/@Model.Id', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert('حدث خطأ');
+        console.error('Error:', error);
+    });
+}
+
+function deleteMessage() {
+    if (!confirm('هل أنت متأكد من حذف هذه الرسالة؟\nلا يمكن التراجع عن هذا الإجراء!')) return;
+    
+    fetch('/Admin/ContactMessages/Delete/@Model.Id', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = '/Admin/ContactMessages';
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert('حدث خطأ');
+        console.error('Error:', error);
+    });
+}
+</script>
