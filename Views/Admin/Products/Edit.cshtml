@@ -40,14 +40,14 @@
 </div>
 
 <!-- Main Form -->
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="ImagePath" />
     <input type="hidden" asp-for="ThumbnailPath" />
-    <input type="hidden" asp-for="BrochurePath" />
     <input type="hidden" asp-for="GalleryImagesJson" />
     <input type="hidden" asp-for="DisplayOrder" />
+    <input type="hidden" asp-for="BrochurePath" id="currentBrochurePath" />
     <input type="hidden" asp-for="CreatedAt" />
 
     <div class="row">
@@ -120,6 +120,44 @@
                             Category in English
                         </label>
                         <input asp-for="CategoryEn" class="form-control form-control-sm" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brochure File -->
+            <div class="card card-purple card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-file-pdf"></i> ملف البروشور (PDF)
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    @if (!string.IsNullOrEmpty(Model.BrochurePath))
+                    {
+                        <div class="mb-2">
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">
+                                <strong>الملف الحالي:</strong>
+                                <a href="@Model.BrochurePath" target="_blank" class="text-primary">
+                                    <i class="fas fa-file-pdf"></i> عرض الملف
+                                </a>
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info" style="padding: 0.5rem; margin-bottom: 0.75rem; font-size: 0.8rem;">
+                            <i class="fas fa-info-circle"></i> لا يوجد ملف بروشور حالياً
+                        </div>
+                    }
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">رفع ملف جديد (اختياري)</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="brochureFile" name="BrochureFile" accept=".pdf" onchange="updateFileName(this)">
+                            <label class="custom-file-label" for="brochureFile" style="font-size: 0.85rem;">اختر ملف PDF...</label>
+                        </div>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">
+                            <i class="fas fa-info-circle"></i> يُقبل فقط ملفات PDF. ترك الحقل فارغاً يُبقي الملف الحالي
+                        </small>
                     </div>
                 </div>
             </div>
@@ -211,7 +249,7 @@
             <p style="margin: 0; font-size: 0.85rem;">
                 <i class="fas fa-info-circle"></i>
                 <strong>ملاحظة:</strong> 
-                الصور والأيقونات والملفات (Gallery, Thumbnail, Brochure) محفوظة ولن يتم تعديلها من هنا.
+                الصور (Gallery, Thumbnail, ImagePath) محفوظة ولن يتم تعديلها من هنا.
                 لتعديل المواصفات والألوان والتصاميم، استخدم الأزرار في صفحة القائمة.
             </p>
         </div>
@@ -220,4 +258,11 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function updateFileName(input) {
+            var fileName = input.files[0]?.name || 'اختر ملف PDF...';
+            var label = input.nextElementSibling;
+            label.textContent = fileName;
+        }
+    </script>
 }

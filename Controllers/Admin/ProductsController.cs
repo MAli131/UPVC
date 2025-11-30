@@ -57,7 +57,7 @@ namespace UPVC.Controllers.Admin
         [HttpPost]
         [Route("Edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product)
+        public async Task<IActionResult> Edit(int id, Product product, IFormFile? BrochureFile)
         {
             if (id != product.Id)
                 return NotFound();
@@ -76,10 +76,67 @@ namespace UPVC.Controllers.Admin
             if (existingProduct == null)
                 return NotFound();
 
+            // Handle Brochure file upload
+            if (BrochureFile != null && BrochureFile.Length > 0)
+            {
+                // Validate file type
+                var allowedExtensions = new[] { ".pdf" };
+                var extension = Path.GetExtension(BrochureFile.FileName).ToLowerInvariant();
+                
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ModelState.AddModelError("BrochureFile", "يُسمح فقط بملفات PDF");
+                    return View("~/Views/Admin/Products/Edit.cshtml", product);
+                }
+
+                // Must have existing brochure path from seeding data
+                if (string.IsNullOrEmpty(existingProduct.BrochurePath))
+                {
+                    TempData["Error"] = "لا يوجد مسار للبروشور في قاعدة البيانات";
+                    return RedirectToAction(nameof(Edit), new { id = id });
+                }
+
+                // Get the full file path
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingProduct.BrochurePath.TrimStart('/'));
+                var directory = Path.GetDirectoryName(filePath);
+                
+                // Create directory if it doesn't exist
+                if (!string.IsNullOrEmpty(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                // Delete old file if exists
+                if (System.IO.File.Exists(filePath))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    catch
+                    {
+                        // Ignore errors when deleting old file
+                    }
+                }
+
+                // Save new file with the same name
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await BrochureFile.CopyToAsync(fileStream);
+                }
+
+                // Keep the same brochure path
+                product.BrochurePath = existingProduct.BrochurePath;
+            }
+            else
+            {
+                // Keep existing brochure path if no new file uploaded
+                product.BrochurePath = existingProduct.BrochurePath;
+            }
+
             // Preserve fields that shouldn't be modified
             product.ImagePath = existingProduct.ImagePath;
             product.ThumbnailPath = existingProduct.ThumbnailPath;
-            product.BrochurePath = existingProduct.BrochurePath;
             product.GalleryImagesJson = existingProduct.GalleryImagesJson;
             product.CreatedAt = existingProduct.CreatedAt;
             product.IsDeleted = existingProduct.IsDeleted;
