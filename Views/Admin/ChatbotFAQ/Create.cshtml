@@ -1,0 +1,94 @@
+@model UPVC.Models.ChatbotFAQ
+
+@{
+    ViewData["Title"] = "إضافة سؤال جديد";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">بيانات السؤال</h3>
+            </div>
+            <form asp-action="Create" method="post">
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="QuestionAr" class="control-label">السؤال (عربي)</label>
+                                <input asp-for="QuestionAr" class="form-control" />
+                                <span asp-validation-for="QuestionAr" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="QuestionEn" class="control-label">السؤال (English)</label>
+                                <input asp-for="QuestionEn" class="form-control" />
+                                <span asp-validation-for="QuestionEn" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="AnswerAr" class="control-label">الإجابة (عربي)</label>
+                                <textarea asp-for="AnswerAr" class="form-control" rows="5"></textarea>
+                                <span asp-validation-for="AnswerAr" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="AnswerEn" class="control-label">الإجابة (English)</label>
+                                <textarea asp-for="AnswerEn" class="form-control" rows="5"></textarea>
+                                <span asp-validation-for="AnswerEn" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="DisplayOrder" class="control-label">الترتيب</label>
+                                <input asp-for="DisplayOrder" type="number" class="form-control" />
+                                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Category" class="control-label">التصنيف (اختياري)</label>
+                                <input asp-for="Category" class="form-control" />
+                                <span asp-validation-for="Category" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">الحالة</label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" asp-for="IsActive" class="custom-control-input" id="isActive">
+                                    <label class="custom-control-label" for="isActive">نشط</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> حفظ
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> رجوع
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

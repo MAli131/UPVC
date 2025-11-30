@@ -34,6 +34,7 @@ namespace UPVC.Data
         public DbSet<ContactMessage> ContactMessages { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<AboutSection> AboutSections { get; set; }
+        public DbSet<ChatbotFAQ> ChatbotFAQs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -828,6 +829,82 @@ namespace UPVC.Data
                 new ProductDesignOption { Id = 24, ProductDetailsId = 4, DesignOptionId = 24, DisplayOrder = 4, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
                 new ProductDesignOption { Id = 25, ProductDetailsId = 4, DesignOptionId = 25, DisplayOrder = 5, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
                 new ProductDesignOption { Id = 26, ProductDetailsId = 4, DesignOptionId = 26, DisplayOrder = 6, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed ChatbotFAQ data
+            modelBuilder.Entity<ChatbotFAQ>().HasData(
+                new ChatbotFAQ
+                {
+                    Id = 1,
+                    QuestionAr = "ما هي أنظمة uPVC؟",
+                    QuestionEn = "What are uPVC systems?",
+                    AnswerAr = "أنظمة uPVC هي أنظمة نوافذ وأبواب مصنوعة من البولي فينيل كلورايد غير الملدن، وهي مادة متينة ومقاومة للعوامل الجوية وعازلة للحرارة والصوت.",
+                    AnswerEn = "uPVC systems are window and door systems made from unplasticized polyvinyl chloride, a durable material that is weather-resistant and provides excellent thermal and sound insulation.",
+                    DisplayOrder = 1,
+                    IsActive = true,
+                    Category = "General",
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ChatbotFAQ
+                {
+                    Id = 2,
+                    QuestionAr = "ما هي مميزات منتجات EMAPEN؟",
+                    QuestionEn = "What are the advantages of EMAPEN products?",
+                    AnswerAr = "منتجات EMAPEN توفر عزلاً حرارياً وصوتياً ممتازاً، مقاومة عالية للعوامل الجوية، سهولة في الصيانة، وعمر افتراضي طويل يصل إلى 50 عاماً.",
+                    AnswerEn = "EMAPEN products offer excellent thermal and sound insulation, high resistance to weather conditions, easy maintenance, and a long lifespan of up to 50 years.",
+                    DisplayOrder = 2,
+                    IsActive = true,
+                    Category = "Products",
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ChatbotFAQ
+                {
+                    Id = 3,
+                    QuestionAr = "كيف يمكنني طلب منتجاتكم؟",
+                    QuestionEn = "How can I order your products?",
+                    AnswerAr = "يمكنك التواصل معنا عبر صفحة 'اتصل بنا' أو الاتصال بنا مباشرة على الخط الساخن. فريقنا سيساعدك في اختيار المنتج المناسب.",
+                    AnswerEn = "You can contact us through the 'Contact Us' page or call us directly on our hotline. Our team will help you choose the right product.",
+                    DisplayOrder = 3,
+                    IsActive = true,
+                    Category = "Orders",
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ChatbotFAQ
+                {
+                    Id = 4,
+                    QuestionAr = "هل تقدمون خدمة التركيب؟",
+                    QuestionEn = "Do you provide installation service?",
+                    AnswerAr = "نعم، نوفر خدمة التركيب من خلال فريق فني متخصص ومدرب على أعلى مستوى.",
+                    AnswerEn = "Yes, we provide installation services through a specialized technical team trained to the highest standards.",
+                    DisplayOrder = 4,
+                    IsActive = true,
+                    Category = "Services",
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ChatbotFAQ
+                {
+                    Id = 5,
+                    QuestionAr = "ما هي مدة الضمان على المنتجات؟",
+                    QuestionEn = "What is the warranty period?",
+                    AnswerAr = "نقدم ضماناً شاملاً على جميع منتجاتنا. تختلف مدة الضمان حسب نوع المنتج ويمكن أن تصل إلى 10 سنوات.",
+                    AnswerEn = "We offer comprehensive warranty on all products. The warranty period varies by product type and can extend up to 10 years.",
+                    DisplayOrder = 5,
+                    IsActive = true,
+                    Category = "Warranty",
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new ChatbotFAQ
+                {
+                    Id = 6,
+                    QuestionAr = "هل المنتجات مناسبة للمناخ الحار؟",
+                    QuestionEn = "Are products suitable for hot climates?",
+                    AnswerAr = "نعم، منتجات EMAPEN مصممة خصيصاً لتتحمل المناخات الحارة والرطبة مع مقاومة عالية للأشعة فوق البنفسجية.",
+                    AnswerEn = "Yes, EMAPEN products are specifically designed to withstand hot and humid climates with high UV resistance.",
+                    DisplayOrder = 6,
+                    IsActive = true,
+                    Category = "Technical",
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                }
             );
         }
     }

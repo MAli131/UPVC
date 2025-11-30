@@ -1,0 +1,149 @@
+@model IEnumerable<UPVC.Models.ChatbotFAQ>
+
+@{
+    ViewData["Title"] = "إدارة الشات بوت";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="card-title mb-0">قائمة الأسئلة</h3>
+                    </div>
+                    <div class="col-auto">
+                        <a asp-action="Create" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> إضافة سؤال جديد
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px">الترتيب</th>
+                            <th>السؤال (عربي)</th>
+                            <th>السؤال (English)</th>
+                            <th>التصنيف</th>
+                            <th style="width: 80px">الحالة</th>
+                            <th style="width: 150px">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var faq in Model)
+                        {
+                            <tr>
+                                <td>@faq.DisplayOrder</td>
+                                <td>@faq.QuestionAr</td>
+                                <td>@faq.QuestionEn</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(faq.Category))
+                                    {
+                                        <span class="badge badge-info">@faq.Category</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input toggle-active" 
+                                               id="toggle-@faq.Id" 
+                                               data-id="@faq.Id" 
+                                               @(faq.IsActive ? "checked" : "")>
+                                        <label class="custom-control-label" for="toggle-@faq.Id"></label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@faq.Id" class="btn btn-sm btn-info" title="تعديل">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-danger delete-faq" data-id="@faq.Id" title="حذف">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Toggle active status
+            $('.toggle-active').on('change', function () {
+                var checkbox = $(this);
+                var faqId = checkbox.data('id');
+
+                $.ajax({
+                    url: '@Url.Action("ToggleActive", "ChatbotFAQ")',
+                    type: 'POST',
+                    data: {
+                        id: faqId,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            toastr.success('تم تحديث الحالة بنجاح');
+                        } else {
+                            toastr.error('حدث خطأ');
+                            checkbox.prop('checked', !checkbox.prop('checked'));
+                        }
+                    },
+                    error: function () {
+                        toastr.error('حدث خطأ');
+                        checkbox.prop('checked', !checkbox.prop('checked'));
+                    }
+                });
+            });
+
+            // Delete FAQ
+            $('.delete-faq').on('click', function () {
+                var button = $(this);
+                var faqId = button.data('id');
+
+                if (confirm('هل أنت متأكد من حذف هذا السؤال؟')) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "ChatbotFAQ")',
+                        type: 'POST',
+                        data: {
+                            id: faqId,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success('تم الحذف بنجاح');
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1000);
+                            } else {
+                                toastr.error('حدث خطأ');
+                            }
+                        },
+                        error: function () {
+                            toastr.error('حدث خطأ');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
