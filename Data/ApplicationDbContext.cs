@@ -33,6 +33,7 @@ namespace UPVC.Data
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<AboutSection> AboutSections { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

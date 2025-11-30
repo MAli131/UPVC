@@ -1,0 +1,223 @@
+@model UPVC.Models.Product
+@{
+    ViewData["Title"] = "تعديل المنتج";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Success/Error Alerts -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-primary" style="min-height: 70px;">
+            <span class="info-box-icon" style="width: 70px; height: 70px; line-height: 70px;">
+                <i class="fas fa-box" style="font-size: 1.8rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">تعديل منتج</span>
+                <span class="info-box-number" style="font-size: 1.2rem;">@Model.NameAr</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Back Button -->
+<div class="row mb-2">
+    <div class="col-12">
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-right"></i> العودة للقائمة
+        </a>
+    </div>
+</div>
+
+<!-- Main Form -->
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImagePath" />
+    <input type="hidden" asp-for="ThumbnailPath" />
+    <input type="hidden" asp-for="BrochurePath" />
+    <input type="hidden" asp-for="GalleryImagesJson" />
+    <input type="hidden" asp-for="DisplayOrder" />
+    <input type="hidden" asp-for="CreatedAt" />
+
+    <div class="row">
+        <!-- Column 1: Basic Info -->
+        <div class="col-lg-6">
+            <!-- Product Names -->
+            <div class="card card-primary card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-tag"></i> اسم المنتج
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="NameAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            الاسم بالعربي <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="NameAr" class="form-control form-control-sm" required />
+                        <span asp-validation-for="NameAr" class="text-danger" style="font-size: 0.75rem;"></span>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="NameEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            Name in English <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="NameEn" class="form-control form-control-sm" required />
+                        <span asp-validation-for="NameEn" class="text-danger" style="font-size: 0.75rem;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtitle -->
+            <div class="card card-info card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-heading"></i> العنوان الفرعي
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="SubtitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            العنوان الفرعي بالعربي
+                        </label>
+                        <input asp-for="SubtitleAr" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="SubtitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            Subtitle in English
+                        </label>
+                        <input asp-for="SubtitleEn" class="form-control form-control-sm" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div hidden="true" class="card card-warning card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-folder"></i> التصنيف
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="CategoryAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            التصنيف بالعربي
+                        </label>
+                        <input asp-for="CategoryAr" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="CategoryEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            Category in English
+                        </label>
+                        <input asp-for="CategoryEn" class="form-control form-control-sm" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 2: Descriptions -->
+        <div class="col-lg-6">
+            <!-- Main Description -->
+            <div class="card card-success card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-align-right"></i> الوصف الرئيسي
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="DescriptionAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            الوصف بالعربي
+                        </label>
+                        <textarea asp-for="DescriptionAr" class="form-control form-control-sm" rows="4"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="DescriptionEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            Description in English
+                        </label>
+                        <textarea asp-for="DescriptionEn" class="form-control form-control-sm" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Description -->
+            <div hidden="true" class="card card-secondary card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-file-alt"></i> التفاصيل (صفحة التفاصيل)
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="DetailsAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            التفاصيل بالعربي
+                        </label>
+                        <textarea asp-for="DetailsAr" class="form-control form-control-sm" rows="5"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="DetailsEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            Details in English
+                        </label>
+                        <textarea asp-for="DetailsEn" class="form-control form-control-sm" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IsActive & Submit -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-outline" style="background-color: #f8f9fa; border: none;">
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="isActive" asp-for="IsActive" />
+                                <label class="custom-control-label" for="isActive" style="font-size: 0.9rem;">
+                                    <strong>نشط</strong> (يظهر في الموقع)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> حفظ التعديلات
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> إلغاء
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Note about images -->
+<div class="row mt-2">
+    <div class="col-12">
+        <div class="callout callout-info" style="padding: 0.5rem 0.75rem;">
+            <p style="margin: 0; font-size: 0.85rem;">
+                <i class="fas fa-info-circle"></i>
+                <strong>ملاحظة:</strong> 
+                الصور والأيقونات والملفات (Gallery, Thumbnail, Brochure) محفوظة ولن يتم تعديلها من هنا.
+                لتعديل المواصفات والألوان والتصاميم، استخدم الأزرار في صفحة القائمة.
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

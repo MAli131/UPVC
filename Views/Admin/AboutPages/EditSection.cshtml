@@ -1,0 +1,98 @@
+@model UPVC.Models.AboutSection
+@{
+    ViewData["Title"] = "تعديل قسم";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-warning" style="min-height: 70px;">
+            <span class="info-box-icon" style="width: 60px; height: 70px; line-height: 70px;">
+                <i class="fas fa-@(Model.SectionType == UPVC.Models.AboutSectionType.Mission ? "bullseye" : "eye")" style="font-size: 1.5rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">تعديل قسم</span>
+                <span class="info-box-number" style="font-size: 1.1rem;">@(Model.SectionType == UPVC.Models.AboutSectionType.Mission ? "المهمة" : "الرؤية")</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="EditSection" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="AboutPageId" />
+    <input type="hidden" asp-for="SectionType" />
+    <input type="hidden" asp-for="Order" />
+    
+    <div class="row">
+        <!-- العناوين -->
+        <div class="col-lg-6 mb-2">
+            <div class="card card-primary card-outline">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 1rem;">
+                        <i class="fas fa-heading"></i> العنوان
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group">
+                        <label><i class="fas fa-language"></i> العنوان (عربي) <span class="text-danger">*</span></label>
+                        <input asp-for="TitleAr" class="form-control form-control-sm" required />
+                        <span asp-validation-for="TitleAr" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> العنوان (إنجليزي) <span class="text-danger">*</span></label>
+                        <input asp-for="TitleEn" class="form-control form-control-sm" required />
+                        <span asp-validation-for="TitleEn" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى والأيقونة -->
+        <div class="col-lg-6 mb-2">
+            <div class="card card-success card-outline">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 1rem;">
+                        <i class="fas fa-align-right"></i> المحتوى والأيقونة
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group">
+                        <label><i class="fas fa-language"></i> المحتوى (عربي) <span class="text-danger">*</span></label>
+                        <textarea asp-for="ContentAr" class="form-control form-control-sm" rows="3" required></textarea>
+                        <span asp-validation-for="ContentAr" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> المحتوى (إنجليزي) <span class="text-danger">*</span></label>
+                        <textarea asp-for="ContentEn" class="form-control form-control-sm" rows="3" required></textarea>
+                        <span asp-validation-for="ContentEn" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- أزرار الحفظ -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-secondary card-outline">
+                <div class="card-footer" style="padding: 0.5rem 0.75rem;">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fas fa-save"></i> حفظ التغييرات
+                    </button>
+                    <a asp-action="Edit" asp-route-id="@Model.AboutPageId" class="btn btn-default btn-sm">
+                        <i class="fas fa-times"></i> رجوع
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

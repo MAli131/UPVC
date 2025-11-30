@@ -1,0 +1,163 @@
+@model UPVC.Models.AboutPage
+@{
+    ViewData["Title"] = "تعديل صفحة من نحن";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Success Alert -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-info" style="min-height: 70px;">
+            <span class="info-box-icon" style="width: 60px; height: 70px; line-height: 70px;">
+                <i class="fas fa-file-alt" style="font-size: 1.5rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">تعديل صفحة من نحن</span>
+                <span class="info-box-number" style="font-size: 1.1rem;">@Model.PageKey</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="PageKey" />
+    
+    <div class="row">
+        <!-- العناوين -->
+        <div class="col-lg-6 mb-2">
+            <div class="card card-primary card-outline">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 1rem;">
+                        <i class="fas fa-heading"></i> العناوين
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group">
+                        <label><i class="fas fa-language"></i> العنوان (عربي) <span class="text-danger">*</span></label>
+                        <input asp-for="TitleAr" class="form-control form-control-sm" required />
+                        <span asp-validation-for="TitleAr" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> العنوان (إنجليزي) <span class="text-danger">*</span></label>
+                        <input asp-for="TitleEn" class="form-control form-control-sm" required />
+                        <span asp-validation-for="TitleEn" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-language"></i> العنوان الفرعي (عربي)</label>
+                        <input asp-for="SubtitleAr" class="form-control form-control-sm" />
+                        <span asp-validation-for="SubtitleAr" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> العنوان الفرعي (إنجليزي)</label>
+                        <input asp-for="SubtitleEn" class="form-control form-control-sm" />
+                        <span asp-validation-for="SubtitleEn" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى والصورة -->
+        <div class="col-lg-6 mb-2">
+            <div class="card card-success card-outline">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 1rem;">
+                        <i class="fas fa-align-right"></i> المحتوى والصورة
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group">
+                        <label><i class="fas fa-language"></i> المحتوى (عربي) <span class="text-danger">*</span></label>
+                        <textarea asp-for="ContentAr" class="form-control form-control-sm" rows="3" required></textarea>
+                        <span asp-validation-for="ContentAr" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> المحتوى (إنجليزي) <span class="text-danger">*</span></label>
+                        <textarea asp-for="ContentEn" class="form-control form-control-sm" rows="3" required></textarea>
+                        <span asp-validation-for="ContentEn" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأقسام -->
+        <div class="col-12 mb-2">
+            <div class="card card-warning card-outline">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 1rem;">
+                        <i class="fas fa-list"></i> الأقسام (Mission & Vision)
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    @if (Model.Sections.Any())
+                    {
+                        <div class="row">
+                            @foreach (var aboutSection in Model.Sections.OrderBy(s => s.Order))
+                            {
+                                <div class="col-md-6 mb-2">
+                                    <div class="card @(aboutSection.SectionType == UPVC.Models.AboutSectionType.Mission ? "card-info" : "card-purple") card-outline">
+                                        <div class="card-header" style="padding: 0.4rem 0.6rem;">
+                                            <h4 class="card-title" style="font-size: 0.9rem;">
+                                                <i class="fas fa-@(aboutSection.SectionType == UPVC.Models.AboutSectionType.Mission ? "bullseye" : "eye")"></i>
+                                                @(aboutSection.SectionType == UPVC.Models.AboutSectionType.Mission ? "المهمة" : "الرؤية")
+                                            </h4>
+                                        </div>
+                                        <div class="card-body" style="padding: 0.6rem;">
+                                            <p class="mb-1" style="font-size: 0.85rem;"><strong>العربي:</strong> @aboutSection.TitleAr</p>
+                                            <p class="mb-1" style="font-size: 0.85rem;"><strong>English:</strong> @aboutSection.TitleEn</p>
+                                            <a asp-action="EditSection" asp-route-id="@aboutSection.Id" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i> تعديل
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center mb-0">
+                            <i class="fas fa-info-circle"></i> لا توجد أقسام متاحة
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- أزرار الحفظ -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-secondary card-outline">
+                <div class="card-footer" style="padding: 0.5rem 0.75rem;">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fas fa-save"></i> حفظ التغييرات
+                    </button>
+                    <a asp-action="Index" class="btn btn-default btn-sm">
+                        <i class="fas fa-times"></i> إلغاء
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

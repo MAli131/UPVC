@@ -1,0 +1,419 @@
+@model UPVC.Models.HomePage
+@{
+    ViewData["Title"] = "تعديل صفحة Home2";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Success Alert -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-success" style="min-height: 70px;">
+            <span class="info-box-icon" style="width: 70px; height: 70px; line-height: 70px;">
+                <i class="fas fa-star" style="font-size: 1.8rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">تعديل صفحة</span>
+                <span class="info-box-number" style="font-size: 1.2rem;">Home2 - مميزات المنتج</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Column 1: Main Page Info -->
+    <div class="col-lg-4">
+        <!-- Page Titles Card -->
+        <div class="card card-success card-outline" style="margin-bottom: 0.75rem;">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-home"></i> معلومات الصفحة
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.75rem;">
+                <form asp-action="EditHome2" method="post">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="TitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان بالعربي</label>
+                        <input asp-for="TitleAr" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="TitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Title in English</label>
+                        <input asp-for="TitleEn" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="SubtitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان الفرعي بالعربي</label>
+                        <input asp-for="SubtitleAr" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="SubtitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Subtitle in English</label>
+                        <input asp-for="SubtitleEn" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="ContentAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">المحتوى بالعربي</label>
+                        <textarea asp-for="ContentAr" class="form-control form-control-sm" rows="3"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="ContentEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Content in English</label>
+                        <textarea asp-for="ContentEn" class="form-control form-control-sm" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm btn-block">
+                        <i class="fas fa-save"></i> حفظ معلومات الصفحة
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-sm btn-block" style="margin-top: 0.5rem;">
+                        <i class="fas fa-arrow-right"></i> رجوع
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Column 2: Sections List -->
+    <div class="col-lg-4">
+        <div class="card card-warning card-outline" style="margin-bottom: 0.75rem;">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-list"></i> الأقسام (@Model.Sections.Count)
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.5rem; max-height: 700px; overflow-y: auto;">
+                @if (Model.Sections.Any())
+                {
+                    var sectionIndex = 0;
+                    @foreach (var homeSection in Model.Sections.OrderBy(s => s.Order))
+                    {
+                        var titleArEncoded = System.Net.WebUtility.HtmlEncode(homeSection.TitleAr ?? "");
+                        var titleEnEncoded = System.Net.WebUtility.HtmlEncode(homeSection.TitleEn ?? "");
+                        var contentArEncoded = System.Net.WebUtility.HtmlEncode(homeSection.ContentAr ?? "");
+                        var contentEnEncoded = System.Net.WebUtility.HtmlEncode(homeSection.ContentEn ?? "");
+                        var imagePathEncoded = System.Net.WebUtility.HtmlEncode(homeSection.ImagePath ?? "");
+                        
+                        <div class="section-item callout callout-success section-@sectionIndex" style="padding: 0.5rem; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.3s;"
+                             data-id="@homeSection.Id"
+                             data-title-ar="@titleArEncoded"
+                             data-title-en="@titleEnEncoded"
+                             data-content-ar="@contentArEncoded"
+                             data-content-en="@contentEnEncoded"
+                             data-order="@homeSection.Order"
+                             data-is-active="@homeSection.IsActive.ToString().ToLower()"
+                             data-image-path="@imagePathEncoded"
+                             onclick="loadSection(this)">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <p class="mb-1" style="font-size: 0.85rem;">
+                                    <strong><i class="fas fa-sort-numeric-up"></i> @homeSection.Order - @homeSection.TitleAr</strong>
+                                </p>
+                                @if (homeSection.IsActive)
+                                {
+                                    <span class="badge badge-success" style="font-size: 0.7rem;">نشط</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-secondary" style="font-size: 0.7rem;">غير نشط</span>
+                                }
+                            </div>
+                            <p class="mb-0" style="font-size: 0.75rem; color: #666;">
+                                <i class="fas fa-globe"></i> @homeSection.TitleEn
+                            </p>
+                        </div>
+                        sectionIndex++;
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-info" style="margin: 0; padding: 0.5rem; font-size: 0.85rem;">
+                        <i class="fas fa-info-circle"></i> لا توجد أقسام حالياً
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Column 3: Section Edit Form -->
+    <div class="col-lg-4">
+        <div class="card card-primary card-outline" style="margin-bottom: 0.75rem;">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-edit"></i> تعديل القسم
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.75rem;">
+                <div id="emptyState" style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-hand-pointer" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                    <p style="color: #999; font-size: 0.9rem;">اضغط على أي قسم لتعديله</p>
+                </div>
+
+                <form id="sectionForm" action="/Admin/HomePages/EditSection" method="post" style="display: none;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="sectionId" name="Id" />
+                    <input type="hidden" id="sectionHomePageId" name="HomePageId" value="@Model.Id" />
+                    <input type="hidden" id="sectionImagePath" name="ImagePath" />
+                    <input type="hidden" id="sectionOrder" name="Order" />
+                    <input type="hidden" id="sectionCreatedAt" name="CreatedAt" />
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">ترتيب القسم</label>
+                        <input type="number" id="sectionOrderDisplay" class="form-control form-control-sm" readonly style="background-color: #f4f4f4;" disabled />
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان بالعربي <span class="text-danger">*</span></label>
+                        <input type="text" id="sectionTitleAr" name="TitleAr" class="form-control form-control-sm" required />
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">Title in English <span class="text-danger">*</span></label>
+                        <input type="text" id="sectionTitleEn" name="TitleEn" class="form-control form-control-sm" required />
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">المحتوى بالعربي</label>
+                        <textarea id="sectionContentAr" name="ContentAr" class="form-control form-control-sm" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">Content in English</label>
+                        <textarea id="sectionContentEn" name="ContentEn" class="form-control form-control-sm" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <div class="custom-control custom-switch">
+                            <input type="hidden" name="IsActive" value="false" />
+                            <input type="checkbox" class="custom-control-input" id="sectionIsActive" name="IsActive" value="true">
+                            <label class="custom-control-label" for="sectionIsActive" style="font-size: 0.85rem;">نشط</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-sm btn-block">
+                        <i class="fas fa-save"></i> حفظ تعديلات القسم
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-block" style="margin-top: 0.5rem;" onclick="clearForm()">
+                        <i class="fas fa-times"></i> إلغاء
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function loadSection(element) {
+    // الحصول على البيانات من data attributes
+    var id = element.getAttribute('data-id');
+    var titleAr = element.getAttribute('data-title-ar');
+    var titleEn = element.getAttribute('data-title-en');
+    var contentAr = element.getAttribute('data-content-ar');
+    var contentEn = element.getAttribute('data-content-en');
+    var order = element.getAttribute('data-order');
+    var isActive = element.getAttribute('data-is-active');
+    var imagePath = element.getAttribute('data-image-path');
+
+    // إخفاء الرسالة الفارغة وإظهار النموذج
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('sectionForm').style.display = 'block';
+
+    // تعبئة النموذج
+    document.getElementById('sectionId').value = id;
+    document.getElementById('sectionOrder').value = order;
+    document.getElementById('sectionOrderDisplay').value = order;
+    document.getElementById('sectionTitleAr').value = titleAr;
+    document.getElementById('sectionTitleEn').value = titleEn;
+    document.getElementById('sectionContentAr').value = contentAr;
+    document.getElementById('sectionContentEn').value = contentEn;
+    document.getElementById('sectionImagePath').value = imagePath;
+    document.getElementById('sectionIsActive').checked = (isActive === 'true');
+
+    // تمييز القسم المحدد
+    document.querySelectorAll('.section-item').forEach(function(item) {
+        item.style.backgroundColor = '';
+        item.style.borderLeft = '';
+    });
+    element.style.backgroundColor = '#e8f5e9';
+    element.style.borderLeft = '4px solid #28a745';
+
+    // التمرير إلى أعلى النموذج
+    document.getElementById('sectionForm').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function clearForm() {
+    document.getElementById('emptyState').style.display = 'block';
+    document.getElementById('sectionForm').style.display = 'none';
+    
+    // إزالة التمييز
+    document.querySelectorAll('.section-item').forEach(function(item) {
+        item.style.backgroundColor = '';
+        item.style.borderLeft = '';
+    });
+}
+
+// تأثير hover للأقسام
+document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.section-item');
+    items.forEach(function(item) {
+        item.addEventListener('mouseenter', function() {
+            if (!this.style.borderLeft) {
+                this.style.backgroundColor = '#f8f9fa';
+            }
+        });
+        item.addEventListener('mouseleave', function() {
+            if (!this.style.borderLeft) {
+                this.style.backgroundColor = '';
+            }
+        });
+    });
+});
+</script>
+
+
+<!-- Success Alert -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-success" style="min-height: 70px;">
+            <span class="info-box-icon" style="width: 70px; height: 70px; line-height: 70px;">
+                <i class="fas fa-star" style="font-size: 1.8rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">تعديل صفحة</span>
+                <span class="info-box-number" style="font-size: 1.2rem;">Home2 - مميزات المنتج</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form -->
+<form asp-action="EditHome2" method="post">
+    <div class="row">
+        <!-- Column 1: Main Info -->
+        <div class="col-lg-6">
+            <!-- Titles Card -->
+            <div class="card card-success card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-heading"></i> العناوين
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="TitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان بالعربي <span class="text-danger">*</span></label>
+                        <input asp-for="TitleAr" class="form-control form-control-sm" required />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="TitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Title in English <span class="text-danger">*</span></label>
+                        <input asp-for="TitleEn" class="form-control form-control-sm" required />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="SubtitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان الفرعي بالعربي</label>
+                        <input asp-for="SubtitleAr" class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="SubtitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Subtitle in English</label>
+                        <input asp-for="SubtitleEn" class="form-control form-control-sm" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Card -->
+            <div class="card card-primary card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-file-alt"></i> المحتوى
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="ContentAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">المحتوى بالعربي</label>
+                        <textarea asp-for="ContentAr" class="form-control form-control-sm" rows="4"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="ContentEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Content in English</label>
+                        <textarea asp-for="ContentEn" class="form-control form-control-sm" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 2: Sections List -->
+        <div class="col-lg-6">
+            <!-- Sections Card -->
+            <div class="card card-warning card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-list"></i> الأقسام (@Model.Sections.Count)
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.5rem; max-height: 600px; overflow-y: auto;">
+                    @if (Model.Sections.Any())
+                    {
+                        @foreach (var homeSection in Model.Sections.OrderBy(s => s.Order))
+                        {
+                            <div class="callout callout-success" style="padding: 0.5rem; margin-bottom: 0.5rem;">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <p class="mb-1" style="font-size: 0.85rem;">
+                                        <strong><i class="fas fa-sort-numeric-up"></i> ترتيب: @homeSection.Order</strong>
+                                    </p>
+                                    @if (homeSection.IsActive)
+                                    {
+                                        <span class="badge badge-success" style="font-size: 0.7rem;">نشط</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-secondary" style="font-size: 0.7rem;">غير نشط</span>
+                                    }
+                                </div>
+                                <p class="mb-1" style="font-size: 0.85rem;"><strong>العربي:</strong> @homeSection.TitleAr</p>
+                                <p class="mb-1" style="font-size: 0.85rem;"><strong>English:</strong> @homeSection.TitleEn</p>
+                                <p class="mb-0 text-muted" style="font-size: 0.75rem;">
+                                    @(homeSection.ContentAr.Length > 50 ? homeSection.ContentAr.Substring(0, 50) + "..." : homeSection.ContentAr)
+                                </p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info" style="margin: 0; padding: 0.5rem; font-size: 0.85rem;">
+                            <i class="fas fa-info-circle"></i> لا توجد أقسام حالياً
+                        </div>
+                    }
+                </div>
+                <div class="card-footer" style="padding: 0.5rem; font-size: 0.75rem; background-color: #fff3cd;">
+                    <i class="fas fa-info-circle text-warning"></i> الأقسام: Energy efficiency, Sound insulation, Dust proof, Durability, Welded joints
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="margin-bottom: 0.75rem;">
+                <div class="card-footer" style="padding: 0.75rem;">
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fas fa-save"></i> حفظ التغييرات
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-sm" style="margin-right: 0.5rem;">
+                        <i class="fas fa-arrow-right"></i> رجوع
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

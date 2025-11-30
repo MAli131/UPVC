@@ -1,0 +1,163 @@
+@model UPVC.Models.HomePage
+@{
+    ViewData["Title"] = "تعديل صفحة Home4";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Success Alert -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box" style="min-height: 70px; background-color: #6f42c1; color: white;">
+            <span class="info-box-icon" style="width: 70px; height: 70px; line-height: 70px; background-color: rgba(255,255,255,0.2);">
+                <i class="fas fa-building" style="font-size: 1.8rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">تعديل صفحة</span>
+                <span class="info-box-number" style="font-size: 1.2rem;">Home4 - المشاريع المكتملة</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form -->
+<form asp-action="EditHome4" method="post">
+    <div class="row">
+        <!-- Column 1 -->
+        <div class="col-lg-6">
+            <!-- Titles Card -->
+            <div class="card card-outline" style="margin-bottom: 0.75rem; border-color: #6f42c1;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem; background-color: #6f42c1; color: white;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-heading"></i> العناوين الرئيسية
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="TitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان بالعربي <span class="text-danger">*</span></label>
+                        <input asp-for="TitleAr" class="form-control form-control-sm" required />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="TitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Title in English <span class="text-danger">*</span></label>
+                        <input asp-for="TitleEn" class="form-control form-control-sm" required />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtitles Card -->
+            <div class="card card-info card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-align-right"></i> العناوين الفرعية
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="SubtitleAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">العنوان الفرعي بالعربي</label>
+                        <textarea asp-for="SubtitleAr" class="form-control form-control-sm" rows="3"></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">وصف عن المشاريع والشركات</small>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="SubtitleEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Subtitle in English</label>
+                        <textarea asp-for="SubtitleEn" class="form-control form-control-sm" rows="3"></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">Description about projects and companies</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Card -->
+            <div class="card card-success card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-file-alt"></i> المحتوى الرئيسي
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="ContentAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">المحتوى بالعربي</label>
+                        <textarea asp-for="ContentAr" class="form-control form-control-sm" rows="3"></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">معلومات عن القدرة الإنتاجية</small>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="ContentEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Content in English</label>
+                        <textarea asp-for="ContentEn" class="form-control form-control-sm" rows="3"></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">Information about production capacity</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col-lg-6">
+            <!-- Additional Content Card -->
+            <div class="card card-warning card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-plus-circle"></i> محتوى إضافي
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label asp-for="ContentOtherAr" style="font-size: 0.85rem; margin-bottom: 0.25rem;">محتوى إضافي بالعربي</label>
+                        <textarea asp-for="ContentOtherAr" class="form-control form-control-sm" rows="3"></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">نص قبل قائمة المشاريع</small>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label asp-for="ContentOtherEn" style="font-size: 0.85rem; margin-bottom: 0.25rem;">Additional Content in English</label>
+                        <textarea asp-for="ContentOtherEn" class="form-control form-control-sm" rows="3"></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">Text before projects list</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Note Card -->
+            <div class="card card-secondary card-outline" style="margin-bottom: 0.75rem;">
+                <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                    <h3 class="card-title" style="font-size: 0.95rem;">
+                        <i class="fas fa-info-circle"></i> ملاحظات
+                    </h3>
+                </div>
+                <div class="card-body" style="padding: 0.75rem;">
+                    <div class="alert alert-info" style="margin: 0; padding: 0.5rem; font-size: 0.8rem;">
+                        <i class="fas fa-lightbulb"></i> <strong>هيكل الصفحة:</strong>
+                        <ul style="margin: 0.5rem 0 0 0; padding-right: 1.5rem;">
+                            <li><strong>العنوان:</strong> "المشاريع المكتملة"</li>
+                            <li><strong>العنوان الفرعي:</strong> وصف عن سمعة الشركة</li>
+                            <li><strong>المحتوى:</strong> معلومات عن القدرة الإنتاجية</li>
+                            <li><strong>محتوى إضافي:</strong> نص قبل قائمة المشاريع الكبرى</li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-warning" style="margin: 0.5rem 0 0 0; padding: 0.5rem; font-size: 0.8rem;">
+                        <i class="fas fa-exclamation-triangle"></i> <strong>قائمة المشاريع</strong> يتم إدارتها من قاعدة البيانات (Projects table)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="margin-bottom: 0.75rem;">
+                <div class="card-footer" style="padding: 0.75rem;">
+                    <button type="submit" class="btn btn-sm" style="background-color: #6f42c1; color: white;">
+                        <i class="fas fa-save"></i> حفظ التغييرات
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-sm" style="margin-right: 0.5rem;">
+                        <i class="fas fa-arrow-right"></i> رجوع
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

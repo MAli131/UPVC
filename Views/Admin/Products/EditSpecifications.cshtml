@@ -1,0 +1,305 @@
+@model UPVC.Models.Product
+@{
+    ViewData["Title"] = "إدارة المواصفات";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    var productDetails = Model.ProductDetails;
+    var productSpecs = productDetails?.Specifications?.OrderBy(ps => ps.DisplayOrder).ToList() ?? new List<UPVC.Models.ProductSpecification>();
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-primary" style="min-height: 70px;">
+            <span class="info-box-icon" style="width: 70px; height: 70px; line-height: 70px;">
+                <i class="fas fa-list-ul" style="font-size: 1.8rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem;">إدارة المواصفات - @Model.NameAr</span>
+                <span class="info-box-number" style="font-size: 1.2rem;">@productSpecs.Count مواصفة</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Back Button -->
+<div class="row mb-2">
+    <div class="col-12">
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-right"></i> العودة للقائمة
+        </a>
+    </div>
+</div>
+
+<!-- Main Layout: 2 Columns -->
+<div class="row">
+    <!-- Column 1: Specifications List -->
+    <div class="col-lg-6">
+        <div class="card card-primary card-outline" style="margin-bottom: 0.75rem;">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-list"></i> المواصفات (@productSpecs.Count)
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.75rem; max-height: 70vh; overflow-y: auto;">
+                @if (productSpecs.Any())
+                {
+                    var specIndex = 0;
+                    foreach (var ps in productSpecs)
+                    {
+                        var nameArEncoded = System.Net.WebUtility.HtmlEncode(ps.Specification?.NameAr ?? "");
+                        var nameEnEncoded = System.Net.WebUtility.HtmlEncode(ps.Specification?.NameEn ?? "");
+                        
+                        <div class="spec-item callout @(ps.IsActive ? "callout-success" : "callout-secondary") spec-@specIndex" 
+                             style="padding: 0.5rem; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.3s;"
+                             data-id="@ps.Id"
+                             data-spec-id="@ps.SpecificationId"
+                             data-name-ar="@nameArEncoded"
+                             data-name-en="@nameEnEncoded"
+                             data-order="@ps.DisplayOrder"
+                             data-is-active="@ps.IsActive.ToString().ToLower()"
+                             onclick="loadSpec(this)">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div style="flex: 1;">
+                                    <p class="mb-1" style="font-size: 0.85rem;">
+                                        <strong><i class="fas fa-sort-numeric-up"></i> @ps.DisplayOrder - @ps.Specification?.NameAr</strong>
+                                    </p>
+                                    <p class="mb-0" style="font-size: 0.75rem; color: #666;">
+                                        <i class="fas fa-globe"></i> @ps.Specification?.NameEn
+                                    </p>
+                                </div>
+                                <div>
+                                    @if (ps.IsActive)
+                                    {
+                                        <span class="badge badge-success" style="font-size: 0.7rem;">نشط</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-secondary" style="font-size: 0.7rem;">غير نشط</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        specIndex++;
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-info" style="margin: 0; padding: 0.5rem; font-size: 0.85rem;">
+                        <i class="fas fa-info-circle"></i> لا توجد مواصفات لهذا المنتج
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Column 2: Edit Form -->
+    <div class="col-lg-6">
+        <div class="card card-success card-outline" style="margin-bottom: 0.75rem;">
+            <div class="card-header" style="padding: 0.5rem 0.75rem;">
+                <h3 class="card-title" style="font-size: 0.95rem;">
+                    <i class="fas fa-edit"></i> تفاصيل المواصفة
+                </h3>
+            </div>
+            <div class="card-body" style="padding: 0.75rem;">
+                <!-- Empty State -->
+                <div id="emptyState" style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-hand-pointer" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                    <p style="color: #999; font-size: 0.9rem;">اضغط على أي مواصفة لعرض تفاصيلها</p>
+                </div>
+
+                <!-- Specification Details (Editable) -->
+                <div id="specDetails" style="display: none;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">الترتيب</label>
+                        <input type="text" id="specOrder" class="form-control form-control-sm" readonly style="background-color: #f4f4f4;" />
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            المواصفة بالعربي <span class="text-danger">*</span>
+                        </label>
+                        <textarea id="specNameAr" class="form-control form-control-sm" rows="2" required></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">
+                            <i class="fas fa-edit"></i> يمكنك تعديل النص العربي للمواصفة
+                        </small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                            Specification in English <span class="text-danger">*</span>
+                        </label>
+                        <textarea id="specNameEn" class="form-control form-control-sm" rows="2" required></textarea>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">
+                            <i class="fas fa-edit"></i> You can edit the English text
+                        </small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="specIsActive">
+                            <label class="custom-control-label" for="specIsActive" style="font-size: 0.85rem;">
+                                <strong>نشط</strong> (يظهر في جميع المنتجات)
+                            </label>
+                        </div>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">
+                            <i class="fas fa-info-circle"></i> تعديل الحالة يؤثر على جميع المنتجات التي تستخدم هذه المواصفة
+                        </small>
+                    </div>
+
+                    <button type="button" class="btn btn-success btn-sm btn-block" onclick="saveSpec()">
+                        <i class="fas fa-save"></i> حفظ التعديلات
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-block" style="margin-top: 0.5rem;" onclick="clearForm()">
+                        <i class="fas fa-times"></i> إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Callout -->
+        <div class="callout callout-warning" style="padding: 0.5rem 0.75rem;">
+            <p style="margin: 0; font-size: 0.8rem;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>تنبيه هام:</strong>
+                تعديل النص العربي أو الإنجليزي للمواصفة سيؤثر على جميع المنتجات التي تستخدم هذه المواصفة.
+                لتغيير حالة المواصفة لمنتج واحد فقط، استخدم خيار "نشط" بدون تعديل النصوص.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+var currentSpecId = null;
+var currentProductDetailsId = @(productDetails?.Id ?? 0);
+
+function loadSpec(element) {
+    // Get data
+    var id = element.getAttribute('data-id');
+    var specId = element.getAttribute('data-spec-id');
+    var nameAr = element.getAttribute('data-name-ar');
+    var nameEn = element.getAttribute('data-name-en');
+    var order = element.getAttribute('data-order');
+    var isActive = element.getAttribute('data-is-active') === 'true';
+
+    currentSpecId = id;
+
+    // Show form, hide empty state
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('specDetails').style.display = 'block';
+
+    // Fill form
+    document.getElementById('specOrder').value = order;
+    document.getElementById('specNameAr').value = nameAr;
+    document.getElementById('specNameEn').value = nameEn;
+    document.getElementById('specIsActive').checked = isActive;
+
+    // Highlight selected
+    document.querySelectorAll('.spec-item').forEach(function(item) {
+        item.classList.remove('callout-success', 'callout-secondary');
+        item.classList.add('callout-info');
+    });
+    element.classList.remove('callout-info');
+    element.classList.add(isActive ? 'callout-success' : 'callout-secondary');
+}
+
+function clearForm() {
+    document.getElementById('emptyState').style.display = 'block';
+    document.getElementById('specDetails').style.display = 'none';
+    currentSpecId = null;
+    
+    // Remove highlighting
+    document.querySelectorAll('.spec-item').forEach(function(item) {
+        var isActive = item.getAttribute('data-is-active') === 'true';
+        item.classList.remove('callout-info');
+        item.classList.add(isActive ? 'callout-success' : 'callout-secondary');
+    });
+}
+
+function saveSpec() {
+    if (!currentSpecId) {
+        alert('الرجاء اختيار مواصفة أولاً');
+        return;
+    }
+
+    var specificationId = document.querySelector('[data-id="' + currentSpecId + '"]').getAttribute('data-spec-id');
+    var nameAr = document.getElementById('specNameAr').value.trim();
+    var nameEn = document.getElementById('specNameEn').value.trim();
+    var isActive = document.getElementById('specIsActive').checked;
+
+    // Validate
+    if (!nameAr || !nameEn) {
+        alert('الاسم العربي والإنجليزي مطلوبان');
+        return;
+    }
+
+    // Send AJAX request to update specification
+    fetch('/Admin/Products/UpdateSpecification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        },
+        body: 'specificationId=' + specificationId + '&nameAr=' + encodeURIComponent(nameAr) + '&nameEn=' + encodeURIComponent(nameEn) + '&isActive=' + isActive
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update UI
+            var element = document.querySelector('[data-id="' + currentSpecId + '"]');
+            element.setAttribute('data-is-active', isActive.toString().toLowerCase());
+            element.setAttribute('data-name-ar', data.nameAr);
+            element.setAttribute('data-name-en', data.nameEn);
+            
+            // Update displayed text
+            element.querySelector('.text-primary, strong').innerHTML = '<i class="fas fa-sort-numeric-up"></i> ' + element.getAttribute('data-order') + ' - ' + data.nameAr;
+            element.querySelector('.text-muted, p:last-child').innerHTML = '<i class="fas fa-globe"></i> ' + data.nameEn;
+            
+            // Update badge
+            var badge = element.querySelector('.badge');
+            if (isActive) {
+                badge.classList.remove('badge-secondary');
+                badge.classList.add('badge-success');
+                badge.textContent = 'نشط';
+            } else {
+                badge.classList.remove('badge-success');
+                badge.classList.add('badge-secondary');
+                badge.textContent = 'غير نشط';
+            }
+            
+            // Show success message
+            showToast('success', data.message);
+            clearForm();
+        } else {
+            showToast('error', data.message);
+        }
+    })
+    .catch(error => {
+        showToast('error', 'حدث خطأ أثناء الحفظ');
+        console.error('Error:', error);
+    });
+}
+
+function showToast(type, message) {
+    // Simple alert for now
+    alert(message);
+}
+
+// Hover effects
+document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.spec-item');
+    items.forEach(function(item) {
+        item.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('callout-success') && !this.classList.contains('callout-secondary')) {
+                this.style.backgroundColor = '#f8f9fa';
+            }
+        });
+        item.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('callout-success') && !this.classList.contains('callout-secondary')) {
+                this.style.backgroundColor = '';
+            }
+        });
+    });
+});
+</script>
+
+@Html.AntiForgeryToken()

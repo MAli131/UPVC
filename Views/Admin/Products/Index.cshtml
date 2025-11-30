@@ -1,0 +1,150 @@
+@model IEnumerable<UPVC.Models.Product>
+@{
+    ViewData["Title"] = "إدارة المنتجات";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Success/Error Alerts -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box bg-gradient-primary" style="min-height: 80px;">
+            <span class="info-box-icon" style="width: 80px; height: 80px; line-height: 80px;">
+                <i class="fas fa-boxes" style="font-size: 2rem;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 1rem;">إدارة المنتجات</span>
+                <span class="info-box-number" style="font-size: 1.5rem;">@Model.Count() منتج</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products Cards -->
+<div class="row">
+    @foreach (var product in Model)
+    {
+        var specsCount = product.ProductDetails?.Specifications?.Count(ps => ps.IsActive) ?? 0;
+        var colorsCount = product.ProductDetails?.Colors?.Count(pc => pc.IsActive) ?? 0;
+        var designsCount = product.ProductDetails?.DesignOptions?.Count(pdo => pdo.IsActive) ?? 0;
+        
+        <div class="col-lg-6 col-md-12 mb-3">
+            <div class="card card-outline @(product.IsActive ? "card-success" : "card-secondary")" style="margin-bottom: 0;">
+                <div class="card-header" style="padding: 0.75rem 1rem;">
+                    <h3 class="card-title" style="font-size: 1.1rem; font-weight: 600;">
+                        <i class="fas fa-box"></i> @product.NameAr
+                    </h3>
+                    <div class="card-tools">
+                        @if (product.IsActive)
+                        {
+                            <span class="badge badge-success" style="font-size: 0.75rem;">نشط</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-secondary" style="font-size: 0.75rem;">غير نشط</span>
+                        }
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 0.75rem 1rem;">
+                    <!-- Basic Info -->
+                    <div class="mb-2">
+                        <p class="mb-1" style="font-size: 0.9rem;">
+                            <strong><i class="fas fa-globe"></i> الاسم الإنجليزي:</strong> @product.NameEn
+                        </p>
+                        <p class="mb-1" style="font-size: 0.85rem; color: #666;">
+                            <strong><i class="fas fa-tag"></i> التصنيف:</strong> @product.CategoryAr (@product.CategoryEn)
+                        </p>
+                        @if (!string.IsNullOrEmpty(product.SubtitleAr))
+                        {
+                            <p class="mb-1" style="font-size: 0.85rem; color: #666;">
+                                <strong><i class="fas fa-heading"></i> العنوان الفرعي:</strong>
+                                @(product.SubtitleAr.Length > 50 ? product.SubtitleAr.Substring(0, 50) + "..." : product.SubtitleAr)
+                            </p>
+                        }
+                    </div>
+
+                    <!-- Counts Info Boxes -->
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <div class="info-box" style="min-height: 60px; margin-bottom: 0; background-color: #e3f2fd;">
+                                <span class="info-box-icon" style="width: 50px; height: 60px; line-height: 60px; background-color: #2196F3;">
+                                    <i class="fas fa-list-ul" style="font-size: 1.3rem; color: white;"></i>
+                                </span>
+                                <div class="info-box-content" style="padding: 0.5rem;">
+                                    <span class="info-box-text" style="font-size: 0.75rem;">مواصفات</span>
+                                    <span class="info-box-number" style="font-size: 1rem;">@specsCount</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="info-box" style="min-height: 60px; margin-bottom: 0; background-color: #fff3e0;">
+                                <span class="info-box-icon" style="width: 50px; height: 60px; line-height: 60px; background-color: #FF9800;">
+                                    <i class="fas fa-palette" style="font-size: 1.3rem; color: white;"></i>
+                                </span>
+                                <div class="info-box-content" style="padding: 0.5rem;">
+                                    <span class="info-box-text" style="font-size: 0.75rem;">ألوان</span>
+                                    <span class="info-box-number" style="font-size: 1rem;">@colorsCount</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="info-box" style="min-height: 60px; margin-bottom: 0; background-color: #f3e5f5;">
+                                <span class="info-box-icon" style="width: 50px; height: 60px; line-height: 60px; background-color: #9C27B0;">
+                                    <i class="fas fa-drafting-compass" style="font-size: 1.3rem; color: white;"></i>
+                                </span>
+                                <div class="info-box-content" style="padding: 0.5rem;">
+                                    <span class="info-box-text" style="font-size: 0.75rem;">تصاميم</span>
+                                    <span class="info-box-number" style="font-size: 1rem;">@designsCount</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary btn-sm btn-block">
+                                <i class="fas fa-edit"></i> تعديل المنتج
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <div class="dropdown">
+                                <button class="btn btn-info btn-sm btn-block dropdown-toggle" type="button" id="dropdownMenu@(product.Id)" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cogs"></i> إدارة التفاصيل
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu@(product.Id)" style="font-size: 0.85rem;">
+                                    <a class="dropdown-item" asp-action="EditSpecifications" asp-route-id="@product.Id">
+                                        <i class="fas fa-list-ul text-primary"></i> المواصفات (@specsCount)
+                                    </a>
+                                    <a class="dropdown-item" asp-action="EditColors" asp-route-id="@product.Id">
+                                        <i class="fas fa-palette text-warning"></i> الألوان (@colorsCount)
+                                    </a>
+                                    <a class="dropdown-item" asp-action="EditDesignOptions" asp-route-id="@product.Id">
+                                        <i class="fas fa-drafting-compass text-purple"></i> التصاميم (@designsCount)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> لا توجد منتجات حالياً
+    </div>
+}

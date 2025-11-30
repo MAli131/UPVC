@@ -1,0 +1,152 @@
+@model UPVC.Models.Product
+@{
+    ViewData["Title"] = "إدارة الخيارات التصميمية";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+    var productDetails = Model.ProductDetails;
+    var productDesigns = productDetails?.DesignOptions?.OrderBy(pdo => pdo.DisplayOrder).ToList() ?? new List<UPVC.Models.ProductDesignOption>();
+}
+
+<!-- Info Box -->
+<div class="row mb-2">
+    <div class="col-12">
+        <div class="info-box" style="min-height: 70px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <span class="info-box-icon" style="width: 70px; height: 70px; line-height: 70px; background-color: rgba(255,255,255,0.2);">
+                <i class="fas fa-drafting-compass" style="font-size: 1.8rem; color: white;"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text" style="font-size: 0.9rem; color: white;">إدارة الخيارات التصميمية - @Model.NameAr</span>
+                <span class="info-box-number" style="font-size: 1.2rem; color: white;">@productDesigns.Count تصميم</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Back Button -->
+<div class="row mb-2">
+    <div class="col-12">
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-right"></i> العودة للقائمة
+        </a>
+    </div>
+</div>
+
+<!-- Main Layout -->
+<div class="row">
+    @foreach (var pdo in productDesigns)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card @(pdo.IsActive ? "card-primary" : "card-secondary") card-outline">
+                <div class="card-body text-center" style="padding: 0.75rem;">
+                    <!-- Design Image -->
+                    <div style="width: 100%; height: 150px; margin-bottom: 0.75rem; background-color: #f8f9fa; border-radius: 5px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        @if (!string.IsNullOrEmpty(pdo.DesignOption?.ImagePath))
+                        {
+                            <img src="@pdo.DesignOption.ImagePath" alt="@pdo.DesignOption.AltText" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <i class="fas fa-image" style="font-size: 3rem; color: #ccc;"></i>
+                        }
+                    </div>
+                    
+                    <!-- Alt Text -->
+                    @if (!string.IsNullOrEmpty(pdo.DesignOption?.AltText))
+                    {
+                        <p style="font-size: 0.8rem; color: #666; margin-bottom: 0.5rem;">@pdo.DesignOption.AltText</p>
+                    }
+                    
+                    <p style="font-size: 0.75rem; color: #999; margin-bottom: 0.75rem;">
+                        <i class="fas fa-sort-numeric-up"></i> ترتيب: @pdo.DisplayOrder
+                    </p>
+                    
+                    <!-- Toggle Switch -->
+                    <div class="custom-control custom-switch" style="display: inline-block;">
+                        <input type="checkbox" 
+                               class="custom-control-input design-toggle" 
+                               id="design@(pdo.Id)" 
+                               data-id="@pdo.Id"
+                               data-design-id="@pdo.DesignOptionId"
+                               @(pdo.IsActive ? "checked" : "")
+                               onchange="toggleDesign(this)">
+                        <label class="custom-control-label" for="design@(pdo.Id)" style="font-size: 0.85rem;">
+                            @(pdo.IsActive ? "نشط" : "غير نشط")
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!productDesigns.Any())
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> لا توجد خيارات تصميمية لهذا المنتج
+    </div>
+}
+
+<div class="row mt-2">
+    <div class="col-12">
+        <div class="callout callout-info" style="padding: 0.5rem 0.75rem;">
+            <p style="margin: 0; font-size: 0.8rem;">
+                <i class="fas fa-info-circle"></i>
+                <strong>ملاحظة:</strong>
+                يمكنك فقط تفعيل أو إلغاء تفعيل الخيارات التصميمية لهذا المنتج (إظهار/إخفاء).
+                الصور والتصاميم نفسها محفوظة ولا يمكن تعديلها من هنا.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+var currentProductDetailsId = @(productDetails?.Id ?? 0);
+
+function toggleDesign(checkbox) {
+    var designId = checkbox.getAttribute('data-design-id');
+    var isActive = checkbox.checked;
+    var card = checkbox.closest('.card');
+    var label = checkbox.nextElementSibling;
+
+    // Send AJAX request
+    fetch('/Admin/Products/ToggleDesignOption', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        },
+        body: 'productDetailsId=' + currentProductDetailsId + '&designOptionId=' + designId + '&isActive=' + isActive
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update card styling
+            if (isActive) {
+                card.classList.remove('card-secondary');
+                card.classList.add('card-primary');
+                label.textContent = 'نشط';
+            } else {
+                card.classList.remove('card-primary');
+                card.classList.add('card-secondary');
+                label.textContent = 'غير نشط';
+            }
+            
+            showToast('success', data.message);
+        } else {
+            // Revert checkbox on error
+            checkbox.checked = !isActive;
+            showToast('error', data.message);
+        }
+    })
+    .catch(error => {
+        checkbox.checked = !isActive;
+        showToast('error', 'حدث خطأ أثناء الحفظ');
+        console.error('Error:', error);
+    });
+}
+
+function showToast(type, message) {
+    alert(message);
+}
+</script>
+
+@Html.AntiForgeryToken()

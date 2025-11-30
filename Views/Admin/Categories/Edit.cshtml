@@ -4,67 +4,144 @@
     Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2><i class="bi bi-pencil-square me-2"></i>تعديل الفئة</h2>
-        <p class="text-muted">تحديث اسم الفئة بالعربي والإنجليزي</p>
-    </div>
-    <a asp-action="Index" class="btn btn-outline-secondary">
-        <i class="bi bi-arrow-right me-2"></i>رجوع للقائمة
-    </a>
-</div>
-
+<!-- Success Alert -->
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle me-2"></i>@TempData["SuccessMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
-            @Html.AntiForgeryToken()
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-4">
-                        <label asp-for="NameAr" class="form-label fw-bold">
-                            <i class="bi bi-translate me-2"></i>اسم الفئة (عربي) <span class="text-danger">*</span>
-                        </label>
-                        <input asp-for="NameAr" class="form-control form-control-lg" placeholder="أدخل اسم الفئة بالعربي" required />
-                        <span asp-validation-for="NameAr" class="text-danger"></span>
-                        <small class="text-muted d-block mt-2">مثال: صاحب منزل، مهندس معماري، مورد</small>
+<div class="row">
+    <!-- Main Edit Form Card -->
+    <div class="col-lg-8">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-edit"></i> تعديل بيانات الفئة
+                </h3>
+            </div>
+
+            <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                @Html.AntiForgeryToken()
+                
+                <div class="card-body">
+                    <!-- Arabic Name Card -->
+                    <div class="card card-success card-outline mb-3">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-language"></i> النسخة العربية
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="NameAr">
+                                    اسم الفئة بالعربي <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                                    </div>
+                                    <input asp-for="NameAr" class="form-control form-control-lg" placeholder="أدخل اسم الفئة بالعربي" required />
+                                </div>
+                                <span asp-validation-for="NameAr" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    <i class="fas fa-lightbulb text-warning"></i> مثال: صاحب منزل، مهندس معماري، مورد، مقاول
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- English Name Card -->
+                    <div class="card card-info card-outline">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-globe"></i> English Version
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="NameEn">
+                                    Category Name in English <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                                    </div>
+                                    <input asp-for="NameEn" class="form-control form-control-lg" placeholder="Enter category name in English" required />
+                                </div>
+                                <span asp-validation-for="NameEn" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    <i class="fas fa-lightbulb text-warning"></i> Example: Home owner, Architect, Supplier, Contractor
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="mb-4">
-                        <label asp-for="NameEn" class="form-label fw-bold">
-                            <i class="bi bi-globe me-2"></i>اسم الفئة (English) <span class="text-danger">*</span>
-                        </label>
-                        <input asp-for="NameEn" class="form-control form-control-lg" placeholder="Enter category name in English" required />
-                        <span asp-validation-for="NameEn" class="text-danger"></span>
-                        <small class="text-muted d-block mt-2">Example: Home owner, Architect, Supplier</small>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-save"></i> حفظ التغييرات
+                    </button>
+                    <a asp-action="Index" class="btn btn-default btn-lg">
+                        <i class="fas fa-arrow-right"></i> رجوع للقائمة
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Info Sidebar -->
+    <div class="col-lg-4">
+        <!-- Category Info Card -->
+        <div class="card card-warning card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-info-circle"></i> معلومات الفئة
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="info-box bg-light">
+                    <span class="info-box-icon bg-warning">
+                        <i class="fas fa-hashtag"></i>
+                    </span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">رقم الفئة</span>
+                        <span class="info-box-number">#@Model.Id</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="alert alert-info">
-                <i class="bi bi-info-circle me-2"></i>
-                <strong>ملاحظة:</strong> سيتم عرض هذه الفئة في القائمة المنسدلة لنموذج الاتصال في الموقع.
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-info-circle"></i> كيف تُستخدم؟</h5>
+                    <p class="mb-0">سيتم عرض هذه الفئة في القائمة المنسدلة لنموذج الاتصال في الموقع العام.</p>
+                </div>
             </div>
+        </div>
 
-            <div class="d-flex gap-2 mt-4">
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="bi bi-save me-2"></i>حفظ التغييرات
-                </button>
-                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
-                    <i class="bi bi-x-circle me-2"></i>إلغاء
-                </a>
+        <!-- Tips Card -->
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-lightbulb"></i> نصائح مفيدة
+                </h3>
             </div>
-        </form>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i> استخدم أسماء واضحة ومفهومة
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i> تأكد من الترجمة الصحيحة
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i> احرص على التناسق في التسمية
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
