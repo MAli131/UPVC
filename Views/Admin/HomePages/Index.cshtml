@@ -18,13 +18,13 @@
 <!-- Info Box -->
 <div class="row mb-3">
     <div class="col-12">
-        <div class="info-box bg-gradient-info" style="min-height: 80px;">
-            <span class="info-box-icon" style="width: 80px; height: 80px; line-height: 80px;">
-                <i class="fas fa-home" style="font-size: 2rem;"></i>
+        <div class="info-box bg-gradient-info" style="min-height: 100px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <span class="info-box-icon" style="width: 90px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-home" style="font-size: 2.5rem;"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text" style="font-size: 1rem;">إدارة صفحات الرئيسية</span>
-                <span class="info-box-number" style="font-size: 1.5rem;">@Model.Count() صفحة</span>
+                <span class="info-box-text" style="font-size: 1.1rem; font-weight: 500;">إدارة صفحات الرئيسية</span>
+                <span class="info-box-number" style="font-size: 2rem; font-weight: bold;">@Model.Count() صفحة</span>
             </div>
         </div>
     </div>
@@ -68,79 +68,78 @@
             }
 
             <div class="col-lg-6 col-12 mb-3">
-                <div class="card card-outline card-primary" style="margin-bottom: 0;">
-                    <div class="card-header" style="padding: 0.75rem 1rem;">
-                        <h3 class="card-title" style="font-size: 1.1rem;">
-                            <i class="@pageIcon" style="font-size: 1rem;"></i> @homePage.PageKey
+                <div class="card shadow-sm" style="border-radius: 10px; overflow: hidden; border: none;">
+                    <div class="card-header @badgeColor" style="padding: 1rem 1.25rem; border: none;">
+                        <h3 class="card-title mb-0" style="font-size: 1.2rem; font-weight: 600; color: #fff;">
+                            <i class="@pageIcon"></i> @homePage.PageKey
                         </h3>
                         <div class="card-tools" style="float: left; direction: ltr;">
                             @if (homePage.IsActive)
                             {
-                                <span class="badge badge-success" style="font-size: 0.85rem; padding: 0.35rem 0.65rem;">
+                                <span class="badge bg-light text-success" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;">
                                     <i class="fas fa-check-circle"></i> نشط
                                 </span>
                             }
                             else
                             {
-                                <span class="badge badge-secondary" style="font-size: 0.85rem; padding: 0.35rem 0.65rem;">
+                                <span class="badge bg-light text-secondary" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;">
                                     <i class="fas fa-times-circle"></i> غير نشط
                                 </span>
                             }
                         </div>
                     </div>
-                    <div class="card-body" style="padding: 0.75rem;">
-                        <!-- Page Type Badge -->
-                        <div class="mb-2">
-                            <span class="badge @badgeColor" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;">
+                    <div class="card-body" style="padding: 1.25rem; background-color: #f8f9fa;">
+                        <!-- Page Description -->
+                        <div class="mb-3 text-center">
+                            <span class="badge badge-light" style="font-size: 1rem; padding: 0.6rem 1.2rem; border: 2px solid #dee2e6;">
                                 <i class="@pageIcon"></i> @pageDescription
                             </span>
                         </div>
 
                         <!-- Title Info -->
-                        <div class="info-box @badgeColor" style="min-height: 70px; margin-bottom: 0.75rem;">
-                            <span class="info-box-icon" style="width: 60px; height: 70px; line-height: 70px;">
-                                <i class="fas fa-heading" style="font-size: 1.5rem;"></i>
-                            </span>
-                            <div class="info-box-content">
-                                <span class="info-box-text" style="font-size: 0.85rem;">العنوان الرئيسي</span>
-                                <span class="info-box-number" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;" title="@homePage.TitleAr">
-                                    @(homePage.TitleAr.Length > 40 ? homePage.TitleAr.Substring(0, 40) + "..." : homePage.TitleAr)
-                                </span>
-                            </div>
+                        <div class="alert alert-light border" style="margin-bottom: 1rem; padding: 1rem;">
+                            <h6 class="mb-2" style="font-size: 0.9rem; color: #6c757d;">
+                                <i class="fas fa-heading"></i> العنوان الرئيسي
+                            </h6>
+                            <p class="mb-0 font-weight-bold" style="font-size: 1rem; color: #495057;" title="@homePage.TitleAr">
+                                @(homePage.TitleAr.Length > 50 ? homePage.TitleAr.Substring(0, 50) + "..." : homePage.TitleAr)
+                            </p>
                         </div>
 
                         <!-- Sections Info (if exists) -->
                         @if (sectionsCount > 0)
                         {
-                            <div class="callout callout-info" style="padding: 0.5rem; margin-bottom: 0.75rem;">
-                                <p class="mb-0" style="font-size: 0.85rem;">
-                                    <i class="fas fa-list"></i> <strong>الأقسام:</strong> @sectionsCount قسم
-                                </p>
+                            <div class="d-flex align-items-center" style="background-color: #fff; padding: 0.75rem; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                <i class="fas fa-list fa-2x text-info mr-3"></i>
+                                <div>
+                                    <small class="text-muted d-block">الأقسام المتاحة</small>
+                                    <strong style="font-size: 1.1rem;">@sectionsCount قسم</strong>
+                                </div>
                             </div>
                         }
                     </div>
-                    <div class="card-footer" style="padding: 0.75rem 1rem;">
+                    <div class="card-footer bg-white" style="padding: 1rem 1.25rem; border-top: 1px solid #dee2e6;">
                         @if (homePage.PageKey == "Index")
                         {
-                            <a asp-action="EditIndex" class="btn btn-primary" style="font-size: 0.95rem; padding: 0.45rem 1rem;">
+                            <a asp-action="EditIndex" class="btn btn-primary btn-block" style="font-size: 1rem; padding: 0.6rem; border-radius: 8px;">
                                 <i class="fas fa-edit"></i> تعديل الصفحة
                             </a>
                         }
                         else if (homePage.PageKey == "Home2")
                         {
-                            <a asp-action="EditHome2" class="btn btn-success" style="font-size: 0.95rem; padding: 0.45rem 1rem;">
+                            <a asp-action="EditHome2" class="btn btn-success btn-block" style="font-size: 1rem; padding: 0.6rem; border-radius: 8px;">
                                 <i class="fas fa-edit"></i> تعديل الصفحة والأقسام
                             </a>
                         }
                         else if (homePage.PageKey == "Home3")
                         {
-                            <a asp-action="EditHome3" class="btn btn-warning" style="font-size: 0.95rem; padding: 0.45rem 1rem;">
+                            <a asp-action="EditHome3" class="btn btn-warning btn-block" style="font-size: 1rem; padding: 0.6rem; border-radius: 8px;">
                                 <i class="fas fa-edit"></i> تعديل الصفحة والأقسام
                             </a>
                         }
                         else if (homePage.PageKey == "Home4")
                         {
-                            <a asp-action="EditHome4" class="btn" style="background-color: #6f42c1; color: white; font-size: 0.95rem; padding: 0.45rem 1rem;">
+                            <a asp-action="EditHome4" class="btn btn-block" style="background-color: #6f42c1; color: white; font-size: 1rem; padding: 0.6rem; border-radius: 8px;">
                                 <i class="fas fa-edit"></i> تعديل الصفحة
                             </a>
                         }

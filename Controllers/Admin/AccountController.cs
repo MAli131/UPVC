@@ -84,5 +84,60 @@ namespace UPVC.Controllers.Admin
             TempData["LogoutMessage"] = "تم تسجيل الخروج بنجاح. يمكنك الآن الوصول للموقع العام.";
             return RedirectToAction("Login");
         }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        {
+            // Check if user is authenticated
+            var adminId = HttpContext.Session.GetInt32("AdminId");
+            if (adminId == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(currentPassword) || string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmPassword))
+            {
+                TempData["Error"] = "جميع الحقول مطلوبة";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                TempData["Error"] = "كلمة السر الجديدة وتأكيد كلمة السر غير متطابقتين";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
+            if (newPassword.Length < 6)
+            {
+                TempData["Error"] = "كلمة السر الجديدة يجب أن تكون 6 أحرف على الأقل";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
+            // Get admin user
+            var admin = await _context.AdminUsers.FindAsync(adminId.Value);
+            if (admin == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Verify current password
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(currentPassword, admin.PasswordHash);
+            if (!isValidPassword)
+            {
+                TempData["Error"] = "كلمة السر الحالية غير صحيحة";
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
+            // Hash new password and update
+            admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            admin.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم تغيير كلمة السر بنجاح";
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
     }
 }

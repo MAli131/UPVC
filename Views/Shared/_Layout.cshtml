@@ -3,7 +3,7 @@
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
 }
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="@(isArabic ? "ar" : "en")" dir="@(isArabic ? "rtl" : "ltr")">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,6 +22,12 @@
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    
+    <!-- Chatbot Widget Styles -->
+    <link rel="stylesheet" href="~/css/chatbot.css" asp-append-version="true" />
+    
+    <!-- Font Awesome for Chatbot Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     @await RenderSectionAsync("Styles", required: false)
 </head>
@@ -117,6 +123,16 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <!-- Language toggle (site-wide) -->
     <script src="/js/lang.js"></script>
+    
+    <!-- Chatbot Widget -->
+    <script>
+        // Pass company info to chatbot
+        window.chatbotConfig = {
+            whatsappNumber: '@(companyInfo?.Mobile ?? companyInfo?.Phone ?? "")',
+            contactUrl: '@Url.Action("Index", "Contact")'
+        };
+    </script>
+    <script src="~/js/chatbot.js" asp-append-version="true"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>
