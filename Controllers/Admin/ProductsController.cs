@@ -63,6 +63,15 @@ namespace UPVC.Controllers.Admin
                 return NotFound();
 
             ModelState.Remove("ProductDetails");
+            ModelState.Remove("ImagePath");
+            ModelState.Remove("ThumbnailPath");
+            ModelState.Remove("GalleryImagesJson");
+            ModelState.Remove("BrochurePath");
+            ModelState.Remove("CreatedAt");
+            ModelState.Remove("DisplayOrder");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("DeletedAt");
+            ModelState.Remove("UpdatedAt");
 
             if (!ModelState.IsValid)
             {

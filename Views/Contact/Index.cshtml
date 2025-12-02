@@ -201,8 +201,8 @@
                 }
                 <form class="row" asp-action="Index" asp-controller="Contact" method="post">
                     @Html.AntiForgeryToken()
-                    <input type="hidden" id="categoryId" name="NewMessage.CategoryId" />
-                    <input type="hidden" id="categoryName" name="NewMessage.Category" />
+                    <input type="hidden" id="categoryId" name="CategoryId" />
+                    <input type="hidden" id="categoryName" name="Category" />
                     <div class="col-12 col-md-5">
                         <input type="text" class="form-control" id="name" placeholder="@(isArabic ? "الاسم" : "Name")" asp-for="NewMessage.Name" required>
                         <span asp-validation-for="NewMessage.Name" class="text-danger"></span>
@@ -300,13 +300,7 @@
 </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
-<script src="~/js/lang.js"></script>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/lang.js"></script>
     <script>
         function setCategoryData(selectElement) {
             var selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -337,4 +331,6 @@
             }
         });
     </script>
-}
+</body>
+
+</html>

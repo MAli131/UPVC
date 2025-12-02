@@ -127,7 +127,7 @@ namespace UPVC.Services
                         </tr>
                         <tr>
                             <td style='padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;'><strong>Submitted At:</strong></td>
-                            <td style='padding: 10px; border: 1px solid #ddd;'>{DateTime.Now:yyyy-MM-dd HH:mm:ss}</td>
+                            <td style='padding: 10px; border: 1px solid #ddd;'>{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", new System.Globalization.CultureInfo("en-US"))}</td>
                         </tr>
                     </table>
                     <p style='margin-top: 20px; color: #666;'>

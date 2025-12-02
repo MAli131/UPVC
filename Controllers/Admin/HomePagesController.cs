@@ -51,6 +51,13 @@ namespace UPVC.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditIndex(HomePage homePage)
         {
+            ModelState.Remove("Sections");
+            ModelState.Remove("ImagePath");
+            ModelState.Remove("SecondaryImagePath");
+            ModelState.Remove("CreatedAt");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("DeletedAt");
+
             var existingPage = await _context.HomePages
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.PageKey == "Index");
@@ -69,6 +76,16 @@ namespace UPVC.Controllers.Admin
             homePage.IsDeleted = existingPage.IsDeleted;
             homePage.DeletedAt = existingPage.DeletedAt;
             homePage.UpdatedAt = DateTime.Now;
+            homePage.IsActive = true;
+            // Preserve ContentAr and ContentEn if they are empty
+            if (string.IsNullOrWhiteSpace(homePage.ContentAr))
+            {
+                homePage.ContentAr = existingPage.ContentAr;
+            }
+            if (string.IsNullOrWhiteSpace(homePage.ContentEn))
+            {
+                homePage.ContentEn = existingPage.ContentEn;
+            }
 
             _context.Update(homePage);
             await _context.SaveChangesAsync();
@@ -101,6 +118,11 @@ namespace UPVC.Controllers.Admin
         public async Task<IActionResult> EditHome2(HomePage homePage)
         {
             ModelState.Remove("Sections");
+            ModelState.Remove("ImagePath");
+            ModelState.Remove("SecondaryImagePath");
+            ModelState.Remove("CreatedAt");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("DeletedAt");
 
             var existingPage = await _context.HomePages
                 .AsNoTracking()
@@ -120,6 +142,16 @@ namespace UPVC.Controllers.Admin
             homePage.IsDeleted = existingPage.IsDeleted;
             homePage.DeletedAt = existingPage.DeletedAt;
             homePage.UpdatedAt = DateTime.Now;
+            homePage.IsActive = true;
+            // Preserve ContentAr and ContentEn if they are empty
+            if (string.IsNullOrWhiteSpace(homePage.ContentAr))
+            {
+                homePage.ContentAr = existingPage.ContentAr;
+            }
+            if (string.IsNullOrWhiteSpace(homePage.ContentEn))
+            {
+                homePage.ContentEn = existingPage.ContentEn;
+            }
 
             _context.Update(homePage);
             await _context.SaveChangesAsync();
@@ -152,6 +184,11 @@ namespace UPVC.Controllers.Admin
         public async Task<IActionResult> EditHome3(HomePage homePage)
         {
             ModelState.Remove("Sections");
+            ModelState.Remove("ImagePath");
+            ModelState.Remove("SecondaryImagePath");
+            ModelState.Remove("CreatedAt");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("DeletedAt");
 
             var existingPage = await _context.HomePages
                 .AsNoTracking()
@@ -171,6 +208,16 @@ namespace UPVC.Controllers.Admin
             homePage.IsDeleted = existingPage.IsDeleted;
             homePage.DeletedAt = existingPage.DeletedAt;
             homePage.UpdatedAt = DateTime.Now;
+            homePage.IsActive = true;
+            // Preserve ContentAr and ContentEn if they are empty
+            if (string.IsNullOrWhiteSpace(homePage.ContentAr))
+            {
+                homePage.ContentAr = existingPage.ContentAr;
+            }
+            if (string.IsNullOrWhiteSpace(homePage.ContentEn))
+            {
+                homePage.ContentEn = existingPage.ContentEn;
+            }
 
             _context.Update(homePage);
             await _context.SaveChangesAsync();
@@ -201,6 +248,13 @@ namespace UPVC.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditHome4(HomePage homePage)
         {
+            ModelState.Remove("Sections");
+            ModelState.Remove("ImagePath");
+            ModelState.Remove("SecondaryImagePath");
+            ModelState.Remove("CreatedAt");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("DeletedAt");
+
             var existingPage = await _context.HomePages
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.PageKey == "Home4");
@@ -219,6 +273,16 @@ namespace UPVC.Controllers.Admin
             homePage.IsDeleted = existingPage.IsDeleted;
             homePage.DeletedAt = existingPage.DeletedAt;
             homePage.UpdatedAt = DateTime.Now;
+            homePage.IsActive = true;
+            // Preserve ContentAr and ContentEn if they are empty
+            if (string.IsNullOrWhiteSpace(homePage.ContentAr))
+            {
+                homePage.ContentAr = existingPage.ContentAr;
+            }
+            if (string.IsNullOrWhiteSpace(homePage.ContentEn))
+            {
+                homePage.ContentEn = existingPage.ContentEn;
+            }
 
             _context.Update(homePage);
             await _context.SaveChangesAsync();
@@ -234,6 +298,9 @@ namespace UPVC.Controllers.Admin
         public async Task<IActionResult> EditSection(HomePageSection homePageSection)
         {
             ModelState.Remove("HomePage"); // Ignore navigation property
+            ModelState.Remove("CreatedAt");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("DeletedAt");
 
             if (!ModelState.IsValid)
             {
@@ -267,7 +334,7 @@ namespace UPVC.Controllers.Admin
             homePageSection.IsDeleted = existingSection.IsDeleted;
             homePageSection.DeletedAt = existingSection.DeletedAt;
             homePageSection.UpdatedAt = DateTime.Now;
-
+            homePageSection.IsActive = true;
             _context.Update(homePageSection);
             await _context.SaveChangesAsync();
 
@@ -346,7 +413,7 @@ namespace UPVC.Controllers.Admin
                     homePage.IsDeleted = existingPage.IsDeleted;
                     homePage.DeletedAt = existingPage.DeletedAt;
                     homePage.UpdatedAt = DateTime.Now;
-
+                    homePage.IsActive = true;
                     _context.Update(homePage);
                     await _context.SaveChangesAsync();
                     

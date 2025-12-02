@@ -6,64 +6,79 @@
 <!-- Statistics Cards -->
 <div class="row">
     <div class="col-lg-3 col-md-6 col-12 mb-3">
-        <div class="info-box bg-primary" style="min-height: 100px;">
-            <span class="info-box-icon" style="width: 90px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-box" style="font-size: 2.5rem;"></i>
+        <div class="info-box bg-primary">
+            <span class="info-box-icon">
+                <i class="fas fa-box"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text" style="font-size: 1rem;">إجمالي المنتجات</span>
-                <span class="info-box-number" style="font-size: 2rem; font-weight: bold;">@ViewBag.TotalProducts</span>
+                <span class="info-box-text">إجمالي المنتجات</span>
+                <span class="info-box-number">@ViewBag.TotalProducts</span>
             </div>
+            <a asp-controller="Products" asp-action="Index" class="small-box-footer">
+                المزيد <i class="fas fa-arrow-circle-left"></i>
+            </a>
         </div>
     </div>
     
     <div class="col-lg-3 col-md-6 col-12 mb-3">
-        <div class="info-box bg-success" style="min-height: 100px;">
-            <span class="info-box-icon" style="width: 90px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-check-circle" style="font-size: 2.5rem;"></i>
+        <div class="info-box bg-success">
+            <span class="info-box-icon">
+                <i class="fas fa-check-circle"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text" style="font-size: 1rem;">المنتجات النشطة</span>
-                <span class="info-box-number" style="font-size: 2rem; font-weight: bold;">@ViewBag.ActiveProducts</span>
+                <span class="info-box-text">المنتجات النشطة</span>
+                <span class="info-box-number">@ViewBag.ActiveProducts</span>
             </div>
+            <a asp-controller="Products" asp-action="Index" class="small-box-footer">
+                المزيد <i class="fas fa-arrow-circle-left"></i>
+            </a>
         </div>
     </div>
     
     <div class="col-lg-3 col-md-6 col-12 mb-3">
-        <div class="info-box bg-info" style="min-height: 100px;">
-            <span class="info-box-icon" style="width: 90px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-home" style="font-size: 2.5rem;"></i>
+        <div class="info-box bg-info">
+            <span class="info-box-icon">
+                <i class="fas fa-home"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text" style="font-size: 1rem;">صفحات الرئيسية</span>
-                <span class="info-box-number" style="font-size: 2rem; font-weight: bold;">@ViewBag.TotalHomePages</span>
+                <span class="info-box-text">صفحات الرئيسية</span>
+                <span class="info-box-number">@ViewBag.TotalHomePages</span>
             </div>
+            <a asp-controller="HomePages" asp-action="Index" class="small-box-footer">
+                المزيد <i class="fas fa-arrow-circle-left"></i>
+            </a>
         </div>
     </div>
 
     <div class="col-lg-3 col-md-6 col-12 mb-3">
-        <div class="info-box bg-warning" style="min-height: 100px;">
-            <span class="info-box-icon" style="width: 90px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-inbox" style="font-size: 2.5rem;"></i>
+        <div class="info-box bg-warning">
+            <span class="info-box-icon">
+                <i class="fas fa-inbox"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text" style="font-size: 1rem;">إجمالي الرسائل</span>
-                <span class="info-box-number" style="font-size: 2rem; font-weight: bold;">@ViewBag.TotalMessages</span>
+                <span class="info-box-text">إجمالي الرسائل</span>
+                <span class="info-box-number">@ViewBag.TotalMessages</span>
             </div>
+            <a asp-controller="ContactMessages" asp-action="Index" class="small-box-footer">
+                المزيد <i class="fas fa-arrow-circle-left"></i>
+            </a>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-3 col-md-6 col-12 mb-3">
-        <div class="info-box bg-danger" style="min-height: 100px;">
-            <span class="info-box-icon" style="width: 90px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-envelope" style="font-size: 2.5rem;"></i>
+        <div class="info-box bg-danger">
+            <span class="info-box-icon">
+                <i class="fas fa-envelope"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text" style="font-size: 1rem;">رسائل غير مقروءة</span>
-                <span class="info-box-number" style="font-size: 2rem; font-weight: bold;">@ViewBag.UnreadMessages</span>
+                <span class="info-box-text">رسائل غير مقروءة</span>
+                <span class="info-box-number">@ViewBag.UnreadMessages</span>
             </div>
+            <a asp-controller="ContactMessages" asp-action="Index" class="small-box-footer">
+                المزيد <i class="fas fa-arrow-circle-left"></i>
+            </a>
         </div>
     </div>
 </div>
@@ -80,57 +95,57 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-boxes fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">عرض المنتجات</span>
+                        <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-block">
+                            <i class="fas fa-boxes mb-2"></i>
+                            <span>عرض المنتجات</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="HomePages" asp-action="Index" class="btn btn-info btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-edit fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">تعديل الصفحات</span>
+                        <a asp-controller="HomePages" asp-action="Index" class="btn btn-info btn-block">
+                            <i class="fas fa-edit mb-2"></i>
+                            <span>تعديل الصفحات</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="CompanyInfo" asp-action="Edit" class="btn btn-secondary btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-building fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">بيانات الشركة</span>
+                        <a asp-controller="CompanyInfo" asp-action="Edit" class="btn btn-secondary btn-block">
+                            <i class="fas fa-building mb-2"></i>
+                            <span>بيانات الشركة</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="SocialMedia" asp-action="Index" class="btn btn-success btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-share-alt fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">حسابات التواصل</span>
+                        <a asp-controller="SocialMedia" asp-action="Index" class="btn btn-success btn-block">
+                            <i class="fas fa-share-alt mb-2"></i>
+                            <span>حسابات التواصل</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="ContactPage" asp-action="Edit" class="btn btn-warning btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-envelope fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">صفحة اتصل بنا</span>
+                        <a asp-controller="ContactPage" asp-action="Edit" class="btn btn-warning btn-block">
+                            <i class="fas fa-envelope mb-2"></i>
+                            <span>صفحة اتصل بنا</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="Categories" asp-action="Index" class="btn btn-danger btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-tags fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">فئات التواصل</span>
+                        <a asp-controller="Categories" asp-action="Index" class="btn btn-danger btn-block">
+                            <i class="fas fa-tags mb-2"></i>
+                            <span>فئات التواصل</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="AboutPages" asp-action="Index" class="btn btn-block btn-lg" style="background-color: #6f42c1; color: white; border-color: #6f42c1; padding: 1rem;">
-                            <i class="fas fa-info-circle fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">صفحات من نحن</span>
+                        <a asp-controller="AboutPages" asp-action="Index" class="btn btn-primary btn-block">
+                            <i class="fas fa-info-circle mb-2"></i>
+                            <span>صفحات من نحن</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="ContactMessages" asp-action="Index" class="btn btn-warning btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-inbox fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">رسائل العملاء</span>
+                        <a asp-controller="ContactMessages" asp-action="Index" class="btn btn-warning btn-block">
+                            <i class="fas fa-inbox mb-2"></i>
+                            <span>رسائل العملاء</span>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 mb-3">
-                        <a asp-controller="ChatbotFAQ" asp-action="Index" class="btn btn-info btn-block btn-lg" style="padding: 1rem;">
-                            <i class="fas fa-comments fa-2x d-block mb-2"></i>
-                            <span style="font-size: 1.1rem;">الشات بوت</span>
+                        <a asp-controller="ChatbotFAQ" asp-action="Index" class="btn btn-info btn-block">
+                            <i class="fas fa-comments mb-2"></i>
+                            <span>الشات بوت</span>
                         </a>
                     </div>
                 </div>

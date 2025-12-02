@@ -51,7 +51,8 @@ class ChatbotWidget {
                 assistantName: 'مساعد EMAPEN',
                 onlineNow: 'متصل الآن',
                 contactUs: 'تواصل معنا',
-                whatsapp: 'واتساب'
+                whatsapp: 'واتساب',
+                badge: 'اسأل الآن'
             },
             en: {
                 openChat: 'Open chatbot',
@@ -59,7 +60,8 @@ class ChatbotWidget {
                 assistantName: 'EMAPEN Assistant',
                 onlineNow: 'Online now',
                 contactUs: 'Contact Us',
-                whatsapp: 'WhatsApp'
+                whatsapp: 'WhatsApp',
+                badge: 'Ask Now'
             }
         };
         
@@ -69,7 +71,7 @@ class ChatbotWidget {
             <div class="chatbot-widget" id="chatbotWidget">
                 <button class="chatbot-toggle-btn" id="chatbotToggle" aria-label="${t.openChat}">
                     <i class="fas fa-comments"></i>
-                    <span class="chatbot-badge" id="chatbotBadge" style="display: none;">جديد</span>
+                    <span class="chatbot-badge" id="chatbotBadge" style="display: none;">${t.badge}</span>
                 </button>
                 
                 <div class="chatbot-window" id="chatbotWindow">

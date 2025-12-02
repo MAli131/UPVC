@@ -21,6 +21,9 @@
     
     <!-- Bootstrap Icons (للأيقونات الموجودة) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Enhanced Admin Dashboard Styles -->
+    <link rel="stylesheet" href="~/css/admin-enhanced.css">
 
     <style>
         /* RTL Custom Styles */
@@ -66,8 +69,6 @@
             height: 100vh;
             overflow-x: hidden;
             width: 250px;
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%) !important;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.15);
         }
         
         .content-wrapper,
@@ -120,162 +121,9 @@
             }
         }
         
-        /* Sidebar Navigation Links - RTL */
-        .nav-sidebar .nav-link {
-            padding: 0.75rem 1rem 0.75rem 1.5rem;
-            display: flex !important;
-            align-items: center;
-            flex-direction: row !important;
-            text-align: right;
-            border-radius: 8px;
-            margin: 0.25rem 0.5rem 0.25rem 1rem;
-            transition: all 0.3s ease;
-            color: #c2c7d0 !important;
-        }
-        
-        .nav-sidebar .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(-3px);
-        }
-        
-        .nav-sidebar .nav-link > .nav-icon {
-            margin-left: 0;
-            margin-right: 0.75rem;
-            width: 2rem;
-            min-width: 2rem;
-            text-align: center;
-            order: 1;
-            font-size: 1.2rem;
-        }
-        
-        .nav-sidebar .nav-link > .fas,
-        .nav-sidebar .nav-link > .far,
-        .nav-sidebar .nav-link > .fab,
-        .nav-sidebar .nav-link > .bi {
-            margin-left: 0;
-            margin-right: 0.5rem;
-            width: 1.6rem;
-            min-width: 1.6rem;
-            text-align: center;
-            order: 1;
-        }
-        
-        .nav-sidebar .nav-link > p {
-            margin-bottom: 0;
-            flex: 1;
-            text-align: right;
-            order: 2;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        
-        .nav-treeview > .nav-item > .nav-link {
-            padding-right: 3rem;
-        }
-        
-        /* Navbar RTL */
-        .navbar-nav {
-            flex-direction: row;
-        }
-        
-        .main-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-bottom: 3px solid #5a67d8;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .main-header .navbar-nav {
-            margin-left: 0;
-            margin-right: 0;
-        }
-        
-        .main-header .nav-link {
-            color: #ffffff !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .main-header .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-        }
-        
-        .main-header .nav-link i {
-            margin-left: 5px;
-            color: #ffffff;
-        }
-        
-        .navbar-nav.mr-auto {
-            margin-right: 0 !important;
-            margin-left: auto !important;
-        }
-        
-        .main-header .navbar-nav.ml-auto {
-            margin-right: auto !important;
-            margin-left: 0 !important;
-        }
-        
         /* Cards & Tables RTL */
         .card-tools {
             float: left;
-        }
-        
-        .card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff !important;
-            border-bottom: 2px solid #5a67d8;
-            text-align: right !important;
-            direction: rtl !important;
-        }
-        
-        .card-header .card-title {
-            color: #ffffff !important;
-            text-align: right !important;
-            direction: rtl !important;
-            font-weight: 600;
-            display: block !important;
-            width: 100%;
-        }
-        
-        .card-header .card-title i {
-            margin-left: 0;
-            margin-right: 0.5rem;
-            float: right;
-        }
-        
-        .card-title {
-            text-align: right !important;
-            direction: rtl !important;
-        }
-        
-        .card-body .card-title {
-            text-align: right !important;
-            direction: rtl !important;
-        }
-        
-        .card-primary.card-outline > .card-header {
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-        }
-        
-        .card-success.card-outline > .card-header {
-            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-        }
-        
-        .card-info.card-outline > .card-header {
-            background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%);
-        }
-        
-        .card-warning.card-outline > .card-header {
-            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
-            color: #000000 !important;
-        }
-        
-        .card-warning.card-outline > .card-header .card-title {
-            color: #000000 !important;
-        }
-        
-        .card-secondary.card-outline > .card-header {
-            background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
         }
         
         .table th,
@@ -340,83 +188,42 @@
             right: auto;
         }
         
-        /* Sidebar Brand */
-        .brand-link {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-bottom: 3px solid #5a67d8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 11px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        
-        .brand-link .brand-text {
-            font-size: 1.5rem !important;
-            letter-spacing: 1px;
-            color: #fff !important;
-        }
-        
         .brand-image {
             margin-left: 0.8rem;
             margin-right: 0;
         }
         
-        /* Custom Colors */
-        .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
-        .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff !important;
-            box-shadow: 0 3px 8px rgba(102, 126, 234, 0.4);
-            transform: translateX(-3px);
-        }
-        
-        .nav-sidebar .nav-link.active .nav-icon {
-            color: #fff !important;
-        }
-        
-        /* Warning Alert in Sidebar */
-        .sidebar-warning-alert {
-            margin: 1rem;
-            padding: 0.5rem;
-            background-color: #ffc107;
-            color: #000;
-            border-radius: 0.25rem;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-        
         /* Make content full width */
         .content .container-fluid {
-            padding-right: 15px;
-            padding-left: 15px;
+            padding-right: 10px;
+            padding-left: 10px;
             max-width: 100%;
             width: 100%;
         }
         
         .content {
-            padding: 1rem;
+            padding: 0.75rem;
             width: 100%;
         }
         
         .content-header {
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem;
         }
         
         .content-header .container-fluid {
-            padding-right: 15px;
-            padding-left: 15px;
+            padding-right: 10px;
+            padding-left: 10px;
         }
         
         /* Full width rows */
         .content .row {
-            margin-right: -15px;
-            margin-left: -15px;
+            margin-right: -10px;
+            margin-left: -10px;
         }
         
         .content [class*="col-"] {
-            padding-right: 15px;
-            padding-left: 15px;
+            padding-right: 10px;
+            padding-left: 10px;
         }
         
         /* Main header fixed */
@@ -495,7 +302,7 @@
         </ul>
 
         <!-- Left navbar links (user info on left) -->
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav" style="margin-left: auto; margin-right: 0;">
             <li class="nav-item d-none d-sm-inline-block">
                 <a class="nav-link">
                     <i class="fas fa-user-circle"></i> مرحباً، @username
@@ -540,7 +347,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" style="padding:0px" data-widget="treeview" role="menu" data-accordion="false">
                     
                     <!-- Dashboard -->
                     <li class="nav-item">

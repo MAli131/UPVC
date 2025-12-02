@@ -39,16 +39,20 @@ namespace UPVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(ViewModels.ContactViewModel viewModel)
+        public async Task<IActionResult> Index(ViewModels.ContactViewModel viewModel, int? CategoryId, string Category)
         {
             var model = viewModel.NewMessage;
             var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
             
-            // Validate Category
-            if (string.IsNullOrWhiteSpace(model.Category))
+            // تعيين القيم من البارامترات المنفصلة
+            model.CategoryId = CategoryId;
+            model.Category = Category;
+            
+            // Validate Category and CategoryId
+            if (string.IsNullOrWhiteSpace(Category) || !CategoryId.HasValue || CategoryId.Value == 0)
             {
                 var errorMessage = isArabic ? "من فضلك اختر الفئة" : "Please select a category";
-                ModelState.AddModelError("NewMessage.Category", errorMessage);
+                ModelState.AddModelError("Category", errorMessage);
             }
             
             if (ModelState.IsValid)

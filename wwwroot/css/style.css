@@ -1,5 +1,7 @@
 /* FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 
 /* VARIABLES */
 :root {
@@ -16,7 +18,8 @@
   --main-gradient-bg: linear-gradient(135deg, #7DDB57 0%, #67C343 18%, #52AD30 39%, #49A428 100%);
 
   /* ===== FONTS ===== */
-  --main-font: "Titillium Web", sans-serif;
+  --main-en-font: "Titillium Web", sans-serif;
+  --main-ar-font: "Cairo", sans-serif;
 }
 
 /* GLOBAL RESET */
@@ -31,9 +34,12 @@
   color: var(--white-clr);
 }
 body {
-  font-family: var(--main-font);
+  font-family: var(--main-en-font);
   color: var(--white-clr);
   overflow: hidden;
+}
+[dir="rtl"] body{
+  font-family: var(--main-ar-font);
 }
 
 /* GENERAL ELEMENTS */
@@ -228,6 +234,9 @@ a.btn-outline-primary{
 [dir="rtl"] .hero-section > *{
   transform: scaleX(-1);
 }
+.home1 > div > .row{
+  height: calc(100% - 116px);
+}
 .hero-section .hero-content{
   height: 100%;
   position: relative;
@@ -339,7 +348,8 @@ a.btn-outline-primary{
   width: 100%;
 }
 .home1 .hero-footer{
-  margin-bottom: 3.125rem;
+  /* margin-bottom: 3.125rem; */
+  padding-inline-start: .75rem;
 }
 .home1 .hero-footer p,
 .product-section .hero-footer p,
@@ -398,10 +408,26 @@ a.btn-outline-primary{
 }
 .product-section .hero-header,
 .product-d-section .hero-header{
+  font-family: "Bebas Neue", sans-serif;
   margin: 0px;
   flex-direction: row;
   justify-content: space-between;
   color: var(--green-main-clr);
+}
+.product-section .hero-header .hero-title,
+.product-d-section .hero-header .hero-title{
+  font-size: clamp(3rem, 4.5vw, 4rem);
+}
+.product-section .hero-header .hero-subtitle{
+  height: 77px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+[dir="rtl"] .product-section .hero-header .hero-subtitle,
+[dir="rtl"] .product-d-section .hero-header .hero-subtitle{
+  font-family: var(--main-ar-font);
 }
 .product-section .product-btns{
   display: flex;
@@ -468,6 +494,12 @@ a.btn-outline-primary{
 }
 .product-d-section .extra-info div:nth-of-type(2) ul{
   gap: 1rem;
+}
+.product-d-section .extra-info div:nth-of-type(2) ul img{
+  height: 50px;
+}
+.product-d-section .extra-info .colors{
+  flex-wrap: wrap;
 }
 .product-d-section .extra-info .colors > *{
   color: var(--gray-main-clr);
