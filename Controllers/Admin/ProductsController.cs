@@ -24,15 +24,17 @@ namespace UPVC.Controllers.Admin
         public async Task<IActionResult> Index()
         {
             var products = await _context.Products
+                .AsSplitQuery()
                 .Include(p => p.ProductDetails)
-                    .ThenInclude(pd => pd!.Specifications)
+                    .ThenInclude(pd => pd!.Specifications.Where(s => !s.IsDeleted))
                 .Include(p => p.ProductDetails)
-                    .ThenInclude(pd => pd!.Colors)
+                    .ThenInclude(pd => pd!.Colors.Where(c => !c.IsDeleted))
                 .Include(p => p.ProductDetails)
-                    .ThenInclude(pd => pd!.DesignOptions)
+                    .ThenInclude(pd => pd!.DesignOptions.Where(d => !d.IsDeleted))
                 .Where(p => !p.IsDeleted)
                 .OrderBy(p => p.DisplayOrder)
                 .ThenBy(p => p.NameEn)
+                .AsNoTracking()
                 .ToListAsync();
 
             return View("~/Views/Admin/Products/Index.cshtml", products);
@@ -45,6 +47,7 @@ namespace UPVC.Controllers.Admin
         {
             var product = await _context.Products
                 .Include(p => p.ProductDetails)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
             if (product == null)

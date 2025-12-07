@@ -17,20 +17,22 @@ namespace UPVC.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _context.Products
+                .AsSplitQuery()
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.Specifications.OrderBy(s => s.DisplayOrder))
+                    .ThenInclude(pd => pd.Specifications.Where(s => s.IsActive).OrderBy(s => s.DisplayOrder))
                         .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.Colors.OrderBy(c => c.DisplayOrder))
+                    .ThenInclude(pd => pd.Colors.Where(c => c.IsActive).OrderBy(c => c.DisplayOrder))
                         .ThenInclude(pc => pc.Color)
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.Certificates.OrderBy(c => c.DisplayOrder))
+                    .ThenInclude(pd => pd.Certificates.Where(c => c.IsActive).OrderBy(c => c.DisplayOrder))
                         .ThenInclude(pc => pc.Certificate)
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.DesignOptions.OrderBy(d => d.DisplayOrder))
+                    .ThenInclude(pd => pd.DesignOptions.Where(d => d.IsActive).OrderBy(d => d.DisplayOrder))
                         .ThenInclude(pdo => pdo.DesignOption)
                 .Where(p => p.IsActive && !p.IsDeleted)
                 .OrderBy(p => p.DisplayOrder)
+                .AsNoTracking()
                 .ToListAsync();
                 
             return View(products);
@@ -39,18 +41,20 @@ namespace UPVC.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var product = await _context.Products
+                .AsSplitQuery()
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.Specifications.OrderBy(s => s.DisplayOrder))
+                    .ThenInclude(pd => pd.Specifications.Where(s => s.IsActive).OrderBy(s => s.DisplayOrder))
                         .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.Colors.OrderBy(c => c.DisplayOrder))
+                    .ThenInclude(pd => pd.Colors.Where(c => c.IsActive).OrderBy(c => c.DisplayOrder))
                         .ThenInclude(pc => pc.Color)
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.Certificates.OrderBy(c => c.DisplayOrder))
+                    .ThenInclude(pd => pd.Certificates.Where(c => c.IsActive).OrderBy(c => c.DisplayOrder))
                         .ThenInclude(pc => pc.Certificate)
                 .Include(p => p.ProductDetails!)
-                    .ThenInclude(pd => pd.DesignOptions.OrderBy(d => d.DisplayOrder))
+                    .ThenInclude(pd => pd.DesignOptions.Where(d => d.IsActive).OrderBy(d => d.DisplayOrder))
                         .ThenInclude(pdo => pdo.DesignOption)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == id && p.IsActive && !p.IsDeleted);
                 
             if (product == null)
