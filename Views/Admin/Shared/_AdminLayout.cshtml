@@ -561,6 +561,18 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
 <script>
+    // Auto-hide alerts after 5 seconds
+    $(document).ready(function() {
+        $('.alert-success, .alert-danger, .alert-info, .alert-warning').each(function() {
+            var alert = $(this);
+            setTimeout(function() {
+                alert.fadeOut('slow', function() {
+                    $(this).remove();
+                });
+            }, 5000);
+        });
+    });
+
     // Password validation
     $('#changePasswordModal form').on('submit', function(e) {
         var newPassword = $('#newPassword').val();
