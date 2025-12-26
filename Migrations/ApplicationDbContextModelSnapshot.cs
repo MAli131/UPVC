@@ -253,7 +253,7 @@ namespace UPVC.Migrations
                             Email = "admin@emapen.com",
                             IsActive = true,
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$CtHbD316jAfNOxWoNP6JVuR32AzkXdUTYIee0Rh0oUMKmmD7Wcyba",
+                            PasswordHash = "$2a$11$dCkjrc6fqR2VHhR2IugU3OVAEFIKEut/x4mnP8lzOt6ezMlpjH3Gq",
                             Username = "admin"
                         });
                 });
@@ -1740,7 +1740,7 @@ namespace UPVC.Migrations
                             NameAr = "EMA-60",
                             NameEn = "EMA-60",
                             SubtitleAr = "نظام المفصلي",
-                            SubtitleEn = "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM"
+                            SubtitleEn = "THE DEFINITIVE CASEMENT WINDOW AND DOOR SYSTEM"
                         },
                         new
                         {
@@ -1772,7 +1772,7 @@ namespace UPVC.Migrations
                             NameAr = "EMA-STYLE",
                             NameEn = "EMA-STYLE",
                             SubtitleAr = "نظام الجرار المميز",
-                            SubtitleEn = "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM"
+                            SubtitleEn = "PREMIUM SLIDING WINDOW AND DOOR SYSTEM"
                         });
                 });
 

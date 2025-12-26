@@ -212,7 +212,8 @@
                         <span asp-validation-for="NewMessage.Email" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-4">
-                        <input type="text" class="form-control" id="country" placeholder="@(isArabic ? "الدولة" : "Country")" asp-for="NewMessage.Country">
+                            <input type="text" class="form-control" id="country" placeholder="@(isArabic ? "الدولة" : "Country")" asp-for="NewMessage.Country" required>
+                            <span asp-validation-for="NewMessage.Country"></span>
                     </div>
                     <div class="col-12 col-md-4">
                         <input type="text" class="form-control" id="city" placeholder="@(isArabic ? "المدينة" : "City")" asp-for="NewMessage.City">
@@ -221,8 +222,8 @@
                         <input type="tel" class="form-control" id="tel" placeholder="@(isArabic ? "الهاتف" : "Telephone")" asp-for="NewMessage.Telephone">
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" id="message" rows="5" placeholder="@(isArabic ? "الرسالة" : "Message")" asp-for="NewMessage.Content" required></textarea>
-                        <span asp-validation-for="NewMessage.Content" class="text-danger"></span>
+                        <textarea class="form-control" id="message" rows="5" placeholder="@(isArabic ? "الرسالة" : "Message")" asp-for="NewMessage.Content"></textarea>
+                       
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">

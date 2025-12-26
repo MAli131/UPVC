@@ -1,7 +1,7 @@
-@model UPVC.ViewModels.HomeViewModel
+﻿@model UPVC.ViewModels.HomeViewModel
 @using System.Globalization
 @{
-    Layout = "_Layout";
+    Layout = null;
     
     // Get current language
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
@@ -86,10 +86,10 @@
             <!-- links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Index">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="About" asp-action="Index">About</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">@(isArabic ? "الرئيسية" : "Home")</a></li>
+                    <li class="nav-item"><a class="nav-link active" asp-controller="Product" asp-action="Index">@(isArabic ? "المنتجات" : "Products")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="About" asp-action="Index">@(isArabic ? "من نحن" : "About")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">@(isArabic ? "تواصل معنا" : "Contact")</a></li>
                 </ul>
                 <div class="navbar-lang">
                     <input type="radio" class="btn-check" name="lang" id="en-lang" autocomplete="off" checked>

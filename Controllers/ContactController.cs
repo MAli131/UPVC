@@ -49,18 +49,19 @@ namespace UPVC.Controllers
             model.Category = Category;
             
             // Validate Category and CategoryId
-            if (string.IsNullOrWhiteSpace(Category) || !CategoryId.HasValue || CategoryId.Value == 0)
-            {
-                var errorMessage = isArabic ? "من فضلك اختر الفئة" : "Please select a category";
-                ModelState.AddModelError("Category", errorMessage);
-            }
+            //if (string.IsNullOrWhiteSpace(Category) || !CategoryId.HasValue || CategoryId.Value == 0)
+            //{
+            //    var errorMessage = isArabic ? "من فضلك اختر الفئة" : "Please select a category";
+            //    ModelState.AddModelError("Category", errorMessage);
+            //}
             
-            if (ModelState.IsValid)
-            {
+          
                 try
                 {
                     // Save to database
                     model.SubmittedAt = DateTime.Now;
+                    model.Content = model.Content ?? "";
+                    model.Category = model.Category ?? "";
                     _context.ContactMessages.Add(model);
                     await _context.SaveChangesAsync();
 
@@ -68,10 +69,10 @@ namespace UPVC.Controllers
                     var emailSent = await _emailService.SendContactFormEmailAsync(
                         model.Name,
                         model.Email,
-                        model.Content,
-                        model.Category,
+                        model.Content??"",
+                        model.Category??"",
                         model.Country,
-                        model.City,
+                        model.City ?? "",
                         model.Telephone
                     );
 
@@ -96,7 +97,7 @@ namespace UPVC.Controllers
                         : "An error occurred while processing your request. Please try again later.";
                     TempData["ErrorMessage"] = errorMessage;
                 }
-            }
+            
 
             // Repopulate view model for redisplay
             viewModel.ContactPage = _context.ContactPages.FirstOrDefault(cp => cp.IsActive);

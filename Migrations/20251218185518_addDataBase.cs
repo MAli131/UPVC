@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UPVC.Migrations
 {
     /// <inheritdoc />
-    public partial class sssww : Migration
+    public partial class addDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -98,6 +98,29 @@ namespace UPVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Certificates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChatbotFAQs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionAr = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    QuestionEn = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    AnswerAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnswerEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    Category = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatbotFAQs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -303,7 +326,7 @@ namespace UPVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AboutSection",
+                name: "AboutSections",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -324,9 +347,9 @@ namespace UPVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AboutSection", x => x.Id);
+                    table.PrimaryKey("PK_AboutSections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AboutSection_AboutPages_AboutPageId",
+                        name: "FK_AboutSections_AboutPages_AboutPageId",
                         column: x => x.AboutPageId,
                         principalTable: "AboutPages",
                         principalColumn: "Id",
@@ -565,7 +588,7 @@ namespace UPVC.Migrations
             migrationBuilder.InsertData(
                 table: "AdminUsers",
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "Email", "IsActive", "LastLoginAt", "PasswordHash", "UpdatedAt", "Username" },
-                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@emapen.com", true, null, "$2a$11$jZSi2UY5j7D1UrE69o0KvuOMfw4MOSzp6lBSDnERdarrK1VZ.bMMC", null, "admin" });
+                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "admin@emapen.com", true, null, "$2a$11$dCkjrc6fqR2VHhR2IugU3OVAEFIKEut/x4mnP8lzOt6ezMlpjH3Gq", null, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -588,6 +611,19 @@ namespace UPVC.Migrations
                     { 2, "EOS", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/eos.png", true, "المواصفات المصرية", "EOS", null, 40 },
                     { 3, "CER", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/cer.png", true, "شهادة", "CER", null, 40 },
                     { 4, "NR", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "/images/product/NR.png", true, "NR", "NR", null, 40 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ChatbotFAQs",
+                columns: new[] { "Id", "AnswerAr", "AnswerEn", "Category", "CreatedAt", "DeletedAt", "DisplayOrder", "IsActive", "QuestionAr", "QuestionEn", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, "أنظمة uPVC هي أنظمة نوافذ وأبواب مصنوعة من البولي فينيل كلورايد غير الملدن، وهي مادة متينة ومقاومة للعوامل الجوية وعازلة للحرارة والصوت.", "uPVC systems are window and door systems made from unplasticized polyvinyl chloride, a durable material that is weather-resistant and provides excellent thermal and sound insulation.", "General", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, 1, true, "ما هي أنظمة uPVC؟", "What are uPVC systems?", null },
+                    { 2, "منتجات EMAPEN توفر عزلاً حرارياً وصوتياً ممتازاً، مقاومة عالية للعوامل الجوية، سهولة في الصيانة، وعمر افتراضي طويل يصل إلى 50 عاماً.", "EMAPEN products offer excellent thermal and sound insulation, high resistance to weather conditions, easy maintenance, and a long lifespan of up to 50 years.", "Products", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, 2, true, "ما هي مميزات منتجات EMAPEN؟", "What are the advantages of EMAPEN products?", null },
+                    { 3, "يمكنك التواصل معنا عبر صفحة 'اتصل بنا' أو الاتصال بنا مباشرة على الخط الساخن. فريقنا سيساعدك في اختيار المنتج المناسب.", "You can contact us through the 'Contact Us' page or call us directly on our hotline. Our team will help you choose the right product.", "Orders", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, 3, true, "كيف يمكنني طلب منتجاتكم؟", "How can I order your products?", null },
+                    { 4, "نعم، نوفر خدمة التركيب من خلال فريق فني متخصص ومدرب على أعلى مستوى.", "Yes, we provide installation services through a specialized technical team trained to the highest standards.", "Services", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, 4, true, "هل تقدمون خدمة التركيب؟", "Do you provide installation service?", null },
+                    { 5, "نقدم ضماناً شاملاً على جميع منتجاتنا. تختلف مدة الضمان حسب نوع المنتج ويمكن أن تصل إلى 10 سنوات.", "We offer comprehensive warranty on all products. The warranty period varies by product type and can extend up to 10 years.", "Warranty", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, 5, true, "ما هي مدة الضمان على المنتجات؟", "What is the warranty period?", null },
+                    { 6, "نعم، منتجات EMAPEN مصممة خصيصاً لتتحمل المناخات الحارة والرطبة مع مقاومة عالية للأشعة فوق البنفسجية.", "Yes, EMAPEN products are specifically designed to withstand hot and humid climates with high UV resistance.", "Technical", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, 6, true, "هل المنتجات مناسبة للمناخ الحار؟", "Are products suitable for hot climates?", null }
                 });
 
             migrationBuilder.InsertData(
@@ -665,9 +701,9 @@ namespace UPVC.Migrations
                 values: new object[,]
                 {
                     { 1, "/files/42s-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.", "The economic alternative to EMA60S, dedicated for smaller sliding windows and smaller budgets while still maintaining the exceptional quality you need for your windows.", null, null, 1, null, "/images/product/EMA-42S.png", true, "EMA-42S", "Ema-42s", "نظام الجرار الإقتصادي", "ECONOMIC SLIDING WINDOW SYSTEM", null, null },
-                    { 2, "/files/60-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.", "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.", null, null, 2, null, "/images/product/EMA-60.png", true, "EMA-60", "EMA-60", "نظام المفصلي", "THE DEFINITIVE CASEMENT WINDOW\nAND DOOR SYSTEM", null, null },
+                    { 2, "/files/60-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.", "Your profile of choice for ensuring maximum ventilation through windows. Moreover, the casement's tight seal provides it with a superior sound insulation compared to its counterparts.", null, null, 2, null, "/images/product/EMA-60.png", true, "EMA-60", "EMA-60", "نظام المفصلي", "THE DEFINITIVE CASEMENT WINDOW AND DOOR SYSTEM", null, null },
                     { 3, "/files/60s-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "الإختيار النموذجي لنوافذ الجرار الخاصة بك، ملائم للفتحات الكبيرة التي تتيح لك الإستمتاع بالمنظر الخارجي. علاوة على ذلك، فإن الحركة الأفقية لأنظمة الجرار تجعلها أكثر ملائمة للمساحات الداخلية المحدودة", "The default option for your sliding windows, ideal when opting for wide unobstructed views. Moreover, the horizontal movement of the sliding systems makes them more suitable for limited interior spaces.", null, null, 3, null, "/images/product/EMA-60s.png", true, "EMA-60S", "EMA-60S", "نظام الجرار", "STANDARD SLIDING WINDOW SYSTEM", null, null },
-                    { 4, "/files/Style-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.", "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.", null, null, 4, null, "/images/product/EMA-STYLE.png", true, "EMA-STYLE", "EMA-STYLE", "نظام الجرار المميز", "PREMIUM SLIDING WINDOW AND\nDOOR SYSTEM", null, null }
+                    { 4, "/files/Style-brochure.pdf", null, null, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), null, "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.", "EMAPEN's new and refined sliding system, introducing a sliding door sash of exceptional quality and a 60mm built-in bar. The system also boasts the highest profile thickness in the suite, giving you the highest durability and insulation.", null, null, 4, null, "/images/product/EMA-STYLE.png", true, "EMA-STYLE", "EMA-STYLE", "نظام الجرار المميز", "PREMIUM SLIDING WINDOW AND DOOR SYSTEM", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -708,7 +744,7 @@ namespace UPVC.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AboutSection",
+                table: "AboutSections",
                 columns: new[] { "Id", "AboutPageId", "ContentAr", "ContentEn", "DeletedAt", "IconPath", "Order", "SectionType", "TitleAr", "TitleEn", "UpdatedAt" },
                 values: new object[,]
                 {
@@ -868,8 +904,8 @@ namespace UPVC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AboutSection_AboutPageId",
-                table: "AboutSection",
+                name: "IX_AboutSections_AboutPageId",
+                table: "AboutSections",
                 column: "AboutPageId");
 
             migrationBuilder.CreateIndex(
@@ -951,10 +987,13 @@ namespace UPVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AboutSection");
+                name: "AboutSections");
 
             migrationBuilder.DropTable(
                 name: "AdminUsers");
+
+            migrationBuilder.DropTable(
+                name: "ChatbotFAQs");
 
             migrationBuilder.DropTable(
                 name: "CompanyInfos");
