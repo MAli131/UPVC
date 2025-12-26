@@ -13,11 +13,12 @@ namespace UPVC.Controllers
         {
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var aboutPage = _context.AboutPages
-                .Include(a => a.Sections)
-                .FirstOrDefault(a => a.PageKey == "About" && a.IsActive);
+            var aboutPage = await _context.AboutPages
+                .AsNoTracking()
+                .Include(a => a.Sections.Where(s => s.IsActive).OrderBy(s => s.Order))
+                .FirstOrDefaultAsync(a => a.PageKey == "About" && a.IsActive);
             
             return View(aboutPage);
         }

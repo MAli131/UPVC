@@ -45,18 +45,22 @@ public class HomeController : BaseController
 
     private async Task<HomeViewModel> GetHomeViewModelAsync(string pageKey)
     {
+        // استخدام AsNoTracking لتحسين الأداء (القراءة فقط)
         var viewModel = new HomeViewModel
         {
             HomePage = await _context.HomePages
-                .Include(h => h.Sections.Where(s => s.IsActive && !s.IsDeleted))
+                .AsNoTracking()
+                .Include(h => h.Sections.Where(s => s.IsActive && !s.IsDeleted).OrderBy(s => s.Order))
                 .Where(h => h.PageKey == pageKey && h.IsActive && !h.IsDeleted)
                 .FirstOrDefaultAsync(),
             
             CompanyInfo = await _context.CompanyInfos
+                .AsNoTracking()
                 .Where(c => c.IsActive && !c.IsDeleted)
                 .FirstOrDefaultAsync(),
             
             SocialMedias = await _context.SocialMedias
+                .AsNoTracking()
                 .Where(s => s.IsActive && !s.IsDeleted)
                 .OrderBy(s => s.DisplayOrder)
                 .ToListAsync()

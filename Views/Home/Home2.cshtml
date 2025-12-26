@@ -23,6 +23,18 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/favicon/favicon.svg" />
 
+    <!-- Preconnect to CDN -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="preload" as="style" href="~/css/style.css">
+    @if (sections.Any())
+    {
+        <link rel="preload" as="image" href="@sections.First().ImagePath">
+    }
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -201,3 +213,4 @@
 </html>
 <script src="~/js/lang.js"></script>
 <script src="~/js/home2-slider.js"></script>
+<script src="~/js/home-navigation.js"></script>

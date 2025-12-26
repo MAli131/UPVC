@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using UPVC.Data;
 
 namespace UPVC.Controllers
@@ -15,8 +16,11 @@ namespace UPVC.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            // Load CompanyInfo for all views
-            ViewBag.CompanyInfo = _context.CompanyInfos.FirstOrDefault(ci => ci.IsActive);
+            // Load CompanyInfo for all views with AsNoTracking for better performance
+            ViewBag.CompanyInfo = _context.CompanyInfos
+                .AsNoTracking()
+                .FirstOrDefault(ci => ci.IsActive && !ci.IsDeleted);
+            
             base.OnActionExecuting(context);
         }
     }

@@ -24,14 +24,14 @@ namespace UPVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var viewModel = new ViewModels.ContactViewModel
             {
-                ContactPage = _context.ContactPages.FirstOrDefault(cp => cp.IsActive),
-                CompanyInfo = _context.CompanyInfos.FirstOrDefault(ci => ci.IsActive),
-                Categories = _context.Categories.Where(c => c.IsActive).ToList(),
-                SocialMedias = _context.SocialMedias.Where(sm => sm.IsActive).OrderBy(sm => sm.DisplayOrder).ToList(),
+                ContactPage = await _context.ContactPages.AsNoTracking().FirstOrDefaultAsync(cp => cp.IsActive),
+                CompanyInfo = await _context.CompanyInfos.AsNoTracking().FirstOrDefaultAsync(ci => ci.IsActive),
+                Categories = await _context.Categories.AsNoTracking().Where(c => c.IsActive).ToListAsync(),
+                SocialMedias = await _context.SocialMedias.AsNoTracking().Where(sm => sm.IsActive).OrderBy(sm => sm.DisplayOrder).ToListAsync(),
                 NewMessage = new ContactMessage()
             };
             return View(viewModel);
