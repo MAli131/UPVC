@@ -3,12 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using UPVC.Data;
 using UPVC.Services;
+using UPVC.Middleware;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add Response Compression (Gzip & Brotli)
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider>();
+    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider>();
+});
 
 // Add Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -59,7 +68,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Use Response Compression (يجب أن يكون قبل Static Files)
+app.UseResponseCompression();
+
 app.UseHttpsRedirection();
+
+// استخدام Image Optimization Middleware قبل Static Files
+app.UseMiddleware<ImageOptimizationMiddleware>();
+
 app.UseStaticFiles();
 
 // Use Request Localization (must be before routing)
