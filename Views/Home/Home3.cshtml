@@ -10,7 +10,7 @@
 
     var title = isArabic ? Model.HomePage?.TitleAr : Model.HomePage?.TitleEn;
     var subtitle = isArabic ? Model.HomePage?.SubtitleAr : Model.HomePage?.SubtitleEn;
-    
+    var companyPhone = Model.CompanyInfo?.Phone ?? "15726";    
 }
 
 @section Styles {
@@ -45,11 +45,15 @@
             </div>
         </div>
         <div class="hero-footer">
+            <div class="hotline d-flex d-lg-none">
+                <span class="hotline-number">@companyPhone</span>
+                <p class="ms-1">@(isArabic ? "الخط الساخن" : "Hotline")</p>
+            </div>
             @if (!string.IsNullOrEmpty(subtitle))
             {
                 <p>@subtitle</p>
             }
-            <p>
+            <p class="d-none d-lg-block">
                 &copy;
                 <script>
                     document.write(new Date().getFullYear());

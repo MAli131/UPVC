@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 
+
 /* VARIABLES */
 :root {
   /* ===== COLORS ===== */
@@ -19,6 +20,7 @@
 
   /* ===== FONTS ===== */
   --main-en-font: "Titillium Web", sans-serif;
+  --secondary-en-font: "Bebas Neue", sans-serif;
   --main-ar-font: "Cairo", sans-serif;
 }
 
@@ -135,6 +137,12 @@ select{
   background: var(--green-main-clr);
   opacity: 1;
 }
+.certifications-container,
+.certifications{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 /* ===== BTNs ===== */
 a.btn {
   height: 35px;
@@ -144,7 +152,7 @@ a.btn {
   gap: 0.5rem;
   border-radius: 0rem;
   border-width: 2px;
-  font-size: .875rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
   white-space: nowrap;
@@ -257,7 +265,6 @@ a.btn-outline-primary{
   inset-inline-start: .75rem;
   z-index: 10;
 }
-
 .hero-section .hero-header{
   margin-inline-start: 3.5rem;
   display: flex;
@@ -266,7 +273,7 @@ a.btn-outline-primary{
   gap: 1rem;
 }
 .hero-section .hero-title {
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-size: clamp(1.5rem, 3.5vw, 3.125rem);
   font-weight: 600;
   line-height: 1.3;
 }
@@ -281,7 +288,7 @@ a.btn-outline-primary{
   color: var(--green-main-clr);
 }
 .hero-section .hero-subtitle{
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-size: clamp(1.25rem, 3.5vw, 2rem);
   color: var(--green-main-clr);
   font-weight: 600;
 }
@@ -292,7 +299,7 @@ a.btn-outline-primary{
   gap: 1rem;
 }
 .hero-section .hero-description {
-  font-size: clamp(0.875rem, 3.5vw, 1rem);
+  font-size: clamp(0.875rem, 3.5vw, 1.25rem);
 }
 .home1 .hero-description{
   color: var(--green-main-clr);
@@ -329,9 +336,17 @@ a.btn-outline-primary{
   font-size: clamp(1.5rem, 3.5vw, 2rem);
   width: 212px;
 }
-[dir="rtl"] .hero-section .hero-items h2{
+/* [dir="rtl"] .hero-section .hero-items h2{
   width: 88px;
+} */
+.hero-section .hero-image{
+  position: relative;
 }
+/* .hero-section .hero-image img{
+  position: absolute;
+  top: 0%;
+  inset-inline-end: 0px;
+} */
 /* HERO FOOTER */
 .hero-section .hero-footer{
   display: flex;
@@ -341,36 +356,32 @@ a.btn-outline-primary{
   font-size: .875rem;
   width: 100%;
 }
-.hero-section:not(.home1) .hero-footer{
+.hero-section .hero-footer{
   position: absolute;
   bottom: 3.125rem;
   inset-inline-end: .75rem;
   width: 100%;
 }
-.home1 .hero-footer{        
-   margin-bottom: 3.125rem; 
+.home1 .hero-footer{
+  /* margin-bottom: 3.125rem; */
   padding-inline-start: .75rem;
 }
-.home1 .hero-footer p,
+.home1 .hero-footer > p,
+.contact-section .hero-footer > p,
 .product-section .hero-footer p,
 .product-d-section .hero-footer p{
   align-self: self-end;
 }
-.home2 .hero-footer p{
+.home2 .hero-footer > p{
   width: 100%;
   text-align: end;
-}
-.hero-section .certifications-container,
-.hero-section .certifications{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 .hero-section .certifications-container{
   justify-content: space-between;
   width: 420px;
 }
 .hero-section .hotline{
+  font-family: var(--secondary-en-font);
   font-size: .75rem;
   display: flex;
   flex-direction: column;
@@ -382,6 +393,13 @@ a.btn-outline-primary{
   font-weight: 700;
   line-height: 1;
 }
+.hero-section .hotline p:not(.contact-section .hotline p){
+  color: var(--green-main-clr);
+}
+.home3 .hotline .hotline-number,
+.home3 .hotline p{
+  color: var(--white-clr) !important;
+}
 .hero-section .hero-address{
   display: flex;
   align-items: center;
@@ -389,7 +407,7 @@ a.btn-outline-primary{
 }
 /* ARROW */
 .hero-section .hero-arrow{
-  position: absolute;
+  position: fixed;
   bottom: 3.125rem;
   inset-inline-start: 50%;
   transform: translateX(-50%);
@@ -403,12 +421,12 @@ a.btn-outline-primary{
   background: url(../images/product/product-bg.png) no-repeat center / cover;
 }
 .product-section .hero-content{
-  margin-top: 3rem;
+  margin-top: 0rem;
   gap: 5rem;
 }
 .product-section .hero-header,
 .product-d-section .hero-header{
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--secondary-en-font);
   margin: 0px;
   flex-direction: row;
   justify-content: space-between;
@@ -416,10 +434,11 @@ a.btn-outline-primary{
 }
 .product-section .hero-header .hero-title,
 .product-d-section .hero-header .hero-title{
-  font-size: clamp(3rem, 4.5vw, 4rem);
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
 }
 .product-section .hero-header .hero-subtitle{
-  height: 77px;
+  font-size: clamp(1.25rem, 3.5vw, 2.5rem);
+  height: 90px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -439,7 +458,7 @@ a.btn-outline-primary{
   margin-top: -200px;
 }
 .product-section .hero-image img{
-  height: 95vh;
+  height: 100vh;
 }
 .product-section .hero-footer,
 .about-section .hero-footer,
@@ -453,6 +472,7 @@ a.btn-outline-primary{
 .product-section .dots-slider{
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 /* PRODUCT DETAILS */
@@ -496,7 +516,7 @@ a.btn-outline-primary{
   gap: 1rem;
 }
 .product-d-section .extra-info div:nth-of-type(2) ul img{
-  height: 50px;
+  height: 45px;
 }
 .product-d-section .extra-info .colors{
   flex-wrap: wrap;
@@ -534,14 +554,14 @@ a.btn-outline-primary{
   justify-content: flex-end;
   margin-top: -6.25rem;
 }
-.product-d-section .p-back{
+.product-details-page .p-back{
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   width: 30%;
 }
-.product-d-section .p-back a{
+.product-details-page .p-back a{
   color: var(--white-clr);
   font-size: 1.125rem;
 }
@@ -617,7 +637,8 @@ a.btn-outline-primary{
     overflow-y: auto;
   }
   .navbar:not(:has(.navbar-toggler.collapsed)),
-  .navbar {
+  .navbar,
+  .product-details-page .navbar {
     backdrop-filter: blur(10px);
     padding-block: .625rem;
   }
@@ -625,10 +646,13 @@ a.btn-outline-primary{
     order: 0;
   }
   .hero-section{
-    padding-top: 7.5rem;
+    padding-top: 5rem;
   }
   .hero-section .row{
     row-gap: 1.25rem;
+  }
+  .hero-section .hero-content{
+    height: auto;
   }
   .hero-section:not(.product-section, .product-d-section, .about-section, .contact-section) .hero-content,
   .hero-section:not(.product-section, .product-d-section) .hero-header{
@@ -671,7 +695,7 @@ a.btn-outline-primary{
   .product-d-section .hero-footer p{
     align-self: center;
   }
-  .home2 .hero-footer p{
+  .home2 .hero-footer > p{
     text-align: center;
   }
   .hero-section .hero-items-container{
@@ -680,31 +704,55 @@ a.btn-outline-primary{
   .hero-section .hero-items{
     width: 45%;
   }
+  .product-section .dots-slider:not(.hero-footer .dots-slider){
+    margin-bottom: 15px;
+  }
   .product-section .hero-content{
     margin-top: 0px;
     gap: 1.25rem;
   }
-  .product-section .hero-content > *,
-  .product-section .hero-subtitle{
-    color: var(--white-clr);
+  .product-section .hero-header{
+    flex-direction: column;
+  }
+  .product-section .hero-image{
+    position: absolute;
+    top: 15px;
+    inset-inline-end: -50px;
+    width: 250px;
   }
   .product-section .hero-image,
   .product-d-section .hero-image{
     justify-content: center;
     margin-top: 0px;
   }
-  .product-section .hero-image img,
+  .product-section .hero-image img{
+    height: 100%;
+  }
   .product-d-section .hero-image img{
-    height: 95%;
+    display: none;
   }
   .product-section .product-btns{
     flex-direction: column;
   }
+  .product-details-page .p-back{
+    width: 100%;
+  }
   .contact-section .hero-content > *{
     max-width: 100%;
   }
-  .hero-section .hero-arrow{
+  /* .hero-section .hero-arrow{
     display: none;
+  } */
+  .hero-section .hero-arrow svg{
+    width: 50px;
+    height: 50px;
+  }
+  .hero-section .hero-address{
+    display: none;
+  }
+  .hero-section .certifications-container,
+  .hero-section .hotline{
+    margin-inline-end: auto;
   }
 }
 /* Medium devices (landscape tablets, 768px and down) */
@@ -715,23 +763,19 @@ a.btn-outline-primary{
 }
 /* Small devices (portrait tablets and large phones, 576px and down) */
 @media (max-width: 576px) {
+  .navbar .navbar-brand svg{
+    width: 100px;
+  }
   .hero-section.home1{
     background-size: 100% 70%;
-  }
-  .hero-section .certifications-container{
-    flex-direction: column;
-    width: 100%;
   }
   .hero-section .hero-slider{
     gap: 4rem;
   }
-  .hero-section .hero-address{
-    flex-wrap: wrap;
-  }
-  .hero-section .hero-address > *{
-    width: 47% !important;
-    text-align: center;
-    flex: 1;
-    font-size: 12px;
+}
+@media (max-width: 400px) {
+  .product-section .hero-header .hero-subtitle{
+    width: 70%;
+    height: auto;
   }
 }
