@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UPVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c409319eb033c062be280534dd5ea675d3d8adb7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b769659529656e7c1dd1f4ee5132ffe05fde003")]
 [assembly: System.Reflection.AssemblyProductAttribute("UPVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UPVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

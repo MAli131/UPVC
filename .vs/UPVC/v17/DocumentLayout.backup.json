@@ -1,10 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\VIP\\source\\repos\\UPVC\\",
+  "WorkspaceRootPath": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|c:\\users\\vip\\source\\repos\\upvc\\views\\home\\home3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|d:\\work projects\\freelance\\1-emapen\\upvc\\views\\home\\home4.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|solutionrelative:views\\home\\home4.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|d:\\work projects\\freelance\\1-emapen\\upvc\\views\\home\\home3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|solutionrelative:views\\home\\home3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|d:\\work projects\\freelance\\1-emapen\\upvc\\views\\home\\home2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|solutionrelative:views\\home\\home2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|d:\\work projects\\freelance\\1-emapen\\upvc\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|solutionrelative:wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|d:\\work projects\\freelance\\1-emapen\\upvc\\wwwroot\\css\\style-rtl.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|solutionrelative:wwwroot\\css\\style-rtl.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|d:\\work projects\\freelance\\1-emapen\\upvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F7715BEA-B4CC-0A0D-818B-E8C81E5D79EC}|UPVC.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,134 +34,83 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 25,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:139:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:140:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:141:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:141:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:143:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Home4.cshtml",
+              "DocumentMoniker": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\Views\\Home\\Home4.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Home4.cshtml",
+              "ToolTip": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\Views\\Home\\Home4.cshtml",
+              "RelativeToolTip": "Views\\Home\\Home4.cshtml",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAAAKYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T22:43:08.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Home2.cshtml",
+              "DocumentMoniker": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\Views\\Home\\Home2.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Home2.cshtml",
+              "ToolTip": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\Views\\Home\\Home2.cshtml",
+              "RelativeToolTip": "Views\\Home\\Home2.cshtml",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAYwKEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T22:42:58.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "style-rtl.css",
+              "DocumentMoniker": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\wwwroot\\css\\style-rtl.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\style-rtl.css",
+              "ToolTip": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\wwwroot\\css\\style-rtl.css",
+              "RelativeToolTip": "wwwroot\\css\\style-rtl.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-01-07T15:49:11.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "style.css",
+              "DocumentMoniker": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\style.css",
+              "ToolTip": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\wwwroot\\css\\style.css",
+              "RelativeToolTip": "wwwroot\\css\\style.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-01-07T15:49:10.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-01-06T11:46:13.412Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Home3.cshtml",
-              "DocumentMoniker": "C:\\Users\\VIP\\source\\repos\\UPVC\\Views\\Home\\Home3.cshtml",
+              "DocumentMoniker": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\Views\\Home\\Home3.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Home3.cshtml",
-              "ToolTip": "C:\\Users\\VIP\\source\\repos\\UPVC\\Views\\Home\\Home3.cshtml",
+              "ToolTip": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\Views\\Home\\Home3.cshtml",
               "RelativeToolTip": "Views\\Home\\Home3.cshtml",
-              "ViewState": "AgIAACwAAAAAAAAAAAAAADYAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAADAAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-01T09:26:42.013Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 995,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

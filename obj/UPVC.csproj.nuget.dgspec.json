@@ -1,25 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\VIP\\source\\repos\\UPVC\\UPVC.csproj": {}
+    "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\UPVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\VIP\\source\\repos\\UPVC\\UPVC.csproj": {
+    "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\UPVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\VIP\\source\\repos\\UPVC\\UPVC.csproj",
+        "projectUniqueName": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\UPVC.csproj",
         "projectName": "UPVC",
-        "projectPath": "C:\\Users\\VIP\\source\\repos\\UPVC\\UPVC.csproj",
-        "packagesPath": "C:\\Users\\VIP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\VIP\\source\\repos\\UPVC\\obj\\",
+        "projectPath": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\UPVC.csproj",
+        "packagesPath": "C:\\Users\\Yomna\\.nuget\\packages\\",
+        "outputPath": "D:\\Work Projects\\Freelance\\1-EMAPEN\\UPVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 24.2\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\VIP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 24.2.config",
+          "C:\\Users\\Yomna\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -28,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 24.2\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -47,15 +44,23 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[11.3.1, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.14.1, )"
             },
             "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
@@ -69,17 +74,21 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[8.0.11, )"
             },
             "Microsoft.Extensions.Localization": {
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[8.0.11, )"
             }
           },
           "imports": [
@@ -101,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

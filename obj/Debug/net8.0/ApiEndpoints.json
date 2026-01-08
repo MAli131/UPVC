@@ -1,1 +1,39 @@
-[]
+[
+  {
+    "ContainingType": "UPVC.Controllers.ChatbotApiController",
+    "Method": "GetQuestionById",
+    "RelativePath": "api/ChatbotApi/question/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "lang",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UPVC.Controllers.ChatbotApiController",
+    "Method": "GetQuestions",
+    "RelativePath": "api/ChatbotApi/questions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lang",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
