@@ -690,6 +690,10 @@ a.btn-outline-primary{
     transform: translateX(50%);
     width: 100%;
   }
+  [dir="rtl"] .home1 .hero-footer,
+  [dir="rtl"] .home2 .hero-footer{
+    transform: translateX(-50%);
+  }
   .home1 .hero-footer p,
   .product-section .hero-footer p,
   .product-d-section .hero-footer p{
