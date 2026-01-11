@@ -17,9 +17,26 @@
         const productBrochure = document.getElementById('productBrochure');
         const seeMoreBtn = document.getElementById('seeMoreBtn');
 
-        const dots = document.querySelectorAll('.horizontal-dots .dot');
-        const prevBtn = document.querySelector('.dots-slider .btn-link:first-of-type');
-        const nextBtn = document.querySelector('.dots-slider .btn-link:last-of-type');
+        const sliders = document.querySelectorAll('.dots-slider');
+        
+        // Get buttons and dots from both sliders (mobile and desktop)
+        const allPrevBtns = [];
+        const allNextBtns = [];
+        const allDotGroups = [];
+        
+        sliders.forEach(slider => {
+            const buttons = slider.querySelectorAll('button.btn-link');
+            if (buttons.length >= 2) {
+                allPrevBtns.push(buttons[0]);
+                allNextBtns.push(buttons[1]);
+            }
+            
+            // Get dots for this specific slider
+            const dotsInSlider = slider.querySelectorAll('.horizontal-dots .dot');
+            if (dotsInSlider.length > 0) {
+                allDotGroups.push(dotsInSlider);
+            }
+        });
 
         function updateProduct() {
             const product = products[currentIndex];
@@ -44,30 +61,38 @@
                 productSubtitle.style.whiteSpace = 'pre-line';
             }
 
-            // Update dots
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
+            // Update dots in all groups (mobile and desktop)
+            allDotGroups.forEach(dotGroup => {
+                dotGroup.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
             });
         }
 
-        // Previous button
-        prevBtn?.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + products.length) % products.length;
-            updateProduct();
-        });
-
-        // Next button
-        nextBtn?.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % products.length;
-            updateProduct();
-        });
-
-        // Dots navigation
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', (e) => {
-                e.preventDefault();
-                currentIndex = index;
+        // Previous buttons (for both mobile and desktop)
+        allPrevBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + products.length) % products.length;
                 updateProduct();
+            });
+        });
+
+        // Next buttons (for both mobile and desktop)
+        allNextBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % products.length;
+                updateProduct();
+            });
+        });
+
+        // Dots navigation for all groups
+        allDotGroups.forEach(dotGroup => {
+            dotGroup.forEach((dot, index) => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentIndex = index;
+                    updateProduct();
+                });
             });
         });
     }
