@@ -254,7 +254,7 @@ a.btn-outline-primary{
 }
 .home3 .home-content,
 .home4 .home-content{
-  height: calc(100% - 80px);
+  height: calc(100% - 85px);
   overflow: hidden;
   overflow-y: auto;
 }
