@@ -16,9 +16,5 @@ body.rtl { text-align: right; }
 /* .rtl .hero-items h2,
 .rtl .hero-items p { text-align: right; } */
 
-.rtl .rotate-icon{
-    transform: scale(-1, 1);
-}
-
 /* Footer and misc */
 .rtl .hero-footer p { text-align: right; }

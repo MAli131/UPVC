@@ -145,6 +145,9 @@ select{
   align-items: center;
   gap: 1rem;
 }
+.rtl .rotate-icon{
+    transform: scale(-1, 1);
+}
 /* ===== BTNs ===== */
 a.btn {
   height: 35px;
@@ -238,12 +241,6 @@ a.btn-outline-primary{
 .hero-section.home4{
   background: url(../images/home/home4-bg.png) no-repeat 0% 50% / cover;
 }
-[dir="rtl"] .hero-section{
-  transform: scaleX(-1);
-}
-[dir="rtl"] .hero-section > *{
-  transform: scaleX(-1);
-}
 .home1 > div > .row{
   height: calc(100% - 116px);
 }
@@ -254,6 +251,12 @@ a.btn-outline-primary{
   flex-direction: column;
   justify-content: space-between;
   gap: 1.25rem;
+}
+.home3 .home-content,
+.home4 .home-content{
+  height: calc(100% - 80px);
+  overflow: hidden;
+  overflow-y: auto;
 }
 .home3 .hero-content{
   height: auto;
@@ -301,7 +304,7 @@ a.btn-outline-primary{
   gap: 1rem;
 }
 .hero-section .hero-description {
-  font-size: clamp(0.875rem, 3.5vw, 1.25rem);
+  font-size: clamp(0.875rem, 3.5vw, 1.125rem);
 }
 .home1 .hero-description{
   color: var(--green-main-clr);
@@ -356,9 +359,6 @@ a.btn-outline-primary{
   align-items: center;
   gap: 1rem;
   font-size: .875rem;
-  width: 100%;
-}
-.hero-section .hero-footer{
   position: absolute;
   bottom: 3.125rem;
   inset-inline-end: .75rem;
@@ -649,6 +649,11 @@ a.btn-outline-primary{
   }
   .hero-section{
     padding-top: 5rem;
+  }
+  .home3 .home-content,
+  .home4 .home-content{
+    height: unset;
+    overflow: hidden;
   }
   .hero-section .row{
     row-gap: 1.25rem;

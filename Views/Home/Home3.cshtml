@@ -26,22 +26,24 @@
             <a asp-controller="Home" asp-action="Home3" class="dot active"></a>
             <a asp-controller="Home" asp-action="Home4" class="dot"></a>
         </div>
-        <div class="hero-content"> 
-            <div class="hero-items-container row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                @if (Model.HomePage?.Sections != null && Model.HomePage.Sections.Any())
-                {
-                    @foreach (var item in Model.HomePage.Sections.OrderBy(s => s.Order))
+        <div class="home-content">
+            <div class="hero-content"> 
+                <div class="hero-items-container row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                    @if (Model.HomePage?.Sections != null && Model.HomePage.Sections.Any())
                     {
-                        var sectionTitle = isArabic ? item.TitleAr : item.TitleEn;
-                        var sectionContent = isArabic ? item.ContentAr : item.ContentEn;
-                        
-                        <div class="hero-items col">
-                            <img class="img-fluid" src="~/images/home/trophy.png" alt="Trophy Image" loading="lazy" />
-                            <h2>@sectionTitle</h2>
-                            <p>@sectionContent</p>
-                        </div>
+                        @foreach (var item in Model.HomePage.Sections.OrderBy(s => s.Order))
+                        {
+                            var sectionTitle = isArabic ? item.TitleAr : item.TitleEn;
+                            var sectionContent = isArabic ? item.ContentAr : item.ContentEn;
+                            
+                            <div class="hero-items col">
+                                <img class="img-fluid" src="~/images/home/trophy.png" alt="Trophy Image" loading="lazy" />
+                                <h2>@sectionTitle</h2>
+                                <p>@sectionContent</p>
+                            </div>
+                        }
                     }
-                }
+                </div>
             </div>
         </div>
         <div class="hero-footer">
