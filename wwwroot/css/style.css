@@ -83,10 +83,12 @@ select{
 .white-navbar * {
   color: var(--white-clr) !important;
   fill: var(--white-clr) !important;
+  stroke: var(--white-clr) !important;
 }
 .green-navbar * {
   color: var(--green-main-clr-o-50) !important;
   fill: var(--green-main-clr-o-50) !important;
+  stroke: var(--green-main-clr-o-50) !important;
 }
 .navbar .navbar-lang label{
   font-size: .75rem;
