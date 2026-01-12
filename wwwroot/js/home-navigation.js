@@ -94,6 +94,11 @@
     let lastScrollTime = 0;
     const SCROLL_COOLDOWN = 1000; // 1 second cooldown between navigations
     
+    // Touch handling variables
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const SWIPE_THRESHOLD = 50; // Minimum swipe distance in pixels
+    
     // Handle scroll navigation
     function handleScroll(event) {
         // Only handle if we're on a home page
@@ -149,6 +154,67 @@
         }, 200); // Increased debounce delay
     }
     
+    // Handle touch start
+    function handleTouchStart(event) {
+        const currentIndex = getCurrentPageIndex();
+        if (currentIndex === -1 || isNavigating) return;
+        
+        touchStartY = event.touches[0].clientY;
+    }
+    
+    // Handle touch move
+    function handleTouchMove(event) {
+        const currentIndex = getCurrentPageIndex();
+        if (currentIndex === -1 || isNavigating) return;
+        
+        // Prevent default scrolling during navigation
+        if (Math.abs(event.touches[0].clientY - touchStartY) > SWIPE_THRESHOLD) {
+            event.preventDefault();
+        }
+    }
+    
+    // Handle touch end
+    function handleTouchEnd(event) {
+        const currentIndex = getCurrentPageIndex();
+        if (currentIndex === -1 || isNavigating) return;
+        
+        // Check cooldown period
+        const now = Date.now();
+        if (now - lastScrollTime < SCROLL_COOLDOWN) {
+            return;
+        }
+        
+        touchEndY = event.changedTouches[0].clientY;
+        const swipeDistance = touchStartY - touchEndY;
+        
+        // Only navigate if swipe is significant enough
+        if (Math.abs(swipeDistance) < SWIPE_THRESHOLD) {
+            return;
+        }
+        
+        let nextIndex = currentIndex;
+        
+        // Swipe up (scroll down) - go to next page
+        if (swipeDistance > 0 && currentIndex < homePages.length - 1) {
+            nextIndex = currentIndex + 1;
+        }
+        // Swipe down (scroll up) - go to previous page
+        else if (swipeDistance < 0 && currentIndex > 0) {
+            nextIndex = currentIndex - 1;
+        }
+        
+        // Navigate to next page if changed
+        if (nextIndex !== currentIndex) {
+            isNavigating = true;
+            lastScrollTime = Date.now();
+            showLoading();
+            
+            setTimeout(function() {
+                window.location.href = homePages[nextIndex].url;
+            }, 100);
+        }
+    }
+    
     // Initialize scroll navigation
     function init() {
         // Check if we're on a home page
@@ -158,6 +224,11 @@
             
             // Add wheel event listener with passive: false to allow preventDefault
             window.addEventListener('wheel', handleScroll, { passive: false });
+            
+            // Add touch event listeners for mobile support
+            window.addEventListener('touchstart', handleTouchStart, { passive: true });
+            window.addEventListener('touchmove', handleTouchMove, { passive: false });
+            window.addEventListener('touchend', handleTouchEnd, { passive: true });
             
             // Also handle arrow keys for additional navigation
             window.addEventListener('keydown', function(event) {
