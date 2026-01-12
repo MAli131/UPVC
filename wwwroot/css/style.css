@@ -716,7 +716,7 @@ a.btn-outline-primary{
     width: 45%;
   }
   .product-section .dots-slider:not(.hero-footer .dots-slider){
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   .product-section .hero-content{
     margin-top: 0px;
@@ -783,8 +783,6 @@ a.btn-outline-primary{
   .hero-section .hero-slider{
     gap: 4rem;
   }
-}
-@media (max-width: 400px) {
   .product-section .hero-header .hero-subtitle{
     width: 70%;
     height: auto;
