@@ -149,7 +149,7 @@ select{
     transform: scale(-1, 1);
 }
 /* ===== BTNs ===== */
-a.btn {
+a.btn, button.btn {
   height: 35px;
   display: flex;
   align-items: center;
@@ -162,20 +162,27 @@ a.btn {
   padding: 0.75rem 1.5rem;
   white-space: nowrap;
 }
-a.btn-primary{
+a.btn-primary, button.btn-primary{
   background-color: var(--green-main-clr-o-50);
   border-color: var(--green-main-clr);
 }
 a.btn-primary:hover,
+button.btn-primary:hover,
 a.btn-primary:active,
+button.btn-primary:active,
 a.btn-primary:focus,
+button.btn-primary:focus,
 a.btn-outline-primary:hover,
+button.btn-outline-primary:hover,
 a.btn-outline-primary:active,
-a.btn-outline-primary:focus{
+button.btn-outline-primary:active,
+a.btn-outline-primary:focus,
+button.btn-outline-primary:focus{
   background-color: var(--green-main-clr) !important;
   border-color: var(--green-main-clr) !important;
 }
-a.btn-outline-primary{
+a.btn-outline-primary,
+button.btn-outline-primary{
   background-color: var(--green-main-clr);
   border-color: var(--white-clr);
   color: var(--white-clr);
@@ -284,6 +291,14 @@ a.btn-outline-primary{
 }
 .home1 .hero-title{
   max-width: 420px;
+}
+.home2 .hero-image{
+  position: absolute !important;
+  top: 75px;
+  inset-inline-end: 0px;
+}
+.home2 .hero-image img{
+  height: 100%;
 }
 .home2 .hero-title{
   color: var(--green-main-clr);
@@ -482,7 +497,7 @@ a.btn-outline-primary{
   padding-block: 2.5rem;
 }
 .product-d-section{
-  background: url(../images/product/product-d-bg.png) no-repeat center / cover;
+  background: url(../images/product/product-d-bg.png) no-repeat left / cover;
   padding-top: 6.25rem;
 }
 .product-d-section .hero-header,
@@ -649,6 +664,9 @@ a.btn-outline-primary{
   }
   .hero-section{
     padding-top: 5rem;
+  }
+  .product-d-section{
+    background: url(../images/product/product-d-bg.png) no-repeat left 0%;
   }
   .home3 .home-content,
   .home4 .home-content{

@@ -78,8 +78,8 @@
         <!-- links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">@(isArabic ? "الرئيسية" : "Home")</a></li>
-                <li class="nav-item"><a class="nav-link active" asp-controller="Product" asp-action="Index">@(isArabic ? "المنتجات" : "Products")</a></li>
+                <li class="nav-item"><a class="nav-link active" asp-controller="Home" asp-action="Index">@(isArabic ? "الرئيسية" : "Home")</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Index">@(isArabic ? "المنتجات" : "Products")</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="About" asp-action="Index">@(isArabic ? "من نحن" : "About")</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">@(isArabic ? "تواصل معنا" : "Contact")</a></li>
             </ul>
@@ -187,6 +187,9 @@
                 }
             </p>
         </div>
+    </div>
+    <div class="col-6 hero-image d-none d-lg-block">
+        <img class="img-fluid" src="images/home/home2-hero.png" alt="Hero Image" loading="lazy">
     </div>
 </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
