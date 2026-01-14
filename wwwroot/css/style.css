@@ -428,6 +428,7 @@ button.btn-outline-primary{
   bottom: 3.125rem;
   inset-inline-start: 50%;
   transform: translateX(-50%);
+  z-index: 1000;
 }
 [dir="rtl"] .hero-section .hero-arrow{
   transform: translateX(50%);
