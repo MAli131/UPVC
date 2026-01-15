@@ -32,11 +32,15 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/images/favicon/favicon.svg" />
-
+    <!-- Chatbot Widget Styles -->
+    <link rel="stylesheet" href="~/css/chatbot.css" asp-append-version="true" />
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+
+    <!-- Font Awesome for Chatbot Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="~/css/style.css" />
@@ -196,5 +200,14 @@
 
     </div>
 </section>
+<!-- Chatbot Widget -->
+<script>
+    // Pass company info to chatbot
+    window.chatbotConfig = {
+        whatsappNumber: '@(ViewBag.companyInfo?.Mobile ?? companyPhone ?? "")',
+        contactUrl: '@Url.Action("Index", "Contact")'
+    };
+</script>
+<script src="~/js/chatbot.js" asp-append-version="true"></script>
 <script src="~/js/lang.js"></script>
 <script src="~/js/home-navigation.js"></script>
