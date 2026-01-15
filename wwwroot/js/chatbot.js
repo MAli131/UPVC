@@ -8,6 +8,7 @@ class ChatbotWidget {
         this.whatsappNumber = window.chatbotConfig?.whatsappNumber || '';
         this.contactUrl = window.chatbotConfig?.contactUrl || '/Contact';
         this.questions = [];
+        this.askedQuestions = []; // Track asked question IDs
         this.questionCount = 0;
         this.maxQuestions = 5;
         this.init();
@@ -178,7 +179,18 @@ class ChatbotWidget {
             return;
         }
         
-        this.questions.forEach(q => {
+        // Filter out already asked questions
+        const availableQuestions = this.questions.filter(q => !this.askedQuestions.includes(q.id));
+        
+        if (availableQuestions.length === 0) {
+            const noQuestionsText = this.language === 'ar'
+                ? 'لقد قمت بطرح جميع الأسئلة المتاحة. للمزيد من المساعدة، تواصل معنا مباشرة:'
+                : 'You have asked all available questions. For more help, contact us directly:';
+            questionsContainer.innerHTML = `<p style="text-align: center; padding: 20px; color: #999;">${noQuestionsText}</p>`;
+            return;
+        }
+        
+        availableQuestions.forEach(q => {
             const btn = document.createElement('button');
             btn.className = 'question-btn';
             btn.textContent = q.question;
@@ -220,6 +232,11 @@ class ChatbotWidget {
             console.error('Error fetching answer:', error);
             this.removeTypingIndicator();
             this.addBotMessage('عذراً، حدث خطأ في تحميل الإجابة. يرجى المحاولة مرة أخرى.');
+        }
+        
+        // Add question to asked list
+        if (!this.askedQuestions.includes(questionId)) {
+            this.askedQuestions.push(questionId);
         }
         
         // Increment question count
@@ -357,12 +374,22 @@ class ChatbotWidget {
 
     saveSession() {
         sessionStorage.setItem('chatbotQuestionCount', this.questionCount.toString());
+        sessionStorage.setItem('chatbotAskedQuestions', JSON.stringify(this.askedQuestions));
     }
 
     restoreSession() {
         const savedCount = sessionStorage.getItem('chatbotQuestionCount');
         if (savedCount) {
             this.questionCount = parseInt(savedCount, 10);
+        }
+        
+        const savedAskedQuestions = sessionStorage.getItem('chatbotAskedQuestions');
+        if (savedAskedQuestions) {
+            try {
+                this.askedQuestions = JSON.parse(savedAskedQuestions);
+            } catch (e) {
+                this.askedQuestions = [];
+            }
         }
     }
 

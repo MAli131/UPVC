@@ -31,6 +31,8 @@
     <!-- Preload Critical Resources -->
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="preload" as="style" href="~/css/style.css">
+    <!-- Chatbot Widget Styles -->
+    <link rel="stylesheet" href="~/css/chatbot.css" asp-append-version="true" />
     @if (sections.Any())
     {
         <link rel="preload" as="image" href="@sections.First().ImagePath">
@@ -40,11 +42,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+    <!-- Font Awesome for Chatbot Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
-
+</html>
 <body>
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-light green-navbar">
@@ -195,6 +199,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!-- Chatbot Widget -->
+<script>
+    // Pass company info to chatbot
+    window.chatbotConfig = {
+        whatsappNumber: '@(ViewBag.CompanyInfo?.Mobile ?? ViewBag.CompanyInfo?.Phone ?? "")',
+        contactUrl: '@Url.Action("Index", "Contact")'
+    };
+</script>
+<script src="~/js/chatbot.js" asp-append-version="true"></script>
+
 <script src="~/js/lang.js"></script>
 <script src="~/js/home2-slider.js"></script>
 <script src="~/js/home-navigation.js"></script>
