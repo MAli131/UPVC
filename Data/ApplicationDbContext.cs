@@ -728,10 +728,10 @@ namespace UPVC.Data
 
             // Seed Shared Certificates (certificates used across products)
             modelBuilder.Entity<Certificate>().HasData(
-                new Certificate { Id = 1, NameEn = "ISO", NameAr = "ايزو", ImagePath = "/images/product/iso.png", AltText = "ISO", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new Certificate { Id = 2, NameEn = "EOS", NameAr = "المواصفات المصرية", ImagePath = "/images/product/eos.png", AltText = "EOS", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new Certificate { Id = 3, NameEn = "CER", NameAr = "شهادة", ImagePath = "/images/product/cer.png", AltText = "CER", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-                new Certificate { Id = 4, NameEn = "NR", NameAr = "NR", ImagePath = "/images/product/NR.png", AltText = "NR", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
+                new Certificate { Id = 1, NameEn = "ISO", NameAr = "ايزو", ImagePath = "/images/product/iso.svg", AltText = "ISO", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Certificate { Id = 2, NameEn = "EOS", NameAr = "المواصفات المصرية", ImagePath = "/images/product/eos.svg", AltText = "EOS", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Certificate { Id = 3, NameEn = "CER", NameAr = "شهادة", ImagePath = "/images/product/cer.svg", AltText = "CER", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Certificate { Id = 4, NameEn = "NR", NameAr = "NR", ImagePath = "/images/product/NR.svg", AltText = "NR", Width = 40, IsActive = true, CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
             );
 
             // Seed Product-Certificate relationships (Many-to-Many junction table)
