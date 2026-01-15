@@ -296,6 +296,7 @@ button.btn-outline-primary{
   position: absolute !important;
   top: 75px;
   inset-inline-end: 0px;
+  justify-content: flex-end;
 }
 .home2 .hero-image img{
   height: 100%;
@@ -571,6 +572,11 @@ button.btn-outline-primary{
   display: flex;
   justify-content: flex-end;
   margin-top: -6.25rem;
+}
+[dir="rtl"] .home2 .hero-image,
+[dir="rtl"] .product-d-section .hero-image,
+[dir="rtl"] .product-section .hero-image{
+  transform: scale(-1, 1);
 }
 .product-details-page .p-back{
   display: flex;
