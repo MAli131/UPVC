@@ -2,7 +2,7 @@
 @using System.Globalization
 @{
     var isArabic = CultureInfo.CurrentCulture.Name.StartsWith("ar");
-    var currentProduct = Model?.FirstOrDefault();
+    var currentProduct = Model?.OrderBy(p => p.DisplayOrder).FirstOrDefault();
     ViewData["Title"] = isArabic ? "المنتجات - إيمابن" : "Products - EMAPEN";
     ViewData["UseGreenNavbar"] = true;
     ViewData["ShowNavbar"] = true;
@@ -146,7 +146,7 @@
 
 <!-- Hidden products data for JavaScript -->
 <script type="application/json" id="productsData" data-lang="@(isArabic ? "ar" : "en")">
-    @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.Select(p => new {
+    @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.OrderBy(p => p.DisplayOrder).Select(p => new {
         id = p.Id,
         nameEn = p.NameEn,
         nameAr = p.NameAr,

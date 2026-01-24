@@ -7,7 +7,18 @@
         const lang = productsDataElement.getAttribute('data-lang');
         const isArabic = lang === 'ar';
 
+        // Check if there's a productId in the URL to return to
+        const urlParams = new URLSearchParams(window.location.search);
+        const productIdFromUrl = urlParams.get('productId');
         let currentIndex = 0;
+        
+        // If productId is specified, find its index
+        if (productIdFromUrl) {
+            const foundIndex = products.findIndex(p => p.id == productIdFromUrl);
+            if (foundIndex !== -1) {
+                currentIndex = foundIndex;
+            }
+        }
 
         // Get elements
         const productName = document.getElementById('productName');
@@ -95,6 +106,9 @@
                 });
             });
         });
+
+        // Initial update to display the correct product on page load
+        updateProduct();
     }
 
     // Initialize when DOM is ready
