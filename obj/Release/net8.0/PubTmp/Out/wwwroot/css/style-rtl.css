@@ -1,0 +1,20 @@
+/* Minimal RTL tweaks. For full RTL support consider using a Bootstrap-RTL build */
+
+/* Ensure document direction is respected */
+html[dir="rtl"] { direction: rtl; }
+
+body.rtl { text-align: right; }
+
+/* Navbar: reverse the order of collapsed content so links appear visually mirrored */
+/* .rtl .navbar-collapse { display: flex; flex-direction: row-reverse; align-items: center; } */
+.rtl .navbar-nav { margin-right: 0; margin-left: 0; }
+
+/* Language selector alignment */
+.rtl .navbar-lang { margin-left: 0.5rem; margin-right: 0; }
+
+/* Hero items: ensure text alignment */
+/* .rtl .hero-items h2,
+.rtl .hero-items p { text-align: right; } */
+
+/* Footer and misc */
+.rtl .hero-footer p { text-align: right; }
