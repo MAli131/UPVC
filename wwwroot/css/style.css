@@ -355,7 +355,9 @@ button.btn-outline-primary{
 }
 .hero-section .hero-items h2{
   font-size: clamp(1.5rem, 3.5vw, 2rem);
-  width: 212px;
+  width: 100%;
+  max-width: 212px;
+  margin: 0 auto;
 }
 /* [dir="rtl"] .hero-section .hero-items h2{
   width: 88px;
@@ -811,5 +813,69 @@ button.btn-outline-primary{
   .product-section .hero-header .hero-subtitle{
     width: 70%;
     height: auto;
+  }
+}
+
+/* ===== HOME3 SLIDER STYLES ===== */
+.home3 .slider-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.home3 .slider-btn {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.home3 .slider-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+.home3 .slider-btn:active {
+  transform: scale(0.95);
+}
+
+.home3 .slider-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.home3 .slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home3 .slider-dot.active {
+  background: white;
+  width: 12px;
+  height: 12px;
+}
+
+.home3 .slider-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@media (min-width: 768px) {
+  .home3 .slider-navigation {
+    display: none !important;
   }
 }

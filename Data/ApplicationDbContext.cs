@@ -528,7 +528,7 @@ namespace UPVC.Data
                     DescriptionAr = "البديل الإقتصادي لنظام EMA-60S مخصص للنوافذ الأصغر السعر والأوفر، مع الحفاظ على العزل و المتانة التي تحتاجها لنوافذك.",
                     ImagePath = "/images/product/EMA-42S.png",
                     BrochurePath = "/files/42s-brochure.pdf",
-                    DisplayOrder = 1,
+                    DisplayOrder = 4,
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -543,7 +543,7 @@ namespace UPVC.Data
                     DescriptionAr = "الإختيار الأمثل لضمان أقصى تهوئة من خلال النوافذ. بالإضافة الى ذلك فإن الإغلاق المحكم للقطاع يوفر عزلا صوتيا أعلى من الأنظمة الاخرى.",
                     ImagePath = "/images/product/EMA-60.png",
                     BrochurePath = "/files/60-brochure.pdf",
-                    DisplayOrder = 2,
+                    DisplayOrder = 1,
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
@@ -573,7 +573,7 @@ namespace UPVC.Data
                     DescriptionAr = "نظام الجرار الجديد و المتطور من EMAPEN, الذي يقدم ضلفة لباب جرار بجودة استثنائية وحلق ببار ٦ سم. يتميز النظام أيضا بأعلى سمك خارجي في مجموعتنا، مما يوفر أقصى درجات المتانة و العزل.",
                     ImagePath = "/images/product/EMA-STYLE.png",
                     BrochurePath = "/files/Style-brochure.pdf",
-                    DisplayOrder = 4,
+                    DisplayOrder = 2,
                     IsActive = true,
                     CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
